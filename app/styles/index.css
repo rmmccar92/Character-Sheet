@@ -1,0 +1,9 @@
+body{
+background-image:radial-gradient(black, black), url('https://wallpaperaccess.com/full/2796640.jpg');
+background-size: cover;
+background-blend-mode: soft-light;
+};
+
+box{
+    background-color: #f2f2f2;
+}
