@@ -129,7 +129,12 @@ export default function Sheet() {
             }}
           >
             <Container
-              style={{ display: `flex`, width: `28%`, alignItems: `center` }}
+              style={{
+                display: `flex`,
+                width: `28%`,
+                alignItems: `center`,
+                marginTop: `1%`,
+              }}
             >
               <Paper
                 shadow="md"
@@ -138,7 +143,8 @@ export default function Sheet() {
                 style={{
                   backgroundColor: `black`,
                   color: `white`,
-                  height: `85%`,
+                  height: `95%`,
+                  alignSelf: `flex-end`,
                   display: `flex`,
                   flexWrap: `wrap`,
                   justifyContent: `center`,
@@ -171,7 +177,12 @@ export default function Sheet() {
               />
             </Container>
             <Container
-              style={{ display: `flex`, width: `28%`, alignItems: `center` }}
+              style={{
+                display: `flex`,
+                width: `28%`,
+                alignItems: `center`,
+                marginTop: `1%`,
+              }}
             >
               <Paper
                 shadow="md"
@@ -180,7 +191,8 @@ export default function Sheet() {
                 style={{
                   backgroundColor: `black`,
                   color: `white`,
-                  height: `85%`,
+                  height: `95%`,
+                  alignSelf: `flex-end`,
                   display: `flex`,
                   flexWrap: `wrap`,
                   justifyContent: `center`,
@@ -213,7 +225,12 @@ export default function Sheet() {
               />
             </Container>
             <Container
-              style={{ display: `flex`, width: `28%`, alignItems: `center` }}
+              style={{
+                display: `flex`,
+                width: `28%`,
+                alignItems: `center`,
+                marginTop: `1%`,
+              }}
             >
               <Paper
                 shadow="md"
@@ -222,7 +239,8 @@ export default function Sheet() {
                 style={{
                   backgroundColor: `black`,
                   color: `white`,
-                  height: `85%`,
+                  height: `95%`,
+                  alignSelf: `flex-end`,
                   display: `flex`,
                   flexWrap: `wrap`,
                   justifyContent: `center`,
@@ -255,7 +273,12 @@ export default function Sheet() {
               />
             </Container>
             <Container
-              style={{ display: `flex`, width: `28%`, alignItems: `center` }}
+              style={{
+                display: `flex`,
+                width: `28%`,
+                alignItems: `center`,
+                marginTop: `1%`,
+              }}
             >
               <Paper
                 shadow="md"
@@ -264,7 +287,8 @@ export default function Sheet() {
                 style={{
                   backgroundColor: `black`,
                   color: `white`,
-                  height: `85%`,
+                  height: `95%`,
+                  alignSelf: `flex-end`,
                   display: `flex`,
                   flexWrap: `wrap`,
                   justifyContent: `center`,
@@ -297,7 +321,12 @@ export default function Sheet() {
               />
             </Container>
             <Container
-              style={{ display: `flex`, width: `28%`, alignItems: `center` }}
+              style={{
+                display: `flex`,
+                width: `28%`,
+                alignItems: `center`,
+                marginTop: `1%`,
+              }}
             >
               <Paper
                 shadow="md"
@@ -306,7 +335,8 @@ export default function Sheet() {
                 style={{
                   backgroundColor: `black`,
                   color: `white`,
-                  height: `85%`,
+                  height: `95%`,
+                  alignSelf: `flex-end`,
                   display: `flex`,
                   flexWrap: `wrap`,
                   justifyContent: `center`,
@@ -339,7 +369,12 @@ export default function Sheet() {
               />
             </Container>
             <Container
-              style={{ display: `flex`, width: `28%`, alignItems: `center` }}
+              style={{
+                display: `flex`,
+                width: `28%`,
+                alignItems: `center`,
+                marginTop: `1%`,
+              }}
             >
               <Paper
                 shadow="md"
@@ -348,7 +383,8 @@ export default function Sheet() {
                 style={{
                   backgroundColor: `black`,
                   color: `white`,
-                  height: `85%`,
+                  height: `95%`,
+                  alignSelf: `flex-end`,
                   display: `flex`,
                   flexWrap: `wrap`,
                   justifyContent: `center`,
