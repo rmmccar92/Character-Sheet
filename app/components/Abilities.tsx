@@ -1,11 +1,4 @@
-import {
-  Center,
-  Container,
-  TextInput,
-  Textarea,
-  Paper,
-  Text,
-} from "@mantine/core";
+import { Center, Container, TextInput, Paper, Text } from "@mantine/core";
 
 export default function Abilities() {
   return (
