@@ -6,7 +6,7 @@ import {
   Text,
   Button,
 } from "@mantine/core";
-
+// TODO: Skills is gonna be fun
 export default function Defense() {
   return (
     <Center
