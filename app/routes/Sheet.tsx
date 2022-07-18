@@ -36,7 +36,6 @@ export default function Sheet() {
       <Skills />
       <Feats />
       <Equipment />
-      <Items />
       <Spells />
       <Notes />
     </Container>

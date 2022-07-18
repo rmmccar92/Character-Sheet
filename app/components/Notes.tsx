@@ -1,4 +1,4 @@
-import { Center } from "@mantine/core";
+import { Center, Container, Textarea } from "@mantine/core";
 export default function Notes() {
   return (
     <Center
@@ -9,7 +9,10 @@ export default function Notes() {
         margin: 0,
       }}
     >
-      <h1>Notes</h1>
+      <Container style={{ width: "100%", marginBottom: "5%" }}>
+        <h1>Notes</h1>
+        <Textarea size="xl" />
+      </Container>
     </Center>
   );
 }
