@@ -1,6 +1,75 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Center, Container, Title, Button } from "@mantine/core";
 import { FormField } from "~/components/form-field";
+import type { ActionFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import {
+  validEmail,
+  validPassword,
+  validName,
+} from "~/utils/validators.server";
+import { login, register } from "~/utils/auth.server";
+
+export const action: ActionFunction = async ({ request }) => {
+  const form = await request.formData();
+  const action = form.get("_action");
+  const email = form.get("email");
+  const password = form.get("password");
+  let firstName = form.get("firstName");
+  let lastName = form.get("lastName");
+
+  // Validation
+  if (
+    typeof action !== "string" ||
+    typeof email !== "string" ||
+    typeof password !== "string"
+  ) {
+    return json({ error: "Invalid form data", form: action }, { status: 400 });
+  }
+  if (
+    action === "register" &&
+    (typeof firstName !== "string" || typeof lastName !== "string")
+  ) {
+    return json({ error: "Invalid form data", form: action }, { status: 400 });
+  }
+
+  const errors = {
+    email: validEmail(email),
+    password: validPassword(password),
+    ...(action === "register"
+      ? {
+          firstName: validName((firstName as string) || ""),
+          lastName: validName((lastName as string) || ""),
+        }
+      : {}),
+  };
+
+  if (Object.values(errors).some(Boolean)) {
+    return json(
+      {
+        errors,
+        fields: { email, password, firstName, lastName },
+        form: action,
+      },
+      { status: 400 }
+    );
+  }
+
+  switch (action) {
+    case "login":
+      return await login({ email, password });
+    case "register":
+      firstName = firstName as string;
+      lastName = lastName as string;
+      return await register({ email, password, firstName, lastName });
+    default:
+      return json(
+        { error: "Invalid form data", form: action },
+        { status: 400 }
+      );
+  }
+};
+
 export default function Login() {
   const [action, setAction] = useState("login");
   const [formData, setFormData] = useState({
@@ -48,57 +117,60 @@ export default function Login() {
         <Title style={{ color: "white", marginBottom: "5%" }}>
           {action === "login" ? "Login" : "Register"}
         </Title>
-        {action === "register" && (
-          <>
-            <FormField
-              htmlFor="firstName"
-              label="First Name"
-              value={formData.firstName}
-              type="text"
-              onChange={(e) => handleChange(e, "firstName")}
-            />
-            <FormField
-              htmlFor="lastName"
-              label="Last Name"
-              value={formData.lastName}
-              type="text"
-              onChange={(e) => handleChange(e, "lastName")}
-            />
-          </>
-        )}
-        <FormField
-          htmlFor="email"
-          label="Email"
-          value={formData.email}
-          type="text"
-          onChange={(e) => handleChange(e, "email")}
-        />
-        <FormField
-          htmlFor="password"
-          label="Password"
-          value={formData.password}
-          type="password"
-          onChange={(e) => handleChange(e, "password")}
-        />
+        <form method="post">
+          {action === "register" && (
+            <>
+              <FormField
+                htmlFor="firstName"
+                label="First Name"
+                value={formData.firstName}
+                type="text"
+                onChange={(e) => handleChange(e, "firstName")}
+              />
+              <FormField
+                htmlFor="lastName"
+                label="Last Name"
+                value={formData.lastName}
+                type="text"
+                onChange={(e) => handleChange(e, "lastName")}
+              />
+            </>
+          )}
 
-        {action === "register" && (
           <FormField
-            htmlFor="passwordConfirm"
-            label="Confirm Password"
-            value={formData.passwordConfirm}
-            type="password"
-            onChange={(e) => handleChange(e, "passwordConfirm")}
+            htmlFor="email"
+            label="Email"
+            value={formData.email}
+            type="text"
+            onChange={(e) => handleChange(e, "email")}
           />
-        )}
-        <Button
-          type="submit"
-          name="_action"
-          value={action}
-          style={{ margin: "10px" }}
-          onClick={() => console.log("Login")}
-        >
-          {action === "login" ? "Login" : "Register"}
-        </Button>
+          <FormField
+            htmlFor="password"
+            label="Password"
+            value={formData.password}
+            type="password"
+            onChange={(e) => handleChange(e, "password")}
+          />
+
+          {action === "register" && (
+            <FormField
+              htmlFor="passwordConfirm"
+              label="Confirm Password"
+              value={formData.passwordConfirm}
+              type="password"
+              onChange={(e) => handleChange(e, "passwordConfirm")}
+            />
+          )}
+          <Button
+            type="submit"
+            name="_action"
+            value={action}
+            style={{ margin: "10px" }}
+            onClick={() => console.log("Login")}
+          >
+            {action === "login" ? "Login" : "Register"}
+          </Button>
+        </form>
       </Container>
       <Button
         onClick={() => setAction(action === "login" ? "register" : "login")}
