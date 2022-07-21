@@ -44,6 +44,7 @@ export const register = async (form: RegisterForm) => {
 };
 
 export const login = async (form: LoginForm) => {
+  console.log("login attempt");
   const user = await prisma.user.findUnique({
     where: { email: form.email },
   });
