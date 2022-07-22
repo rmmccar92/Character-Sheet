@@ -44,7 +44,6 @@ export const register = async (form: RegisterForm) => {
 };
 
 export const login = async (form: LoginForm) => {
-  console.log("login attempt");
   const user = await prisma.user.findUnique({
     where: { email: form.email },
   });
@@ -52,7 +51,6 @@ export const login = async (form: LoginForm) => {
   if (!user || !(await bcrypt.compare(form.password, user.password))) {
     return json({ error: "Login failed" }, { status: 400 });
   }
-  // TODO create session
   return createUserSession(user.id, "/");
 };
 

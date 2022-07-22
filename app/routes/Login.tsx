@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Center, Container, Title, Button, InputWrapper } from "@mantine/core";
+import { Center, Container, Title, Button } from "@mantine/core";
 import { FormField } from "~/components/form-field";
 import type { ActionFunction } from "@remix-run/node";
-import { Form } from "@remix-run/react";
 import { json } from "@remix-run/node";
+import { Form } from "@remix-run/react";
 import {
   validEmail,
-  // validPassword,
+  validPassword,
   validName,
 } from "~/utils/validators.server";
 import { login, register } from "~/utils/auth.server";
@@ -18,43 +18,43 @@ export const action: ActionFunction = async ({ request }) => {
   const password = form.get("password");
   let firstName = form.get("firstName");
   let lastName = form.get("lastName");
-
   // Validation
-  if (
-    typeof action !== "string" ||
-    typeof email !== "string" ||
-    typeof password !== "string"
-  ) {
-    return json({ error: "Invalid form data", form: action }, { status: 400 });
-  }
-  if (
-    action === "register" &&
-    (typeof firstName !== "string" || typeof lastName !== "string")
-  ) {
-    return json({ error: "Invalid form data", form: action }, { status: 400 });
-  }
+  // if (
+  //   typeof action !== "string" ||
+  //   typeof email !== "string" ||
+  //   typeof password !== "string"
+  // ) {
+  //   return json({ error: "Invalid form data", form: action }, { status: 400 });
+  // }
+  // if (
+  //   action === "register" &&
+  //   (typeof firstName !== "string" || typeof lastName !== "string")
+  // ) {
+  //   return json({ error: "Invalid form data", form: action }, { status: 400 });
+  // }
 
-  const errors = {
-    email: validEmail(email),
-    // password: validPassword(password),
-    ...(action === "register"
-      ? {
-          firstName: validName((firstName as string) || ""),
-          lastName: validName((lastName as string) || ""),
-        }
-      : {}),
-  };
+  // const errors = {
+  //   email: validEmail(email),
+  //   password: validPassword(password),
+  //   ...(action === "register"
+  //      {
+  //         firstName: validName((firstName as string) || ""),
+  //         lastName: validName((lastName as string) || ""),
+  //       }
+  //     : {}),
+  // };
 
-  if (Object.values(errors).some(Boolean)) {
-    return json(
-      {
-        errors,
-        fields: { email, password, firstName, lastName },
-        form: action,
-      },
-      { status: 400 }
-    );
-  }
+  // if (Object.values(errors).some(Boolean)) {
+  //   return json(
+  //     {
+  //       errors,
+  //       fields: { email, password, firstName, lastName },
+  //       form: action,
+  //     },
+  //     { status: 400 }
+  //   );
+  // }
+
   switch (action) {
     case "login":
       return await login({ email, password });
@@ -117,10 +117,7 @@ export default function Login() {
         <Title style={{ color: "white", marginBottom: "5%" }}>
           {action === "login" ? "Login" : "Register"}
         </Title>
-        <Form
-          method="post"
-          style={{ display: "flex", flexDirection: "column" }}
-        >
+        <Form method="post">
           {action === "register" && (
             <>
               <FormField
@@ -169,13 +166,12 @@ export default function Login() {
             name="_action"
             value={action}
             style={{ margin: "10px" }}
-            // onClick={() => console.log("Login")}
+            onClick={() => console.log("Login")}
           >
-            {action === "login" ? "login" : "register"}
+            {action === "login" ? "Login" : "Register"}
           </Button>
         </Form>
       </Container>
-
       <Button
         onClick={() => setAction(action === "login" ? "register" : "login")}
       >
