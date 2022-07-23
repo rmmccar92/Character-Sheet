@@ -19,41 +19,41 @@ export const action: ActionFunction = async ({ request }) => {
   let firstName = form.get("firstName");
   let lastName = form.get("lastName");
   // Validation
-  // if (
-  //   typeof action !== "string" ||
-  //   typeof email !== "string" ||
-  //   typeof password !== "string"
-  // ) {
-  //   return json({ error: "Invalid form data", form: action }, { status: 400 });
-  // }
-  // if (
-  //   action === "register" &&
-  //   (typeof firstName !== "string" || typeof lastName !== "string")
-  // ) {
-  //   return json({ error: "Invalid form data", form: action }, { status: 400 });
-  // }
+  if (
+    typeof action !== "string" ||
+    typeof email !== "string" ||
+    typeof password !== "string"
+  ) {
+    return json({ error: "Invalid form data", form: action }, { status: 400 });
+  }
+  if (
+    action === "register" &&
+    (typeof firstName !== "string" || typeof lastName !== "string")
+  ) {
+    return json({ error: "Invalid form data", form: action }, { status: 400 });
+  }
 
-  // const errors = {
-  //   email: validEmail(email),
-  //   password: validPassword(password),
-  //   ...(action === "register"
-  //      {
-  //         firstName: validName((firstName as string) || ""),
-  //         lastName: validName((lastName as string) || ""),
-  //       }
-  //     : {}),
-  // };
-
-  // if (Object.values(errors).some(Boolean)) {
-  //   return json(
-  //     {
-  //       errors,
-  //       fields: { email, password, firstName, lastName },
-  //       form: action,
-  //     },
-  //     { status: 400 }
-  //   );
-  // }
+  const errors = {
+    email: validEmail(email),
+    password: validPassword(password),
+    ...(action === "register"
+      ? {
+          firstName: validName((firstName as string) || ""),
+          lastName: validName((lastName as string) || ""),
+        }
+      : {}),
+  };
+  // console.log(errors);
+  // This code breaks the login functionality
+  if (Object.values(errors).some(Boolean))
+    return json(
+      {
+        errors,
+        fields: { email, password, firstName, lastName },
+        form: action,
+      },
+      { status: 400 }
+    );
 
   switch (action) {
     case "login":
@@ -117,7 +117,10 @@ export default function Login() {
         <Title style={{ color: "white", marginBottom: "5%" }}>
           {action === "login" ? "Login" : "Register"}
         </Title>
-        <Form method="post">
+        <Form
+          method="post"
+          style={{ display: "Flex", flexDirection: "column", width: "60%" }}
+        >
           {action === "register" && (
             <>
               <FormField

@@ -1,5 +1,9 @@
 export const validEmail = (email: string | undefined) => {
-  return typeof email === "string" && email.length > 3 && email.includes("@");
+  var validRegex =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  if (!email?.length || !validRegex.test(email)) {
+    return "Please enter a valid email address";
+  }
 };
 
 export const validPassword = (password: string | undefined) => {

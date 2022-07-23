@@ -3,6 +3,7 @@ import { prisma } from "./prisma.server";
 import type { RegisterForm, LoginForm } from "./types.server";
 import { createUser } from "./users.server";
 import bcrypt from "bcryptjs";
+
 const sessionSecret = process.env.SESSION_SECRET;
 if (!sessionSecret) {
   throw new Error("SESSION_SECRET environment variable not set");
