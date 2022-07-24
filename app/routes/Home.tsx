@@ -1,6 +1,6 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { requireUserId } from "~/utils/auth.server";
-import { Button } from "@mantine/core";
+import { Button, Container } from "@mantine/core";
 import { Form } from "@remix-run/react";
 import Layout from "~/components/Layout";
 export const loader: LoaderFunction = async ({ request }) => {
@@ -11,9 +11,34 @@ export const loader: LoaderFunction = async ({ request }) => {
 export default function Home() {
   return (
     <Layout>
-      <Form action="/logout" method="post">
-        <Button type="submit">Logout</Button>
-      </Form>
+      <Container
+        style={{
+          height: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-evenly",
+          flexDirection: "column",
+        }}
+      >
+        <Container
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-around",
+            alignItems: "center",
+            height: "25%",
+            border: "1px solid black",
+          }}
+        >
+          <Button>My Characters</Button>
+          <Button>New Character</Button>
+        </Container>
+        <Container>
+          <Form action="/logout" method="post">
+            <Button type="submit">Logout</Button>
+          </Form>
+        </Container>
+      </Container>
     </Layout>
   );
 }
