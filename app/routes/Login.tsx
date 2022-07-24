@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import { Center, Container, Title, Button, Text } from "@mantine/core";
+import { Container, Title, Button, Text } from "@mantine/core";
 import { FormField } from "~/components/form-field";
-import { ActionFunction, LoaderFunction, redirect } from "@remix-run/node";
+import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import {
@@ -10,6 +11,7 @@ import {
   validName,
 } from "~/utils/validators.server";
 import { login, register, getUser } from "~/utils/auth.server";
+import Layout from "~/components/Layout";
 
 export const loader: LoaderFunction = async ({ request }) => {
   return (await getUser(request)) ? redirect("/") : null;
@@ -123,13 +125,7 @@ export default function Login() {
     }));
   };
   return (
-    <Center
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-      }}
-    >
+    <Layout>
       <Container
         className="box"
         style={{
@@ -221,6 +217,6 @@ export default function Login() {
       >
         {action === "login" ? "New Here? Register" : "Back to Login"}
       </Button>
-    </Center>
+    </Layout>
   );
 }
