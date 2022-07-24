@@ -64,3 +64,52 @@ export const createUserSession = async (userId: string, redirectTo: string) => {
     },
   });
 };
+
+export const requireUserId = async (
+  request: Request,
+  redirectTo: string = new URL(request.url).pathname
+) => {
+  const session = await getUserSession(request);
+  const userId = session.get("userId");
+  if (!userId || typeof userId !== "string") {
+    const searchParams = new URLSearchParams([["redirectTo", redirectTo]]);
+    throw redirect(`/login?${searchParams}`);
+  }
+  return userId;
+};
+
+const getUserSession = (request: Request) => {
+  return storage.getSession(request.headers.get("Cookie"));
+};
+
+const getUserId = async (request: Request) => {
+  const session = await getUserSession(request);
+  const userId = session.get("userId");
+  if (!userId || typeof userId !== "string") return null;
+  return userId;
+};
+
+export const getUser = async (request: Request) => {
+  const userId = await getUserId(request);
+  if (typeof userId !== "string") return null;
+
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { id: true, email: true, profile: true },
+    });
+    return user;
+  } catch (err) {
+    console.log(err);
+    throw logout(request);
+  }
+};
+
+export const logout = async (request: Request) => {
+  const session = await getUserSession(request);
+  return redirect("/login", {
+    headers: {
+      "Set-Cookie": await storage.destroySession(session),
+    },
+  });
+};

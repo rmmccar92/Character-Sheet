@@ -1,15 +1,19 @@
-import { useState } from "react";
-import { Center, Container, Title, Button } from "@mantine/core";
+import { useState, useEffect, useRef } from "react";
+import { Center, Container, Title, Button, Text } from "@mantine/core";
 import { FormField } from "~/components/form-field";
-import type { ActionFunction } from "@remix-run/node";
+import { ActionFunction, LoaderFunction, redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { Form } from "@remix-run/react";
+import { Form, useActionData } from "@remix-run/react";
 import {
   validEmail,
   validPassword,
   validName,
 } from "~/utils/validators.server";
-import { login, register } from "~/utils/auth.server";
+import { login, register, getUser } from "~/utils/auth.server";
+
+export const loader: LoaderFunction = async ({ request }) => {
+  return (await getUser(request)) ? redirect("/") : null;
+};
 
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
@@ -43,8 +47,7 @@ export const action: ActionFunction = async ({ request }) => {
         }
       : {}),
   };
-  // console.log(errors);
-  // This code breaks the login functionality
+
   if (Object.values(errors).some(Boolean))
     return json(
       {
@@ -71,14 +74,44 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export default function Login() {
+  const actionData = useActionData();
+  const firstLoad = useRef(true);
+  const [formError, setFormError] = useState(actionData?.error || "");
+  const [errors, setErrors] = useState(actionData?.errors || {});
   const [action, setAction] = useState("login");
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    firstName: "",
-    lastName: "",
+    email: actionData?.fields?.email || "",
+    password: actionData?.fields?.password || "",
+    firstName: actionData?.fields?.firstName || "",
+    lastName: actionData?.fields?.lastName || "",
     passwordConfirm: "",
   });
+
+  useEffect(() => {
+    // Clear errors
+    if (firstLoad.current) {
+      const newState = {
+        email: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        passwordConfirm: "",
+      };
+      setErrors(newState);
+      setFormError("");
+      setFormData(newState);
+    }
+  }, [action]);
+
+  useEffect(() => {
+    if (!firstLoad.current) {
+      setFormError("");
+    }
+  }, [formData]);
+
+  useEffect(() => {
+    firstLoad.current = false;
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -129,6 +162,7 @@ export default function Login() {
                 value={formData.firstName}
                 type="text"
                 onChange={(e) => handleChange(e, "firstName")}
+                error={errors?.firstName}
               />
               <FormField
                 htmlFor="lastName"
@@ -136,6 +170,7 @@ export default function Login() {
                 value={formData.lastName}
                 type="text"
                 onChange={(e) => handleChange(e, "lastName")}
+                error={errors?.lastName}
               />
             </>
           )}
@@ -146,6 +181,7 @@ export default function Login() {
             value={formData.email}
             type="text"
             onChange={(e) => handleChange(e, "email")}
+            error={errors?.email}
           />
           <FormField
             htmlFor="password"
@@ -153,8 +189,9 @@ export default function Login() {
             value={formData.password}
             type="password"
             onChange={(e) => handleChange(e, "password")}
+            error={errors?.password}
           />
-
+          {/* 
           {action === "register" && (
             <FormField
               htmlFor="passwordConfirm"
@@ -162,8 +199,9 @@ export default function Login() {
               value={formData.passwordConfirm}
               type="password"
               onChange={(e) => handleChange(e, "passwordConfirm")}
+              error={errors.passwordConfirm}
             />
-          )}
+          )} */}
           <Button
             type="submit"
             name="_action"
@@ -174,6 +212,9 @@ export default function Login() {
             {action === "login" ? "Login" : "Register"}
           </Button>
         </Form>
+      </Container>
+      <Container>
+        <Text color="red">{formError}</Text>
       </Container>
       <Button
         onClick={() => setAction(action === "login" ? "register" : "login")}
