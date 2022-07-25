@@ -1,44 +1,22 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { requireUserId } from "~/utils/auth.server";
-import { Button, Container } from "@mantine/core";
-import { Form } from "@remix-run/react";
+import { HubPanel } from "~/components/hub-panel";
 import Layout from "~/components/Layout";
+import { getOtherUsers } from "~/utils/users.server";
+import { json } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
+
 export const loader: LoaderFunction = async ({ request }) => {
-  await requireUserId(request);
-  return null;
+  const userId = await requireUserId(request);
+  const users = await getOtherUsers(userId);
+  return json({ users });
 };
 // TODO This is the user hub page
 export default function Home() {
+  const { users } = useLoaderData();
   return (
     <Layout>
-      <Container
-        style={{
-          height: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-evenly",
-          flexDirection: "column",
-        }}
-      >
-        <Container
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-around",
-            alignItems: "center",
-            height: "25%",
-            border: "1px solid black",
-          }}
-        >
-          <Button>My Characters</Button>
-          <Button>New Character</Button>
-        </Container>
-        <Container>
-          <Form action="/logout" method="post">
-            <Button type="submit">Logout</Button>
-          </Form>
-        </Container>
-      </Container>
+      <HubPanel users={users} />
     </Layout>
   );
 }
