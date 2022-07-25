@@ -11,15 +11,239 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  profile   Profile
+  id         String      @id @default(auto()) @map("_id") @db.ObjectId
+  email      String      @unique
+  password   String
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  profile    Profile?
+  characters Character[]
 }
 
-type Profile {
+model Profile {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
   firstName String
   lastName  String
+  user      User   @relation(fields: [userId], references: [id])
+  userId    String @unique
+}
+
+model Character {
+  id              String         @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  alignment       String
+  level           Int
+  class           String
+  home            String
+  health          Health
+  height          String
+  weight          String
+  race            String
+  deity           String
+  size            String
+  hair            String
+  eyes            String
+  user            User           @relation(fields: [userId], references: [id])
+  userId          String
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  stats           Stats
+  ac              AC
+  dr              DR
+  sr              SR
+  resistances     Resistances
+  cmb             CMB
+  immunities      Immunities
+  cmd             CMD
+  initiative      Initiative
+  bab             String
+  speed           Speed
+  saves           Saves
+  skills          Skills
+  feats           Feat[]
+  traits          Trait[]
+  items           Item[]
+  notes           Note[]
+  weapons         Weapon[]
+  known_languages KnownLanguages
+  xp              XP
+}
+
+type XP {
+  current Int
+  needed  Int
+}
+
+model Weapon {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  damage      String
+  critical    String
+  range       String
+  type        String
+  properties  String
+  character   Character @relation(fields: [characterId], references: [id])
+  characterId String
+}
+
+type Speed {
+  base    String
+  armor   String
+  fly     String
+  swim    String
+  climb   String
+  burrow  String
+  tempMod String
+}
+
+type Health {
+  current   Int
+  max       Int
+  nonlethal Int
+  temp      Int
+}
+
+type DR {
+  type   String
+  amount Int
+}
+
+type SR {
+  type   String
+  amount Int
+}
+
+type AC {
+  total Int
+  touch Int
+  flat  Int
+}
+
+type Resistances {
+  type String
+}
+
+type Immunities {
+  type String
+}
+
+type CMD {
+  total   Int
+  sizeMod Int
+  miscMod Int
+  tempMod Int
+}
+
+type Saves {
+  fortitude Int
+  reflex    Int
+  will      Int
+}
+
+type Initiative {
+  total   Int
+  miscMod Int
+}
+
+type CMB {
+  total   Int
+  sizeMod Int
+  miscMod Int
+  tempMod Int
+}
+
+type Stats {
+  strength     Int @default(0)
+  dexterity    Int @default(0)
+  constitution Int @default(0)
+  intelligence Int @default(0)
+  wisdom       Int @default(0)
+  charisma     Int @default(0)
+}
+
+type Skills {
+  acrobatics     Int        @default(0)
+  appraise       Int        @default(0)
+  athletics      Int        @default(0)
+  bluff          Int        @default(0)
+  climb          Int        @default(0)
+  craft          Int        @default(0)
+  diplomacy      Int        @default(0)
+  disableDevice  Int        @default(0)
+  disguise       Int        @default(0)
+  escapeArtist   Int        @default(0)
+  fly            Int        @default(0)
+  handleAnimal   Int        @default(0)
+  heal           Int        @default(0)
+  intimidation   Int        @default(0)
+  linguistics    Int        @default(0)
+  perception     Int        @default(0)
+  performance    Int        @default(0)
+  profession     Int        @default(0)
+  ride           Int        @default(0)
+  senseMotive    Int        @default(0)
+  sleightOfHand  Int        @default(0)
+  spellcraft     Int        @default(0)
+  stealth        Int        @default(0)
+  survival       Int        @default(0)
+  swim           Int        @default(0)
+  useMagicDevice Int        @default(0)
+  knowledges     Knowledges
+}
+
+type Knowledges {
+  arcana        Int @default(0)
+  dungeoneering Int @default(0)
+  engineering   Int @default(0)
+  geography     Int @default(0)
+  history       Int @default(0)
+  local         Int @default(0)
+  nature        Int @default(0)
+  nobility      Int @default(0)
+  planes        Int @default(0)
+  religion      Int @default(0)
+}
+
+type KnownLanguages {
+  name String
+}
+
+model Feat {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  character   Character @relation(fields: [characterId], references: [id])
+  characterId String    @unique
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Trait {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  character   Character @relation(fields: [characterId], references: [id])
+  characterId String    @unique
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Item {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  character   Character @relation(fields: [characterId], references: [id])
+  characterId String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  stats       Stats
+}
+
+model Note {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  content     String
+  character   Character @relation(fields: [characterId], references: [id])
+  characterId String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
