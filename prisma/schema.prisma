@@ -64,9 +64,25 @@ model Character {
   traits          Trait[]
   items           Item[]
   notes           Note[]
-  weapons         Weapon[]
   known_languages KnownLanguages
   xp              XP
+  weapons         Weapon[]
+  spells          Spell[]
+  armor           Armor[]
+}
+
+model Spell {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  level       Int
+  school      String
+  time        String
+  range       String
+  components  String
+  duration    String
+  description String
+  character   Character @relation(fields: [characterId], references: [id])
+  characterId String
 }
 
 type XP {
@@ -237,6 +253,17 @@ model Item {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   stats       Stats
+}
+
+model Armor {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  ac          Int
+  character   Character @relation(fields: [characterId], references: [id])
+  characterId String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
 
 model Note {
