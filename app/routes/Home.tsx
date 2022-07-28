@@ -4,7 +4,7 @@ import { HubPanel } from "~/components/hub-panel";
 import Layout from "~/components/Layout";
 import { getOtherUsers } from "~/utils/users.server";
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Outlet, useLoaderData } from "@remix-run/react";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const userId = await requireUserId(request);
@@ -16,6 +16,7 @@ export default function Home() {
   const { users } = useLoaderData();
   return (
     <Layout>
+      <Outlet />
       <HubPanel users={users} />
     </Layout>
   );

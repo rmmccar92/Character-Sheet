@@ -51,9 +51,9 @@ export function HubPanel({ users }: props) {
       <Container
         style={{ display: "flex", justifyContent: "center", width: "100%" }}
       >
-        {users.map((user) => (
+        {/* {users.map((user) => (
           <UserCircle key={user.id} profile={user.profile} />
-        ))}
+        ))} */}
       </Container>
     </Container>
   );
