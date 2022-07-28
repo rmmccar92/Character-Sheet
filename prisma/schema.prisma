@@ -16,16 +16,13 @@ model User {
   password   String
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
-  profile    Profile?
+  profile    Profile
   characters Character[]
 }
 
-model Profile {
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
+type Profile {
   firstName String
   lastName  String
-  user      User   @relation(fields: [userId], references: [id])
-  userId    String @unique
 }
 
 model Character {
@@ -69,6 +66,7 @@ model Character {
   weapons         Weapon[]
   spells          Spell[]
   armor           Armor[]
+  image           String         @default("https://i.imgur.com/0Z0Z0Z0.png")
 }
 
 model Spell {
@@ -83,6 +81,7 @@ model Spell {
   description String
   character   Character @relation(fields: [characterId], references: [id])
   characterId String
+  image       String    @default("https://i.imgur.com/0Z0Z0Z0.png")
 }
 
 type XP {
@@ -100,6 +99,7 @@ model Weapon {
   properties  String
   character   Character @relation(fields: [characterId], references: [id])
   characterId String
+  image       String    @default("https://i.imgur.com/0Z0Z0Z0.png")
 }
 
 type Speed {
