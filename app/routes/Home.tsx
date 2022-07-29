@@ -11,7 +11,6 @@ export const loader: LoaderFunction = async ({ request }) => {
   const users = await getOtherUsers(userId);
   return json({ users });
 };
-// TODO This is the user hub page
 export default function Home() {
   const { users } = useLoaderData();
   return (

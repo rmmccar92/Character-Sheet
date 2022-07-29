@@ -9,3 +9,7 @@ export interface LoginForm {
   email: string;
   password: string;
 }
+// TODO: CharacterForm Type
+export interface CharacterForm {
+  name: string;
+}

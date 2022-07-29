@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { useNavigate } from "@remix-run/react";
 import { Portal } from "./Portal";
+import { Center, Container } from "@mantine/core";
 
 interface Props {
   children?: ReactNode;
@@ -27,26 +28,33 @@ const Modal = ({ children, isOpen, ariaLabel, className }: Props) => {
           top: 0,
           left: 0,
           width: "100%",
-          overflowY: "auto",
           height: "100%",
           backgroundColor: "rgba(0,0,0,0.5)",
         }}
       ></div>
-      <div
+      <Center
         style={{
           position: "fixed",
           display: "flex",
+          left: "28%",
+          top: "10%",
+          width: "42%",
+          height: "75%",
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "white",
           maxHeight: "100vh",
-          overflow: "scroll",
+          overflow: "hidden",
+          textAlign: "center",
+          color: "white",
+          backgroundColor: "black",
+          border: "1px solid white",
+          borderRadius: "40px",
         }}
       >
-        <div className={className} style={{ padding: "5%", margin: "auto" }}>
+        <Container className={className} style={{ padding: "5%" }}>
           {children}
-        </div>
-      </div>
+        </Container>
+      </Center>
     </Portal>
   );
 };
