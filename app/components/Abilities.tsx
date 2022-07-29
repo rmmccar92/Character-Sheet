@@ -1,4 +1,5 @@
 import { Center, Container, TextInput, Paper, Text } from "@mantine/core";
+import characterData from "../../data/data.js";
 
 export default function Abilities() {
   return (
@@ -49,6 +50,7 @@ export default function Abilities() {
             <TextInput
               description="Ability Score"
               size="xs"
+              defaultValue={characterData[0].abilities.str || 0}
               style={{ width: `20%` }}
             />
             <TextInput
@@ -97,6 +99,7 @@ export default function Abilities() {
             <TextInput
               description="Ability Score"
               size="xs"
+              defaultValue={characterData[0].abilities.dex || 0}
               style={{ width: `20%` }}
             />
             <TextInput
@@ -143,6 +146,7 @@ export default function Abilities() {
               <Text style={{ fontSize: `0.5em` }}>Constitution</Text>
             </Paper>
             <TextInput
+              defaultValue={characterData[0].abilities.con || 0}
               description="Ability Score"
               size="xs"
               style={{ width: `20%` }}
@@ -191,6 +195,7 @@ export default function Abilities() {
               <Text style={{ fontSize: `0.5em` }}>Intelligence</Text>
             </Paper>
             <TextInput
+              defaultValue={characterData[0].abilities.int || 0}
               description="Ability Score"
               size="xs"
               style={{ width: `20%` }}
@@ -239,6 +244,7 @@ export default function Abilities() {
               <Text style={{ fontSize: `0.5em` }}>Wisdom</Text>
             </Paper>
             <TextInput
+              defaultValue={characterData[0].abilities.wis || 0}
               description="Ability Score"
               size="xs"
               style={{ width: `20%` }}
@@ -287,6 +293,7 @@ export default function Abilities() {
               <Text style={{ fontSize: `0.5em` }}>Charisma</Text>
             </Paper>
             <TextInput
+              defaultValue={characterData[0].abilities.cha || 0}
               description="Ability Score"
               size="xs"
               style={{ width: `20%` }}

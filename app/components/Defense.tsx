@@ -6,7 +6,8 @@ import {
   Text,
   Button,
 } from "@mantine/core";
-// TODO: Skills is gonna be fun
+import characterData from "../../data/data.js";
+
 export default function Defense() {
   return (
     <Center
