@@ -65,14 +65,16 @@ const Creation = () => {
             padding: 0,
           }}
         >
-          <Stepper active={active} onStepClick={setActive}>
-            <Stepper.Step label="Step 1" />
-            <Stepper.Step label="Step 2" />
-            <Stepper.Step label="Step 3" />
-            <Stepper.Step label="Step 4" />
-            <Stepper.Step label="Step 5" />
-            <Stepper.Step label="Step 6" />
-          </Stepper>
+          <Container style={{ marginTop: "2%" }}>
+            <Stepper active={active} onStepClick={setActive} color="teal">
+              <Stepper.Step label="Step 1" style={{ color: "white" }} />
+              <Stepper.Step label="Step 2" style={{ color: "white" }} />
+              <Stepper.Step label="Step 3" style={{ color: "white" }} />
+              <Stepper.Step label="Step 4" style={{ color: "white" }} />
+              <Stepper.Step label="Step 5" style={{ color: "white" }} />
+              <Stepper.Step label="Step 6" style={{ color: "white" }} />
+            </Stepper>
+          </Container>
           <Container
             style={{
               display: "flex",
