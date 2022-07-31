@@ -36,7 +36,7 @@ const Creation = () => {
   //   Stepper Functions
   const [active, setActive] = useState(1);
   const nextStep = () =>
-    setActive((current) => (current < 3 ? current + 1 : current));
+    setActive((current) => (current < 6 ? current + 1 : current));
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
   return (
@@ -97,36 +97,59 @@ const Creation = () => {
                 //   alignItems: "center",
               }}
             >
-              <Form action="/create" method="post">
-                <Container
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "flex-start",
-                    margin: "1%",
-                  }}
-                >
-                  <FormField
-                    htmlFor="characterName"
-                    label="Character Name"
-                    value={formData.characterName}
-                    type="text"
-                    style={{ width: "100%" }}
-                    onChange={(e) => handleChange(e, "characterName")}
-                  />
-                  <FormField
-                    htmlFor="characterClass"
-                    label="Class"
-                    value={formData.characterClass}
-                    type="text"
-                    style={{ width: "100%" }}
-                    onChange={(e) => handleChange(e, "characterClass")}
-                  />
-                  <Button type="submit" style={{ marginTop: "10%" }}>
-                    Next
-                  </Button>
-                </Container>
-              </Form>
+              <Container
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  margin: "1%",
+                  color: "white",
+                }}
+              >
+                {active === 1 ? (
+                  <Form action="/create" method="post">
+                    <FormField
+                      htmlFor="characterName"
+                      label="Character Name"
+                      value={formData.characterName}
+                      type="text"
+                      style={{ width: "100%" }}
+                      onChange={(e) => handleChange(e, "characterName")}
+                    />
+                    <FormField
+                      htmlFor="characterClass"
+                      label="Class"
+                      value={formData.characterClass}
+                      type="text"
+                      style={{ width: "100%" }}
+                      onChange={(e) => handleChange(e, "characterClass")}
+                    />
+                  </Form>
+                ) : active === 2 ? (
+                  <div>
+                    <h1>Step 2</h1>
+                  </div>
+                ) : active === 3 ? (
+                  <div>
+                    <h1>Step 3</h1>
+                  </div>
+                ) : active === 4 ? (
+                  <div>
+                    <h1>Step 4</h1>
+                  </div>
+                ) : active === 5 ? (
+                  <div>
+                    <h1>Step 5</h1>
+                  </div>
+                ) : active === 6 ? (
+                  <div>
+                    <h1>Step 6</h1>
+                  </div>
+                ) : null}
+                <Button onClick={() => nextStep()} style={{ marginTop: "10%" }}>
+                  Next
+                </Button>
+              </Container>
             </Container>
             <Container
               style={{
