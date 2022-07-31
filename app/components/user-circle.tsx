@@ -1,4 +1,4 @@
-import { Container, Avatar, Button, Text } from "@mantine/core";
+import { Container, Text } from "@mantine/core";
 import type { Profile } from "@prisma/client";
 
 interface props {

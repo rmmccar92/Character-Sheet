@@ -39,7 +39,7 @@ export function HubPanel({ users }: props) {
           }}
         >
           <Button>My Characters</Button>
-          <Button>New Character</Button>
+          <Button onClick={() => navigate("/creation")}>New Character</Button>
         </Container>
         <Container>
           <Form action="/logout" method="post">

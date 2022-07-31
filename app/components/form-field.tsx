@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-
+import type { CSSProperties } from "react";
 // If a custom input field is needed
 interface FormFieldProps {
   htmlFor: string;
   label: string;
   value: any;
   type: string;
+  style?: CSSProperties;
   onChange?: (...args: any) => any;
   error?: string;
 }
@@ -15,6 +16,7 @@ export function FormField({
   label,
   value,
   type,
+  style,
   onChange,
   error,
 }: FormFieldProps) {
@@ -38,6 +40,7 @@ export function FormField({
         id={htmlFor}
         name={htmlFor}
         value={value}
+        style={style}
       />
       {errTxt && (
         <div className="error">
