@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Modal from "~/components/Modal";
-import { Container, Title, Text, Button } from "@mantine/core";
+import { Container, Title, Text, Button, Stepper } from "@mantine/core";
 import { Form, useActionData } from "@remix-run/react";
 import { FormField } from "~/components/form-field";
+import Layout from "~/components/Layout";
 // import { useLoaderData } from "@remix-run/react";
 // import { getUserById } from "~/utils/users.server";
 // import type { LoaderFunction } from "@remix-run/node";
@@ -31,72 +32,114 @@ const Creation = () => {
       [field]: e.target.value,
     }));
   };
+
+  //   Stepper Functions
+  const [active, setActive] = useState(1);
+  const nextStep = () =>
+    setActive((current) => (current < 3 ? current + 1 : current));
+  const prevStep = () =>
+    setActive((current) => (current > 0 ? current - 1 : current));
   return (
     // <Modal isOpen={true}>
-    <Container
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-        width: "100%",
-      }}
-    >
-      <Title>Character Creation</Title>
-      <Text>Coming Soon!</Text>
+    <Layout>
       <Container
         style={{
           display: "flex",
-          flexDirection: "row-reverse",
-          alignItems: "center",
           justifyContent: "center",
-          width: "80%",
-          background: "black",
-          border: "1px solid white",
-          padding: "1%",
+          alignItems: "center",
+          flexDirection: "column",
+          width: "100%",
         }}
       >
+        <Title>Character Creation</Title>
+        <Text>Coming Soon!</Text>
         <Container
-          style={{ border: "1px solid red", width: "50%", height: "100%" }}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+            background: "black",
+            border: "1px solid white",
+            padding: 0,
+          }}
         >
-          <Form action="/create" method="post">
+          <Stepper active={active} onStepClick={setActive}>
+            <Stepper.Step label="Step 1" />
+            <Stepper.Step label="Step 2" />
+            <Stepper.Step label="Step 3" />
+            <Stepper.Step label="Step 4" />
+            <Stepper.Step label="Step 5" />
+            <Stepper.Step label="Step 6" />
+          </Stepper>
+          <Container
+            style={{
+              display: "flex",
+              flexDirection: "row-reverse",
+              justifyContent: "space-evenly",
+              alignItems: "center",
+              padding: 0,
+              margin: "5% 0 2% 0",
+              width: "100%",
+            }}
+          >
             <Container
               style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                margin: "1%",
+                border: "1px solid red",
+                width: "40%",
+                height: "100%",
+                //   display: "flex",
+                //   flexDirection: "row-reverse",
+                //   justifyContent: "center",
+                //   alignItems: "center",
               }}
             >
-              <FormField
-                htmlFor="characterName"
-                label="Character Name"
-                value={formData.characterName}
-                type="text"
-                style={{ width: "100%" }}
-                onChange={(e) => handleChange(e, "characterName")}
-              />
-              <FormField
-                htmlFor="characterClass"
-                label="Class"
-                value={formData.characterClass}
-                type="text"
-                style={{ width: "100%" }}
-                onChange={(e) => handleChange(e, "characterClass")}
-              />
-              <Button type="submit" style={{ marginTop: "10%" }}>
-                Next
-              </Button>
+              <Form action="/create" method="post">
+                <Container
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                    margin: "1%",
+                  }}
+                >
+                  <FormField
+                    htmlFor="characterName"
+                    label="Character Name"
+                    value={formData.characterName}
+                    type="text"
+                    style={{ width: "100%" }}
+                    onChange={(e) => handleChange(e, "characterName")}
+                  />
+                  <FormField
+                    htmlFor="characterClass"
+                    label="Class"
+                    value={formData.characterClass}
+                    type="text"
+                    style={{ width: "100%" }}
+                    onChange={(e) => handleChange(e, "characterClass")}
+                  />
+                  <Button type="submit" style={{ marginTop: "10%" }}>
+                    Next
+                  </Button>
+                </Container>
+              </Form>
             </Container>
-          </Form>
-        </Container>
-        <Container
-          style={{ background: "white", width: "50%", height: "25em" }}
-        >
-          <Text>Character Preview</Text>
+            <Container
+              style={{
+                background: "white",
+                width: "50%",
+                height: "25em",
+                textAlign: "center",
+              }}
+            >
+              <Text>Character Preview</Text>
+            </Container>
+          </Container>
         </Container>
       </Container>
-    </Container>
+    </Layout>
     // </Modal>
   );
 };
