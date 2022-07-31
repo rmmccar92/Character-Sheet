@@ -149,6 +149,9 @@ const Creation = () => {
                 <Button onClick={() => nextStep()} style={{ marginTop: "10%" }}>
                   Next
                 </Button>
+                <Button onClick={() => prevStep()} style={{ marginTop: "10%" }}>
+                  Prev
+                </Button>
               </Container>
             </Container>
             <Container
