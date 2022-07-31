@@ -34,9 +34,9 @@ const Creation = () => {
   };
 
   //   Stepper Functions
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(0);
   const nextStep = () =>
-    setActive((current) => (current < 6 ? current + 1 : current));
+    setActive((current) => (current < 5 ? current + 1 : current));
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
   return (
@@ -106,7 +106,7 @@ const Creation = () => {
                   color: "white",
                 }}
               >
-                {active === 1 ? (
+                {active === 0 ? (
                   <Form action="/create" method="post">
                     <FormField
                       htmlFor="characterName"
@@ -125,30 +125,37 @@ const Creation = () => {
                       onChange={(e) => handleChange(e, "characterClass")}
                     />
                   </Form>
-                ) : active === 2 ? (
+                ) : active === 1 ? (
                   <div>
                     <h1>Step 2</h1>
                   </div>
-                ) : active === 3 ? (
+                ) : active === 2 ? (
                   <div>
                     <h1>Step 3</h1>
                   </div>
-                ) : active === 4 ? (
+                ) : active === 3 ? (
                   <div>
                     <h1>Step 4</h1>
                   </div>
-                ) : active === 5 ? (
+                ) : active === 4 ? (
                   <div>
                     <h1>Step 5</h1>
                   </div>
-                ) : active === 6 ? (
+                ) : active === 5 ? (
                   <div>
                     <h1>Step 6</h1>
                   </div>
                 ) : null}
-                <Button onClick={() => nextStep()} style={{ marginTop: "10%" }}>
-                  Next
-                </Button>
+                {active < 5 ? (
+                  <Button
+                    onClick={() => nextStep()}
+                    style={{ marginTop: "10%" }}
+                  >
+                    Next
+                  </Button>
+                ) : (
+                  <Button style={{ marginTop: "10%" }}>Submit</Button>
+                )}
                 <Button onClick={() => prevStep()} style={{ marginTop: "10%" }}>
                   Prev
                 </Button>
