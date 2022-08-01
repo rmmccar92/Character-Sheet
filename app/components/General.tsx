@@ -6,7 +6,7 @@ import {
   Paper,
   Text,
 } from "@mantine/core";
-import characterData from "../../data/data.js";
+// import characterData from "../../data/data.js";
 
 export default function General() {
   return (
@@ -29,19 +29,19 @@ export default function General() {
           }}
         >
           <TextInput
-            defaultValue={characterData[0].name || ""}
+            // defaultValue={characterData[0].name || ""}
             placeholder="Name"
             label="Name"
             style={{ width: `32%` }}
           />
           <TextInput
-            defaultValue={characterData[0].alignment || ""}
+            // defaultValue={characterData[0].alignment || ""}
             placeholder="Alignment"
             label="Alignment"
             style={{ width: `32%` }}
           />
           <TextInput
-            defaultValue={characterData[0].user.displayName || ""}
+            // defaultValue={characterData[0].user.displayName || ""}
             placeholder="Player"
             label="Player"
             style={{ width: `32%` }}

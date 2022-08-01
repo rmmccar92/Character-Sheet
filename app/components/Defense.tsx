@@ -6,7 +6,7 @@ import {
   Text,
   Button,
 } from "@mantine/core";
-import characterData from "../../data/data.js";
+// import characterData from "../../data/data.js";
 
 export default function Defense() {
   return (
