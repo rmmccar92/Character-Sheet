@@ -141,12 +141,12 @@ const Creation = () => {
                   color: "white",
                 }}
               >
-                {active === 0 ? (
-                  <>
-                    <Title color="white" align="center">
-                      General Info
-                    </Title>
-                    <Form>
+                <Form>
+                  {active === 0 ? (
+                    <>
+                      <Title color="white" align="center">
+                        General Info
+                      </Title>
                       <FormField
                         htmlFor="characterName"
                         label="Character Name"
@@ -259,14 +259,12 @@ const Creation = () => {
                         style={{ width: "100%" }}
                         onChange={(e) => handleChange(e, "characterClass")}
                       />
-                    </Form>
-                  </>
-                ) : active === 1 ? (
-                  <>
-                    <Title color="white" align="center">
-                      Stats
-                    </Title>
-                    <Form>
+                    </>
+                  ) : active === 1 ? (
+                    <>
+                      <Title color="white" align="center">
+                        Stats
+                      </Title>
                       <Container
                         style={{
                           display: "flex",
@@ -339,46 +337,49 @@ const Creation = () => {
                           />
                         </Container>
                       </Container>
-                    </Form>
-                  </>
-                ) : active === 2 ? (
-                  <>
-                    <Title color="white" align="center">
-                      Skills
-                    </Title>
-                  </>
-                ) : active === 3 ? (
-                  <>
-                    <Title color="white" align="center">
-                      Feats and Traits
-                    </Title>
-                  </>
-                ) : active === 4 ? (
-                  <>
-                    <Title color="white" align="center">
-                      Backstory
-                    </Title>
-                  </>
-                ) : active === 5 ? (
-                  <>
-                    <Title color="white" align="center">
-                      Review
-                    </Title>
-                  </>
-                ) : null}
-                {active < 5 ? (
+                    </>
+                  ) : active === 2 ? (
+                    <>
+                      <Title color="white" align="center">
+                        Skills
+                      </Title>
+                    </>
+                  ) : active === 3 ? (
+                    <>
+                      <Title color="white" align="center">
+                        Feats and Traits
+                      </Title>
+                    </>
+                  ) : active === 4 ? (
+                    <>
+                      <Title color="white" align="center">
+                        Backstory
+                      </Title>
+                    </>
+                  ) : active === 5 ? (
+                    <>
+                      <Title color="white" align="center">
+                        Review
+                      </Title>
+                    </>
+                  ) : null}
+                  {active < 5 ? (
+                    <Button
+                      onClick={() => nextStep()}
+                      style={{ marginTop: "10%" }}
+                    >
+                      Next
+                    </Button>
+                  ) : (
+                    <Button style={{ marginTop: "10%" }}>Submit</Button>
+                  )}
                   <Button
-                    onClick={() => nextStep()}
+                    onClick={() => prevStep()}
                     style={{ marginTop: "10%" }}
                   >
-                    Next
+                    Prev
                   </Button>
-                ) : (
-                  <Button style={{ marginTop: "10%" }}>Submit</Button>
-                )}
-                <Button onClick={() => prevStep()} style={{ marginTop: "10%" }}>
-                  Prev
-                </Button>
+                </Form>
               </Container>
             </Container>
             <Container
