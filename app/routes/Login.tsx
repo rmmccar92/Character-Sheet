@@ -203,7 +203,6 @@ export default function Login() {
             name="_action"
             value={action}
             style={{ margin: "10px" }}
-            onClick={() => console.log("Login")}
           >
             {action === "login" ? "Login" : "Register"}
           </Button>

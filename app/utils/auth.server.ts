@@ -78,7 +78,7 @@ export const requireUserId = async (
   return userId;
 };
 
-const getUserSession = (request: Request) => {
+export const getUserSession = (request: Request) => {
   return storage.getSession(request.headers.get("Cookie"));
 };
 

@@ -4,7 +4,7 @@ import { Form, useActionData } from "@remix-run/react";
 import { FormField } from "~/components/form-field";
 import Layout from "~/components/Layout";
 // import { useLoaderData } from "@remix-run/react";
-// import { getUserById } from "~/utils/users.server";
+// import { getUserSession } from "~/utils/auth.server";
 // import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import type { ActionFunction } from "@remix-run/node";
@@ -34,58 +34,62 @@ export const action: ActionFunction = async ({ request }) => {
   const charisma = form.get("charisma");
 
   // This is bad validation it will need to change but wanted to stop TS from yelling at me
-  if (
-    typeof characterName !== "string" ||
-    typeof characterClass !== "string" ||
-    typeof alignment !== "string" ||
-    typeof level !== "number" ||
-    typeof deity !== "string" ||
-    typeof homeland !== "string" ||
-    typeof race !== "string" ||
-    typeof size !== "string" ||
-    typeof gender !== "string" ||
-    typeof characterAge !== "string" ||
-    typeof weight !== "string" ||
-    typeof strength !== "number" ||
-    typeof dexterity !== "number" ||
-    typeof constitution !== "number" ||
-    typeof wisdom !== "number" ||
-    typeof intelligence !== "number" ||
-    typeof charisma !== "number" ||
-    typeof characterHeight !== "string" ||
-    typeof hairColor !== "string" ||
-    typeof eyeColor !== "string"
-  ) {
-    return json({ error: "Invalid form data" }, { status: 400 });
-  }
+  // if (
+  //   typeof characterName !== "string" ||
+  //   typeof characterClass !== "string" ||
+  //   typeof alignment !== "string" ||
+  //   typeof level !== "number" ||
+  //   typeof deity !== "string" ||
+  //   typeof homeland !== "string" ||
+  //   typeof race !== "string" ||
+  //   typeof size !== "string" ||
+  //   typeof gender !== "string" ||
+  //   typeof characterAge !== "string" ||
+  //   typeof weight !== "string" ||
+  //   typeof strength !== "number" ||
+  //   typeof dexterity !== "number" ||
+  //   typeof constitution !== "number" ||
+  //   typeof wisdom !== "number" ||
+  //   typeof intelligence !== "number" ||
+  //   typeof charisma !== "number" ||
+  //   typeof characterHeight !== "string" ||
+  //   typeof hairColor !== "string" ||
+  //   typeof eyeColor !== "string"
+  // ) {
+  //   return json({ error: "Invalid form data" }, { status: 400 });
+  // }
 
-  return await createCharacter({
-    characterName,
-    characterClass,
-    alignment,
-    level,
-    deity,
-    homeland,
-    race,
-    size,
-    gender,
-    characterAge,
-    characterHeight,
-    weight,
-    hairColor,
-    eyeColor,
-    strength,
-    dexterity,
-    constitution,
-    intelligence,
-    wisdom,
-    charisma,
-  });
+  return await createCharacter(
+    {
+      characterName,
+      characterClass,
+      alignment,
+      level,
+      deity,
+      homeland,
+      race,
+      size,
+      gender,
+      characterAge,
+      characterHeight,
+      weight,
+      hairColor,
+      eyeColor,
+      strength,
+      dexterity,
+      constitution,
+      intelligence,
+      wisdom,
+      charisma,
+    },
+    request
+  );
 };
 const Creation = () => {
   //   const { user } = useLoaderData();
   const actionData = useActionData();
-
+  // const { userId } = useLoaderData();
+  // console.log("user", userId);
   const [formData, setFormData] = useState({
     characterName: actionData?.fields?.characterName || "",
     characterClass: actionData?.fields?.characterClass || "",
@@ -191,7 +195,7 @@ const Creation = () => {
                   color: "white",
                 }}
               >
-                <Form>
+                <Form method="post">
                   {active === 0 ? (
                     <>
                       <Title color="white" align="center">
@@ -413,15 +417,13 @@ const Creation = () => {
                       </Title>
                     </>
                   ) : null}
-                  {active < 5 ? (
+                  {active < 5 && (
                     <Button
                       onClick={() => nextStep()}
                       style={{ marginTop: "10%" }}
                     >
                       Next
                     </Button>
-                  ) : (
-                    <Button style={{ marginTop: "10%" }}>Submit</Button>
                   )}
                   <Button
                     onClick={() => prevStep()}
@@ -429,6 +431,11 @@ const Creation = () => {
                   >
                     Prev
                   </Button>
+                  {active === 5 && (
+                    <Button type="submit" style={{ marginTop: "40%" }}>
+                      Submit
+                    </Button>
+                  )}
                 </Form>
               </Container>
             </Container>

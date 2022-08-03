@@ -29,7 +29,7 @@ model Character {
   id              String         @id @default(auto()) @map("_id") @db.ObjectId
   user            User           @relation(fields: [userId], references: [id])
   name            String
-  alignment       String
+  alignment       alignment
   level           Int
   class           String
   home            String
@@ -67,6 +67,18 @@ model Character {
   spells          Spell[]
   armor           Armor[]
   image           String         @default("https://i.imgur.com/0Z0Z0Z0.png")
+}
+
+enum alignment {
+  LG
+  NG
+  CG
+  LN
+  N
+  CN
+  LE
+  NE
+  CE
 }
 
 model Spell {
