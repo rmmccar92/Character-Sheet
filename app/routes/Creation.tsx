@@ -6,8 +6,9 @@ import Layout from "~/components/Layout";
 // import { useLoaderData } from "@remix-run/react";
 // import { getUserById } from "~/utils/users.server";
 // import type { LoaderFunction } from "@remix-run/node";
-// import { json, redirect } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import type { ActionFunction } from "@remix-run/node";
+import { createCharacter } from "~/utils/character.server";
 
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
@@ -31,32 +32,81 @@ export const action: ActionFunction = async ({ request }) => {
   const intelligence = form.get("intelligence");
   const wisdom = form.get("wisdom");
   const charisma = form.get("charisma");
+
+  // This is bad validation it will need to change but wanted to stop TS from yelling at me
+  if (
+    typeof characterName !== "string" ||
+    typeof characterClass !== "string" ||
+    typeof alignment !== "string" ||
+    typeof level !== "number" ||
+    typeof deity !== "string" ||
+    typeof homeland !== "string" ||
+    typeof race !== "string" ||
+    typeof size !== "string" ||
+    typeof gender !== "string" ||
+    typeof characterAge !== "string" ||
+    typeof weight !== "string" ||
+    typeof strength !== "number" ||
+    typeof dexterity !== "number" ||
+    typeof constitution !== "number" ||
+    typeof wisdom !== "number" ||
+    typeof intelligence !== "number" ||
+    typeof charisma !== "number" ||
+    typeof characterHeight !== "string" ||
+    typeof hairColor !== "string" ||
+    typeof eyeColor !== "string"
+  ) {
+    return json({ error: "Invalid form data" }, { status: 400 });
+  }
+
+  return await createCharacter({
+    characterName,
+    characterClass,
+    alignment,
+    level,
+    deity,
+    homeland,
+    race,
+    size,
+    gender,
+    characterAge,
+    characterHeight,
+    weight,
+    hairColor,
+    eyeColor,
+    strength,
+    dexterity,
+    constitution,
+    intelligence,
+    wisdom,
+    charisma,
+  });
 };
 const Creation = () => {
   //   const { user } = useLoaderData();
   const actionData = useActionData();
 
   const [formData, setFormData] = useState({
-    characterName: actionData?.fields.characterName || "",
-    characterClass: actionData?.fields.characterClass || "",
-    alignment: actionData?.fields.alignment || "",
-    level: actionData?.fields.level || "",
-    deity: actionData?.fields.deity || "",
-    homeland: actionData?.fields.homeland || "",
-    race: actionData?.fields.race || "",
-    size: actionData?.fields.size || "",
-    gender: actionData?.fields.gender || "",
-    characterAge: actionData?.fields.characterAge || "",
-    characterHeight: actionData?.fields.characterHeight || "",
-    weight: actionData?.fields.weight || "",
-    hairColor: actionData?.fields.hairColor || "",
-    eyeColor: actionData?.fields.eyeColor || "",
-    strength: actionData?.fields.strength || "",
-    dexterity: actionData?.fields.dexterity || "",
-    constitution: actionData?.fields.constitution || "",
-    intelligence: actionData?.fields.intelligence || "",
-    wisdom: actionData?.fields.wisdom || "",
-    charisma: actionData?.fields.charisma || "",
+    characterName: actionData?.fields?.characterName || "",
+    characterClass: actionData?.fields?.characterClass || "",
+    alignment: actionData?.fields?.alignment || "",
+    level: actionData?.fields?.level || "",
+    deity: actionData?.fields?.deity || "",
+    homeland: actionData?.fields?.homeland || "",
+    race: actionData?.fields?.race || "",
+    size: actionData?.fields?.size || "",
+    gender: actionData?.fields?.gender || "",
+    characterAge: actionData?.fields?.characterAge || "",
+    characterHeight: actionData?.fields?.characterHeight || "",
+    weight: actionData?.fields?.weight || "",
+    hairColor: actionData?.fields?.hairColor || "",
+    eyeColor: actionData?.fields?.eyeColor || "",
+    strength: actionData?.fields?.strength || "",
+    dexterity: actionData?.fields?.dexterity || "",
+    constitution: actionData?.fields?.constitution || "",
+    intelligence: actionData?.fields?.intelligence || "",
+    wisdom: actionData?.fields?.wisdom || "",
+    charisma: actionData?.fields?.charisma || "",
   });
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
