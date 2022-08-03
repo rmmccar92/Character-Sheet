@@ -11,6 +11,7 @@ import type { ActionFunction } from "@remix-run/node";
 import { createCharacter } from "~/utils/character.server";
 
 export const action: ActionFunction = async ({ request }) => {
+  // TODO: Stepper is breaking form data will need to submit data per step
   const form = await request.formData();
   const characterName = form.get("characterName");
   const characterClass = form.get("characterClass");
@@ -32,8 +33,8 @@ export const action: ActionFunction = async ({ request }) => {
   const intelligence = form.get("intelligence");
   const wisdom = form.get("wisdom");
   const charisma = form.get("charisma");
-
-  // This is bad validation it will need to change but wanted to stop TS from yelling at me
+  console.log("form", form);
+  // TODO: Add better validation
   // if (
   //   typeof characterName !== "string" ||
   //   typeof characterClass !== "string" ||
@@ -58,7 +59,7 @@ export const action: ActionFunction = async ({ request }) => {
   // ) {
   //   return json({ error: "Invalid form data" }, { status: 400 });
   // }
-
+  // TODO errors bellow caused by possible null values validation can fix
   return await createCharacter(
     {
       characterName,

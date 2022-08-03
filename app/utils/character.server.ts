@@ -10,8 +10,8 @@ export const createCharacter = async (
 ) => {
   const session = await getUserSession(request);
   const userId = session.get("userId");
-  console.log("userId", userId);
-  console.log("character", character);
+  // console.log("userId", userId);
+  // console.log("character", character);
   return null;
   // const newCharacter = await prisma.character.create({
   //   data: {
