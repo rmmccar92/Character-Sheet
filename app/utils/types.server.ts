@@ -24,10 +24,10 @@ export interface CharacterForm {
   weight: string;
   hairColor?: string | null;
   eyeColor?: string;
-  strength: number;
-  dexterity: number;
-  constitution: number;
-  wisdom: number;
-  intelligence: number;
-  charisma: number;
+  strength: number | string;
+  dexterity: number | string;
+  constitution: number | string;
+  wisdom: number | string;
+  intelligence: number | string;
+  charisma: number | string;
 }

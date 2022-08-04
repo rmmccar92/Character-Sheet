@@ -9,10 +9,15 @@ import Layout from "~/components/Layout";
 import { json } from "@remix-run/node";
 import type { ActionFunction } from "@remix-run/node";
 import { createCharacter } from "~/utils/character.server";
+import { CharacterForm } from "~/utils/types.server";
 
 export const action: ActionFunction = async ({ request }) => {
   // TODO: Stepper is breaking form data will need to submit data per step
   const form = await request.formData();
+  // This will work to clean up some variables Stepper still break it
+  // const values = Object.fromEntries(form);
+  // console.log("values", values);
+
   const characterName = form.get("characterName");
   const characterClass = form.get("characterClass");
   const alignment = form.get("alignment");
@@ -87,6 +92,9 @@ export const action: ActionFunction = async ({ request }) => {
   );
 };
 const Creation = () => {
+  const [characterData, setCharacterData] = useState<CharacterForm | null>(
+    null
+  );
   //   const { user } = useLoaderData();
   const actionData = useActionData();
   // const { userId } = useLoaderData();
@@ -125,8 +133,12 @@ const Creation = () => {
 
   //   Stepper Functions
   const [active, setActive] = useState(0);
-  const nextStep = () =>
+  const nextStep = () => {
     setActive((current) => (current < 5 ? current + 1 : current));
+    setCharacterData({ ...formData });
+    console.log("characterData", characterData);
+  };
+  console.log("characterData", characterData);
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
   return (
@@ -432,7 +444,8 @@ const Creation = () => {
                   >
                     Prev
                   </Button>
-                  {active === 5 && (
+                  {/* TODO: This condition should be === only like this for testing purposes */}
+                  {active < 5 && (
                     <Button type="submit" style={{ marginTop: "40%" }}>
                       Submit
                     </Button>
