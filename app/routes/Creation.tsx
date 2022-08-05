@@ -9,7 +9,7 @@ import Layout from "~/components/Layout";
 import { json } from "@remix-run/node";
 import type { ActionFunction } from "@remix-run/node";
 import { createCharacter } from "~/utils/character.server";
-import { CharacterForm } from "~/utils/types.server";
+import type { CharacterForm } from "~/utils/types.server";
 
 export const action: ActionFunction = async ({ request }) => {
   // TODO: Stepper is breaking form data will need to submit data per step
@@ -65,6 +65,7 @@ export const action: ActionFunction = async ({ request }) => {
   //   return json({ error: "Invalid form data" }, { status: 400 });
   // }
   // TODO errors bellow caused by possible null values validation can fix
+  const submission = localStorage.getItem("characterData");
   return await createCharacter(
     {
       characterName,
@@ -136,7 +137,7 @@ const Creation = () => {
   const nextStep = () => {
     setActive((current) => (current < 5 ? current + 1 : current));
     setCharacterData({ ...formData });
-    console.log("characterData", characterData);
+    localStorage.setItem("characterData", JSON.stringify(characterData));
   };
   console.log("characterData", characterData);
   const prevStep = () =>
