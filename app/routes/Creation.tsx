@@ -1,21 +1,14 @@
-import { FormEvent, useState } from "react";
-import type { ChangeEvent } from "react";
+import { useState } from "react";
+import type { ChangeEvent, FormEvent } from "react";
 import { Container, Title, Text, Button, Stepper } from "@mantine/core";
 import { Form, useActionData, useSubmit } from "@remix-run/react";
 import { FormField } from "~/components/form-field";
 import Layout from "~/components/Layout";
-// import { useLoaderData } from "@remix-run/react";
-// import { getUserSession } from "~/utils/auth.server";
-// import type { LoaderFunction } from "@remix-run/node";
-import { json } from "@remix-run/node";
 import type { ActionFunction } from "@remix-run/node";
 import { createCharacter } from "~/utils/character.server";
-import type { CharacterForm } from "~/utils/types.server";
 
 export const action: ActionFunction = async ({ request }) => {
-  // TODO: Stepper is breaking form data will need to submit data per step
   const form = await request.formData();
-  // console.log(form);
   // This will work to clean up some variables Stepper still break it
   const values = Object.fromEntries(form);
   // TODO error handling
@@ -27,13 +20,7 @@ export const action: ActionFunction = async ({ request }) => {
   );
 };
 const Creation = () => {
-  const [characterData, setCharacterData] = useState<CharacterForm | null>(
-    null
-  );
-  //   const { user } = useLoaderData();
   const actionData = useActionData();
-  // const { userId } = useLoaderData();
-  // console.log("user", userId);
   const [formData, setFormData] = useState({
     characterName: actionData?.fields?.characterName || "",
     characterClass: actionData?.fields?.characterClass || "",
@@ -72,13 +59,10 @@ const Creation = () => {
   const [active, setActive] = useState(0);
   const nextStep = () => {
     setActive((current) => (current < 5 ? current + 1 : current));
-    // setCharacterData({ ...formData });
   };
-  // console.log("characterData", characterData);
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
   return (
-    // <Modal isOpen={true}>
     <Layout>
       <Container
         style={{
@@ -401,7 +385,6 @@ const Creation = () => {
         </Container>
       </Container>
     </Layout>
-    // </Modal>
   );
 };
 
