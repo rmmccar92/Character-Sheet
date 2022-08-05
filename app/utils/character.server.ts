@@ -4,10 +4,7 @@ import { getUserSession } from "./auth.server";
 
 // TODO: Character creation
 
-export const createCharacter = async (
-  character: CharacterForm,
-  request: Request
-) => {
+export const createCharacter = async (character: any, request: Request) => {
   const session = await getUserSession(request);
   const userId = session.get("userId");
   // console.log("userId", userId);

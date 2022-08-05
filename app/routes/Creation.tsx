@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { ChangeEvent } from "react";
 import { Container, Title, Text, Button, Stepper } from "@mantine/core";
 import { Form, useActionData } from "@remix-run/react";
 import { FormField } from "~/components/form-field";
@@ -10,6 +11,8 @@ import { json } from "@remix-run/node";
 import type { ActionFunction } from "@remix-run/node";
 import { createCharacter } from "~/utils/character.server";
 import type { CharacterForm } from "~/utils/types.server";
+import { generateId } from "~/utils/helpers.server";
+import { saveToRedis } from "~/utils/redis.server";
 
 export const action: ActionFunction = async ({ request }) => {
   // TODO: Stepper is breaking form data will need to submit data per step
@@ -17,7 +20,7 @@ export const action: ActionFunction = async ({ request }) => {
   // This will work to clean up some variables Stepper still break it
   // const values = Object.fromEntries(form);
   // console.log("values", values);
-
+  const action = form.get("_action");
   const characterName = form.get("characterName");
   const characterClass = form.get("characterClass");
   const alignment = form.get("alignment");
@@ -32,13 +35,12 @@ export const action: ActionFunction = async ({ request }) => {
   const weight = form.get("weight");
   const hairColor = form.get("hairColor");
   const eyeColor = form.get("eyeColor");
-  const strength = form.get("strength");
-  const dexterity = form.get("dexterity");
-  const constitution = form.get("constitution");
-  const intelligence = form.get("intelligence");
-  const wisdom = form.get("wisdom");
-  const charisma = form.get("charisma");
-  console.log("form", form);
+  // const strength = form.get("strength");
+  // const dexterity = form.get("dexterity");
+  // const constitution = form.get("constitution");
+  // const intelligence = form.get("intelligence");
+  // const wisdom = form.get("wisdom");
+  // const charisma = form.get("charisma");
   // TODO: Add better validation
   // if (
   //   typeof characterName !== "string" ||
@@ -64,33 +66,53 @@ export const action: ActionFunction = async ({ request }) => {
   // ) {
   //   return json({ error: "Invalid form data" }, { status: 400 });
   // }
+  const id = generateId(8);
+
+  const formDataObject: CharacterForm = {
+    id,
+    characterName,
+    characterClass,
+    alignment,
+    level,
+    deity,
+    homeland,
+    race,
+    size,
+    gender,
+    characterAge,
+    characterHeight,
+    weight,
+    hairColor,
+    eyeColor,
+  };
+  await saveToRedis(formDataObject);
+
   // TODO errors bellow caused by possible null values validation can fix
-  const submission = localStorage.getItem("characterData");
-  return await createCharacter(
-    {
-      characterName,
-      characterClass,
-      alignment,
-      level,
-      deity,
-      homeland,
-      race,
-      size,
-      gender,
-      characterAge,
-      characterHeight,
-      weight,
-      hairColor,
-      eyeColor,
-      strength,
-      dexterity,
-      constitution,
-      intelligence,
-      wisdom,
-      charisma,
-    },
-    request
-  );
+  //   return await createCharacter(
+  //     {
+  //       characterName,
+  //       characterClass,
+  //       alignment,
+  //       level,
+  //       deity,
+  //       homeland,
+  //       race,
+  //       size,
+  //       gender,
+  //       characterAge,
+  //       characterHeight,
+  //       weight,
+  //       hairColor,
+  //       eyeColor,
+  //       strength,
+  //       dexterity,
+  //       constitution,
+  //       intelligence,
+  //       wisdom,
+  //       charisma,
+  //     },
+  //     request
+  //   );
 };
 const Creation = () => {
   const [characterData, setCharacterData] = useState<CharacterForm | null>(
@@ -122,10 +144,7 @@ const Creation = () => {
     wisdom: actionData?.fields?.wisdom || "",
     charisma: actionData?.fields?.charisma || "",
   });
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    field: string
-  ) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>, field: string) => {
     setFormData((form) => ({
       ...form,
       [field]: e.target.value,
@@ -137,7 +156,6 @@ const Creation = () => {
   const nextStep = () => {
     setActive((current) => (current < 5 ? current + 1 : current));
     setCharacterData({ ...formData });
-    localStorage.setItem("characterData", JSON.stringify(characterData));
   };
   console.log("characterData", characterData);
   const prevStep = () =>

@@ -10,6 +10,7 @@ export interface LoginForm {
   password: string;
 }
 export interface CharacterForm {
+  id: string;
   characterName: string;
   characterClass: string;
   alignment: string;
