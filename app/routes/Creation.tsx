@@ -18,105 +18,10 @@ export const action: ActionFunction = async ({ request }) => {
   // console.log(form);
   // This will work to clean up some variables Stepper still break it
   const values = Object.fromEntries(form);
-  console.log("values", values);
-  // const action = form.get("_action");
-  // const characterName = form.get("characterName");
-  // const characterClass = form.get("characterClass");
-  // const alignment = form.get("alignment");
-  // const level = form.get("level");
-  // const deity = form.get("deity");
-  // const homeland = form.get("homeland");
-  // const race = form.get("race");
-  // const size = form.get("size");
-  // const gender = form.get("gender");
-  // const characterAge = form.get("characterAge");
-  // const characterHeight = form.get("characterHeight");
-  // const weight = form.get("weight");
-  // const hairColor = form.get("hairColor");
-  // const eyeColor = form.get("eyeColor");
-  // const strength = form.get("strength");
-  // const dexterity = form.get("dexterity");
-  // const constitution = form.get("constitution");
-  // const intelligence = form.get("intelligence");
-  // const wisdom = form.get("wisdom");
-  // const charisma = form.get("charisma");
-  // TODO: Add better validation
-  // if (
-  //   typeof characterName !== "string" ||
-  //   typeof characterClass !== "string" ||
-  //   typeof alignment !== "string" ||
-  //   typeof level !== "string" ||
-  //   typeof deity !== "string" ||
-  //   typeof homeland !== "string" ||
-  //   typeof race !== "string" ||
-  //   typeof size !== "string" ||
-  //   typeof gender !== "string" ||
-  //   typeof characterAge !== "string" ||
-  //   typeof weight !== "string"
-  // ) {
-  //   return json({ error: "Invalid form data" }, { status: 400 });
-  // }
-  // if (
-  //   action === "step2" &&
-  //   (typeof strength !== "string" ||
-  //     typeof dexterity !== "string" ||
-  //     typeof constitution !== "string" ||
-  //     typeof wisdom !== "string" ||
-  //     typeof intelligence !== "string" ||
-  //     typeof charisma !== "string" ||
-  //     typeof characterHeight !== "string" ||
-  //     typeof hairColor !== "string" ||
-  //     typeof eyeColor !== "string")
-  // ) {
-  //   return json({ error: "Invalid form data" }, { status: 400 });
-  // }
-
-  //  This was for Redis but it may not be needed
-  // const id = generateId(8);
-
-  // const formDataObject: CharacterForm = {
-  //   id,
-  //   characterName,
-  //   characterClass,
-  //   alignment,
-  //   level,
-  //   deity,
-  //   homeland,
-  //   race,
-  //   size,
-  //   gender,
-  //   characterAge,
-  //   characterHeight,
-  //   weight,
-  //   hairColor,
-  //   eyeColor,
-  // };
-  // await saveToRedis(formDataObject);
-
-  // TODO errors bellow caused by possible null values validation can fix
+  // TODO error handling
   return await createCharacter(
     {
       ...values,
-      // values.characterName,
-      // values.characterClass,
-      // values.alignment,
-      // values.level,
-      // values.deity,
-      // values.homeland,
-      // values.race,
-      // values.size,
-      // values.gender,
-      // values.characterAge,
-      // values.characterHeight,
-      // values.weight,
-      // values.hairColor,
-      // values.eyeColor,
-      // values.strength,
-      // values.dexterity,
-      // values.constitution,
-      // values.intelligence,
-      // values.wisdom,
-      // values.charisma,
     },
     request
   );
