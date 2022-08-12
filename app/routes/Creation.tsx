@@ -1,11 +1,12 @@
 import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
-import { Container, Title, Text, Button, Stepper } from "@mantine/core";
+import { Container, Title, Text, Button, Stepper, Radio } from "@mantine/core";
 import { Form, useActionData, useSubmit } from "@remix-run/react";
 import { FormField } from "~/components/form-field";
 import Layout from "~/components/Layout";
 import type { ActionFunction } from "@remix-run/node";
 import { createCharacter } from "~/utils/character.server";
+import skills from "~/utils/data.js";
 
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
@@ -42,6 +43,12 @@ const Creation = () => {
     intelligence: actionData?.fields?.intelligence || "",
     wisdom: actionData?.fields?.wisdom || "",
     charisma: actionData?.fields?.charisma || "",
+  });
+  skills.map((skill) => {
+    const name = skill.name;
+    return {
+      [name]: actionData?.fields?.[name] || "",
+    };
   });
 
   const submit = useSubmit();
@@ -146,6 +153,7 @@ const Creation = () => {
                         style={{ width: "100%" }}
                         onChange={(e) => handleChange(e, "alignment")}
                       />
+                      {/* Not needed can be assumed that character starts at 0 
                       <FormField
                         htmlFor="level"
                         label="Level"
@@ -153,7 +161,7 @@ const Creation = () => {
                         type="text"
                         style={{ width: "100%" }}
                         onChange={(e) => handleChange(e, "level")}
-                      />
+                      /> */}
                       <FormField
                         htmlFor="deity"
                         label="Deity"
@@ -326,6 +334,35 @@ const Creation = () => {
                       <Title color="white" align="center">
                         Skills
                       </Title>
+                      {skills.map((skill) => (
+                        <Container
+                          key={skill.name}
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                          }}
+                        >
+                          <Radio
+                            value={skill.name}
+                            color="white"
+                            size="xs"
+                            style={{ marginRight: "1%" }}
+                          />
+                          <Text>{skill.name}</Text>
+                          <FormField
+                            htmlFor={skill.name}
+                            value={formData[skill.name]}
+                            type="string"
+                            label=""
+                            style={{
+                              width: "10%",
+                              marginLeft: "1%",
+                              justifySelf: "flex-end",
+                            }}
+                            onChange={(e) => handleChange(e, skill.name)}
+                          />
+                        </Container>
+                      ))}
                     </>
                   ) : active === 3 ? (
                     <>
