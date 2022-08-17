@@ -175,19 +175,19 @@ type Initiative {
 }
 
 type CMB {
-  total   Int
-  sizeMod Int
-  miscMod Int
-  tempMod Int
+  total     Int
+  sizeMod   Int
+  miscMod   Int
+  tempMoInt Int
 }
 
 type Stats {
-  strength     String?
-  dexterity    String?
-  constitution String?
-  intelligence String?
-  wisdom       String?
-  charisma     String?
+  strength     Int? @default(0)
+  dexterity    Int? @default(0)
+  constitution Int? @default(0)
+  intelligence Int? @default(0)
+  wisdom       Int? @default(0)
+  charisma     Int? @default(0)
 }
 
 type Skills {

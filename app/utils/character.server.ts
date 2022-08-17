@@ -26,7 +26,7 @@ export const createCharacter = async (
       gender: character.gender,
       // characterAge: character.characterAge
       stats: {
-        strength: parseInt(character?.strength),
+        strength: parseInt(character?.strength) || 0,
         dexterity: parseInt(character?.dexterity),
         constitution: parseInt(character?.constitution),
         wisdom: parseInt(character?.wisdom),
