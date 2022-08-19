@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import { Container, Title, Text, Button, Stepper, Radio } from "@mantine/core";
 import { Form, useActionData, useSubmit } from "@remix-run/react";
@@ -43,14 +43,22 @@ const Creation = () => {
     intelligence: actionData?.fields?.intelligence || "",
     wisdom: actionData?.fields?.wisdom || "",
     charisma: actionData?.fields?.charisma || "",
+    skills: actionData?.fields || {},
   });
-  skills.map((skill) => {
-    const name = skill.name;
-    return {
-      [name]: actionData?.fields?.[name] || "",
-    };
-  });
+  // console.log("SKILLDATA", skillData);
+  useMemo(() => {
+    skills.forEach((skill) => {
+      setFormData((prev) => ({
+        ...prev,
+        skills: {
+          ...prev.skills,
+          [skill.name]: skill,
+        },
+      }));
+    });
+  }, []);
 
+  console.log("FORMDATA", formData);
   const submit = useSubmit();
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -351,7 +359,7 @@ const Creation = () => {
                           <Text>{skill.name}</Text>
                           <FormField
                             htmlFor={skill.name}
-                            value={formData[skill.name]}
+                            value={formData.skills[skill.name]}
                             type="string"
                             label=""
                             style={{
