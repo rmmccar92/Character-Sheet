@@ -45,7 +45,6 @@ const Creation = () => {
     charisma: actionData?.fields?.charisma || "",
     skills: actionData?.fields || {},
   });
-  // console.log("SKILLDATA", skillData);
   useMemo(() => {
     skills.forEach((skill) => {
       setFormData((prev) => ({
@@ -58,7 +57,6 @@ const Creation = () => {
     });
   }, []);
 
-  console.log("FORMDATA", formData);
   const submit = useSubmit();
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
