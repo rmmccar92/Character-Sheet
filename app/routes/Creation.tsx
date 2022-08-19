@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import { Container, Title, Text, Button, Stepper, Radio } from "@mantine/core";
 import { Form, useActionData, useSubmit } from "@remix-run/react";
@@ -6,7 +6,7 @@ import { FormField } from "~/components/form-field";
 import Layout from "~/components/Layout";
 import type { ActionFunction } from "@remix-run/node";
 import { createCharacter } from "~/utils/character.server";
-import skills from "~/utils/data.js";
+import skillsData from "~/utils/data.js";
 
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
@@ -43,20 +43,21 @@ const Creation = () => {
     intelligence: actionData?.fields?.intelligence || "",
     wisdom: actionData?.fields?.wisdom || "",
     charisma: actionData?.fields?.charisma || "",
-    skills: actionData?.fields || {},
+    skills: actionData?.fields?.skills || {},
   });
   useMemo(() => {
-    skills.forEach((skill) => {
+    skillsData.forEach((skill) => {
       setFormData((prev) => ({
         ...prev,
         skills: {
           ...prev.skills,
-          [skill.name]: skill,
+          [skill.name]: actionData?.fields?.[skill.name] || "",
         },
       }));
     });
   }, []);
-
+  // console.log("ACTION DATA", actionData);
+  // console.log("formData", formData);
   const submit = useSubmit();
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -66,6 +67,19 @@ const Creation = () => {
     setFormData((form) => ({
       ...form,
       [field]: e.target.value,
+    }));
+  };
+
+  const handleSkillChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    skill: string
+  ) => {
+    setFormData((form) => ({
+      ...form,
+      skills: {
+        ...form.skills,
+        [skill]: e.target.value,
+      },
     }));
   };
   //   Stepper Functions
@@ -340,7 +354,7 @@ const Creation = () => {
                       <Title color="white" align="center">
                         Skills
                       </Title>
-                      {skills.map((skill) => (
+                      {skillsData.map((skill) => (
                         <Container
                           key={skill.name}
                           style={{
@@ -357,7 +371,7 @@ const Creation = () => {
                           <Text>{skill.name}</Text>
                           <FormField
                             htmlFor={skill.name}
-                            value={formData.skills[skill.name]}
+                            value={formData.skills?.[skill.name]}
                             type="string"
                             label=""
                             style={{
@@ -365,7 +379,9 @@ const Creation = () => {
                               marginLeft: "1%",
                               justifySelf: "flex-end",
                             }}
-                            onChange={(e) => handleChange(e, skill.name)}
+                            onChange={(e) => {
+                              handleSkillChange(e, `${skill.name}`);
+                            }}
                           />
                         </Container>
                       ))}
