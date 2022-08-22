@@ -12,6 +12,9 @@ export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
   // This will work to clean up some variables Stepper still break it
   const values = Object.fromEntries(form);
+  // const skills = form.getAll("skills");
+  // const testSkills = form.getAll(JSON.parse(skills));
+  // console.log("___________", values);
   // TODO error handling
   return await createCharacter(
     {
@@ -56,11 +59,12 @@ const Creation = () => {
       }));
     });
   }, []);
-  // console.log("ACTION DATA", actionData);
   // console.log("formData", formData);
   const submit = useSubmit();
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    formData.skills = JSON.stringify(formData.skills);
+    console.log("formData", formData);
     submit(formData, { method: "post" });
   };
   const handleChange = (e: ChangeEvent<HTMLInputElement>, field: string) => {
