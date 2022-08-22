@@ -30,4 +30,44 @@ export interface CharacterForm {
   wisdom?: number | string;
   intelligence?: number | string;
   charisma?: number | string;
+  skills?: Skills;
 }
+
+type Skills = {
+  acrobatics: number | string;
+  appraise: number | string;
+  athletics: number | string;
+  bluff: number | string;
+  climb: number | string;
+  craft: number | string;
+  diplomacy: number | string;
+  disableDevice: number | string;
+  disguise: number | string;
+  escapeArtist: number | string;
+  fly: number | string;
+  handleAnimal: number | string;
+  heal: number | string;
+  intimidation: number | string;
+  linguistics: number | string;
+  perception: number | string;
+  performance: number | string;
+  profession: number | string;
+  ride: number | string;
+  senseMotive: number | string;
+  sleightOfHand: number | string;
+  spellcraft: number | string;
+  stealth: number | string;
+  survival: number | string;
+  swim: number | string;
+  useMagicDevice: number | string;
+  knowledgeArcana: number | string;
+  knowledgeDungeoneering: number | string;
+  knowledgeEngineering: number | string;
+  knowledgeGeography: number | string;
+  knowledgeHistory: number | string;
+  knowledgeLocal: number | string;
+  knowledgeNature: number | string;
+  knowledgeNobility: number | string;
+  knowledgePlanes: number | string;
+  knowledgeReligion: number | string;
+};
