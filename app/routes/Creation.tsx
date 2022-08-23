@@ -52,7 +52,11 @@ const Creation = () => {
         ...prev,
         skills: {
           ...prev.skills,
-          [skill.name]: actionData?.fields?.[skill.name] || "",
+          [skill.name]: actionData?.fields?.skills[skill.name] || {
+            ...prev.skills[skill.name],
+            ranks: actionData?.fields?.ranks || "",
+            trained: actionData?.fields?.trained || false,
+          },
         },
       }));
     });
@@ -80,7 +84,7 @@ const Creation = () => {
       ...form,
       skills: {
         ...form.skills,
-        [skill]: e.target.value,
+        [skill]: { ...form.skills[skill], ranks: e.target.value },
       },
     }));
   };
@@ -359,11 +363,16 @@ const Creation = () => {
                             flexDirection: "row",
                           }}
                         >
-                          <RadioButton skillName={skill.name} />
+                          <RadioButton
+                            value={formData.skills?.[skill.name].trained}
+                            skillName={skill.name}
+                            formData={formData}
+                            setFormData={setFormData}
+                          />
                           <Text>{skill.name}</Text>
                           <FormField
                             htmlFor={skill.name}
-                            value={formData.skills?.[skill.name]}
+                            value={formData.skills?.[skill.name].ranks}
                             type="string"
                             label=""
                             style={{

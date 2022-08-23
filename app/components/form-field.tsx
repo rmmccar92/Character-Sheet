@@ -3,7 +3,7 @@ import type { CSSProperties } from "react";
 // If a custom input field is needed
 interface FormFieldProps {
   htmlFor: string;
-  label: string;
+  label?: string;
   value: any;
   type: string;
   style?: CSSProperties;
