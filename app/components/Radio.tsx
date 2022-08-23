@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { Radio } from "@mantine/core";
 
-const RadioButton = ({ name }) => {
+interface props {
+  skillName: string;
+}
+
+const RadioButton = ({ skillName }: props) => {
   const [toggle, setToggle] = useState(false);
   const handleRadioChange = () => {
     setToggle((prev) => !prev);
@@ -9,7 +13,7 @@ const RadioButton = ({ name }) => {
 
   return (
     <Radio
-      value={name}
+      value={skillName}
       checked={toggle}
       color="white"
       size="xs"

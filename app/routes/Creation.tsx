@@ -85,12 +85,6 @@ const Creation = () => {
     }));
   };
 
-  // Radio buttons
-  const [toggle, setToggle] = useState(false);
-  const handleRadioChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setToggle((prev) => !prev);
-  };
-
   //   Stepper Functions
   const [active, setActive] = useState(0);
   const nextStep = () => {
@@ -183,15 +177,6 @@ const Creation = () => {
                         style={{ width: "100%" }}
                         onChange={(e) => handleChange(e, "alignment")}
                       />
-                      {/* Not needed can be assumed that character starts at 0 
-                      <FormField
-                        htmlFor="level"
-                        label="Level"
-                        value={formData.level}
-                        type="text"
-                        style={{ width: "100%" }}
-                        onChange={(e) => handleChange(e, "level")}
-                      /> */}
                       <FormField
                         htmlFor="deity"
                         label="Deity"
@@ -372,15 +357,7 @@ const Creation = () => {
                             flexDirection: "row",
                           }}
                         >
-                          {/* <Radio
-                            value={skill.name}
-                            checked={toggle}
-                            color="white"
-                            size="xs"
-                            style={{ marginRight: "1%" }}
-                            onClick={(e) => handleRadioChange(e)}
-                          /> */}
-                          <RadioButton name={skill.name} />
+                          <RadioButton skillName={skill.name} />
                           <Text>{skill.name}</Text>
                           <FormField
                             htmlFor={skill.name}
