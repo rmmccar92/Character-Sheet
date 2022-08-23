@@ -7,14 +7,12 @@ import Layout from "~/components/Layout";
 import type { ActionFunction } from "@remix-run/node";
 import { createCharacter } from "~/utils/character.server";
 import skillsData from "~/utils/data.js";
+import RadioButton from "~/components/Radio";
 
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
-  // This will work to clean up some variables Stepper still break it
+  // Object to be submitted to the server created from values from the form
   const values = Object.fromEntries(form);
-  // const skills = form.getAll("skills");
-  // const testSkills = form.getAll(JSON.parse(skills));
-  // console.log("___________", values);
   // TODO error handling
   return await createCharacter(
     {
@@ -64,7 +62,7 @@ const Creation = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     formData.skills = JSON.stringify(formData.skills);
-    console.log("formData", formData);
+    // console.log("formData", formData);
     submit(formData, { method: "post" });
   };
   const handleChange = (e: ChangeEvent<HTMLInputElement>, field: string) => {
@@ -86,13 +84,21 @@ const Creation = () => {
       },
     }));
   };
+
+  // Radio buttons
+  const [toggle, setToggle] = useState(false);
+  const handleRadioChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setToggle((prev) => !prev);
+  };
+
   //   Stepper Functions
   const [active, setActive] = useState(0);
   const nextStep = () => {
     setActive((current) => (current < 5 ? current + 1 : current));
   };
-  const prevStep = () =>
+  const prevStep = () => {
     setActive((current) => (current > 0 ? current - 1 : current));
+  };
   return (
     <Layout>
       <Container
@@ -366,12 +372,15 @@ const Creation = () => {
                             flexDirection: "row",
                           }}
                         >
-                          <Radio
+                          {/* <Radio
                             value={skill.name}
+                            checked={toggle}
                             color="white"
                             size="xs"
                             style={{ marginRight: "1%" }}
-                          />
+                            onClick={(e) => handleRadioChange(e)}
+                          /> */}
+                          <RadioButton name={skill.name} />
                           <Text>{skill.name}</Text>
                           <FormField
                             htmlFor={skill.name}
