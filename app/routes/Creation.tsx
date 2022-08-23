@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
-import { Container, Title, Text, Button, Stepper, Radio } from "@mantine/core";
+import { Container, Title, Text, Button, Stepper } from "@mantine/core";
 import { Form, useActionData, useSubmit } from "@remix-run/react";
 import { FormField } from "~/components/form-field";
 import Layout from "~/components/Layout";
@@ -94,6 +94,8 @@ const Creation = () => {
     setActive((current) => (current > 0 ? current - 1 : current));
   };
   return (
+    // TODO: Simplify with components
+    // TODO: Equipment Step
     <Layout>
       <Container
         style={{
