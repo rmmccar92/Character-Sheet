@@ -13,7 +13,7 @@ const RadioButton = ({ skillName, value, formData, setFormData }: props) => {
   const [toggle, setToggle] = useState(false);
   const handleRadioChange = () => {
     setToggle((prev) => !prev);
-    console.log(formData.skills);
+    // console.log(formData.skills);
     // setFormData({ ...formData, skills[skillName].trained: !toggle });
   };
   return (

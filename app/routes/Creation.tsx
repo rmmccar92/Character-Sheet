@@ -364,7 +364,7 @@ const Creation = () => {
                           }}
                         >
                           <RadioButton
-                            value={formData.skills?.[skill.name].trained}
+                            value={formData.skills?.[skill.name]?.trained}
                             skillName={skill.name}
                             formData={formData}
                             setFormData={setFormData}
@@ -372,7 +372,7 @@ const Creation = () => {
                           <Text>{skill.name}</Text>
                           <FormField
                             htmlFor={skill.name}
-                            value={formData.skills?.[skill.name].ranks}
+                            value={formData.skills?.[skill.name]?.ranks}
                             type="string"
                             label=""
                             style={{
