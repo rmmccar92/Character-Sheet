@@ -19,7 +19,7 @@ const RadioButton = ({ skillName, value, formData, setFormData }: props) => {
     <Checkbox
       value={value}
       checked={toggle}
-      color="dark"
+      color="gray"
       radius="xl"
       size="xs"
       style={{ marginRight: "1%" }}
