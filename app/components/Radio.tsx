@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Radio } from "@mantine/core";
+import { Checkbox } from "@mantine/core";
 
 interface props {
   skillName: string;
@@ -12,18 +12,18 @@ const RadioButton = ({ skillName, value, formData, setFormData }: props) => {
   // Radio button funcions
   const [toggle, setToggle] = useState(false);
   const handleRadioChange = () => {
+    console.log(toggle);
     setToggle((prev) => !prev);
-    // console.log(formData.skills);
-    // setFormData({ ...formData, skills[skillName].trained: !toggle });
   };
   return (
-    <Radio
+    <Checkbox
       value={value}
       checked={toggle}
-      color="white"
+      color="dark"
+      radius="xl"
       size="xs"
       style={{ marginRight: "1%" }}
-      onClick={() => handleRadioChange()}
+      onChange={() => handleRadioChange()}
     />
   );
 };
