@@ -8,6 +8,6 @@ export const links: LinksFunction = () => {
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
-  await requireUserId(request);
+  // await requireUserId(request);
   return redirect("/home");
 };
