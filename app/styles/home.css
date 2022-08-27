@@ -1,0 +1,56 @@
+svg{
+    position: absolute;
+    left: -.25em;
+    fill: none;
+    stroke: var(--highlight);
+    stroke-dasharray: 150 480;
+    stroke-dashoffset: 150;
+    transition: 1.5s ease-in-out;
+}
+.loginBtn{
+    position: absolute;
+    right: 20em;
+    top: 4em;
+    background-color: var(--secondary-purple);
+    border-radius: 12px;
+    color: white;
+    width: 15em;
+    height: 5em;
+    transition: 1s all;
+}
+.loginBtn:hover{
+    background-color: var(--main-purple);
+}
+.loginBtn:hover svg{
+    stroke-dashoffset: -480;
+}
+.center{
+    width: 20em;
+    height: 5em;
+    position: absolute;
+}
+.welcomeText {
+    font-family: "Uncial Antiqua";
+    margin: 3em 0 0 20px; 
+    text-shadow: 2px 1px 5px black;
+    font-size: 100px;
+    line-height: 140px;
+    color: white;
+}
+.welcomeText:first-letter{
+    color: var(--main-purple);
+    float:left;
+    font-family: 'Euphoria Script';
+    font-size: 350px;
+    text-shadow: 10px 10px 25px black, 5px 5px var(--secondary-purple), -5px -5px var(--secondary-purple); 
+    letter-spacing: 10px;
+    margin-top: 1px;
+}
+.welcomeSubText{
+    color: white;
+    font-size: 30px;
+    width: 35%;
+    margin: 1em 0 0 6em;
+    text-shadow: 3px 3px 3px black;
+    font-family: Uncial Antiqua;
+}

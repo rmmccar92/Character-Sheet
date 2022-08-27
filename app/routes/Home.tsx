@@ -8,6 +8,7 @@ import { Outlet, useLoaderData } from "@remix-run/react";
 import { Title, Box, Text } from "@mantine/core";
 import AnimatedButton from "../components/AnimatedBtn";
 import { useNavigate } from "@remix-run/react";
+import styles from "../styles/home.css"
 
 // export const loader: LoaderFunction = async ({ request }) => {
 //   const userId = await requireUserId(request);
@@ -15,6 +16,10 @@ import { useNavigate } from "@remix-run/react";
 //   return json({ users });
 // };
 
+
+export function links() {
+  return [{ rel: "stylesheet", href: styles }];
+}
 
 
 export default function Home() {
@@ -34,41 +39,26 @@ export default function Home() {
         width: "95%",
         display: "flex",
         background:
-          "linear-gradient(to bottom, rgba(20, 46, 152, 0.22), rgba(0, 0, 0, 0.53)), url(https://cdn.wallpapersafari.com/7/23/e84ObF.jpg) no-repeat",
+          "linear-gradient(to left, rgba(100, 6, 115, 0.22)52%, rgba(0, 0, 0, 0.7)70%), url(https://cdn.wallpapersafari.com/7/23/e84ObF.jpg) no-repeat",
         backgroundSize: "cover",
         boxShadow: "4px 15px 45px black",
       }}
     >
-      <Title
-        sx={{
-          color: "white",
-          margin: "10em 0 0 2em",
-        }}
-      >
+      <Box>
         <Text
           className="welcomeText"
-          sx={{
-            fontSize: "100px",
-            lineHeight: "140px",
-          }}
         >
           Your Adventure
-          <br /> <span style={{ marginLeft: "3em" }}>Starts Here!</span>
+          <br /> Starts Here!
         </Text>
-      </Title>
+        <Text
+        className="welcomeSubText"
+        >
+          A fully functioning tabletop simulator that les you create your character and play with friends without needing to all be in the same room.<br/><br/>Create your character and play with others! An incredible journey awaits! What are you waiting for?  
+        </Text>
+        </Box>
       <AnimatedButton
       onClick={handlePageChange}
-      style={{
-        position: "absolute",
-        right: "20em",
-        top: "4em",
-        backgroundColor: "rgba(255,255,19,.3)",
-        borderRadius: "12px",
-        color: "white",
-        width: "15em",
-        height: "5em",
-        transition: "1s all",
-      }}
       >
       <Text 
       sx={{ fontSize: "40px" }}>
