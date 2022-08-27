@@ -1,6 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap');
 body{
-background-image:radial-gradient(black, black), url('https://wallpaperaccess.com/full/2796640.jpg');
+/* background-image:radial-gradient(black, black), url('https://wallpaperaccess.com/full/2796640.jpg'); */
+background: rgb(2,31,62);
 background-size: cover;
 background-blend-mode: soft-light;
-};
+}
 
+svg{
+    position: absolute;
+    left: -.25em;
+    fill: none;
+    stroke: yellow;
+    stroke-dasharray: 150 480;
+    stroke-dashoffset: 150;
+    transition: 1.5s ease-in-out;
+}
+.loginBtn:hover {
+    background-color: rgba(255,255,19,.3);
+    
+}
+.loginBtn:hover svg{
+    stroke-dashoffset: -480;
+}
+.center{
+    width: 20em;
+    height: 5em;
+    position: absolute;
+}
+.welcomeText::first-letter{
+    color: #D4AF37;
+    font-family: 'Alex Brush', cursive;
+    font-size: 400px;
+    text-shadow: 10px 10px 25px rgb(168, 130, 6); 
+    letter-spacing: -10px;
+}
