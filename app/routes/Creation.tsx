@@ -1,13 +1,6 @@
 import { useMemo, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
-import {
-  Container,
-  Title,
-  Text,
-  Button,
-  Stepper,
-  RadioGroup,
-} from "@mantine/core";
+import { Container, Title, Text, Button, Stepper } from "@mantine/core";
 import { Form, useActionData, useSubmit } from "@remix-run/react";
 import { FormField } from "~/components/form-field";
 import Layout from "~/components/Layout";
@@ -15,6 +8,8 @@ import type { ActionFunction } from "@remix-run/node";
 import { createCharacter } from "~/utils/character.server";
 import skillsData from "~/utils/data.js";
 import RadioButton from "~/components/Radio";
+import Defense from "~/components/Creation/Defense";
+import Offense from "~/components/Creation/Offense";
 
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
@@ -99,7 +94,7 @@ const Creation = () => {
   //   Stepper Functions
   const [active, setActive] = useState(0);
   const nextStep = () => {
-    setActive((current) => (current < 5 ? current + 1 : current));
+    setActive((current) => (current < 8 ? current + 1 : current));
   };
   const prevStep = () => {
     setActive((current) => (current > 0 ? current - 1 : current));
@@ -397,23 +392,37 @@ const Creation = () => {
                   ) : active === 3 ? (
                     <>
                       <Title color="white" align="center">
-                        Feats and Traits
+                        Defensive Stats
+                        <Defense />
                       </Title>
                     </>
                   ) : active === 4 ? (
                     <>
                       <Title color="white" align="center">
-                        Backstory
+                        Offensive Stats
+                        <Offense />
                       </Title>
                     </>
                   ) : active === 5 ? (
+                    <>
+                      <Title color="white" align="center">
+                        Feats and Traits
+                      </Title>
+                    </>
+                  ) : active === 6 ? (
+                    <>
+                      <Title color="white" align="center">
+                        Backstory
+                      </Title>
+                    </>
+                  ) : active === 7 ? (
                     <>
                       <Title color="white" align="center">
                         Review
                       </Title>
                     </>
                   ) : null}
-                  {active < 5 && (
+                  {active < 8 && (
                     <Button
                       name="_action"
                       value={active === 5 ? "submit" : `step${active + 1}`}
