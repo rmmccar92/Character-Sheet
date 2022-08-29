@@ -3,6 +3,7 @@ import type { ChangeEvent, FormEvent } from "react";
 import { Container, Title, Text, Button, Stepper } from "@mantine/core";
 import { Form, useActionData, useSubmit } from "@remix-run/react";
 import { FormField } from "~/components/form-field";
+import { GeneralInfo } from "~/components/Creation/GeneralInfo";
 import Layout from "~/components/Layout";
 import type { ActionFunction } from "@remix-run/node";
 import { createCharacter } from "~/utils/character.server";
@@ -165,6 +166,7 @@ const Creation = () => {
               >
                 <Form onSubmit={handleSubmit}>
                   {active === 0 ? (
+                    // <GeneralInfo formData={formData} handleChange={handleChange} />
                     <>
                       <Title color="white" align="center">
                         General Info
