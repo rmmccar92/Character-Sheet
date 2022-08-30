@@ -260,7 +260,7 @@ const Creation = () => {
                     Prev
                   </Button>
                   {/* TODO: This condition should be === only like this for testing purposes */}
-                  {active < 5 && (
+                  {active < 8 && (
                     <Button type="submit" style={{ marginTop: "40%" }}>
                       Submit
                     </Button>
