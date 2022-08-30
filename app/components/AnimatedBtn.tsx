@@ -5,9 +5,10 @@ import type { CSSProperties } from "react";
 interface AnimatedBtnProps {
   type?: string;
   style?: CSSProperties;
-  onClick: any
+  onClick: any;
   error?: string;
-  children?: React.ReactNode
+  children?: React.ReactNode;
+  name?: string;
 }
 
 export default function AnimatedButton({type,style,onClick,error,children }: AnimatedBtnProps) {

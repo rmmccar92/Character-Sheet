@@ -31,7 +31,7 @@ svg{
 }
 .welcomeText {
     font-family: "Uncial Antiqua";
-    margin: 3em 0 0 20px; 
+    margin: 6% 0 0 20px; 
     text-shadow: 2px 1px 5px black;
     font-size: 100px;
     line-height: 140px;
@@ -50,7 +50,49 @@ svg{
     color: white;
     font-size: 30px;
     width: 35%;
-    margin: 1em 0 0 6em;
+    margin: 10px 0 0 6em;
     text-shadow: 3px 3px 3px black;
     font-family: Uncial Antiqua;
 }
+.homePicContainer{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 1em 0 0 10em;
+    width: 35%;
+}
+.homePic{
+    width: 350px;
+    filter: drop-shadow(10px -8px 2px var(--secondary-purple))
+    drop-shadow(-11px 9px 2px var(--main-purple));
+}
+.tablePic{
+    position: sticky;
+    margin: auto;
+    margin-right: 5%;
+    width: 1000px;
+    filter:saturate(300%);
+}
+/* .tablePic::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 14em;
+    left: 0;
+    backdrop-filter: blur(1px);
+    mask-image: linear-gradient(
+        0deg, 
+        rgba(0,0,0,1) 0%, 
+        rgba(0,0,0,1) 10%, 
+        rgba(0,0,0,0) 30%, 
+        rgba(0,0,0,0) 40%, 
+        rgba(0,0,0,1) 60%, 
+        rgba(0,0,0,1) 100%);
+} */
+
+@media only screen and (max-width: 1920px) {
+    .welcomeSubText {
+        margin-left: 8em;
+        width: 40%;
+    }
+  }

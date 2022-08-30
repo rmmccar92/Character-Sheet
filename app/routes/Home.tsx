@@ -1,31 +1,34 @@
 import type { LoaderFunction } from "@remix-run/node";
-import { requireUserId } from "~/utils/auth.server";
+import { getUserSession, requireUserId } from "~/utils/auth.server";
 import { HubPanel } from "~/components/hub-panel";
 import Layout from "~/components/Layout";
-import { getOtherUsers } from "~/utils/users.server";
+import { getOtherUsers, getUserById } from "~/utils/users.server";
 import { json } from "@remix-run/node";
-import { Outlet, useLoaderData } from "@remix-run/react";
-import { Title, Box, Text } from "@mantine/core";
+import { Outlet, useLoaderData, Form } from "@remix-run/react";
+import { Image, Box, Text, Button } from "@mantine/core";
 import AnimatedButton from "../components/AnimatedBtn";
 import { useNavigate } from "@remix-run/react";
-import styles from "../styles/home.css"
+import styles from "../styles/home.css";
 
 // export const loader: LoaderFunction = async ({ request }) => {
-//   const userId = await requireUserId(request);
-//   const users = await getOtherUsers(userId);
-//   return json({ users });
+//   const session = await getUserSession(request);
+//   const userId = session.get("userId");
+//   const user = getUserById(userId) ;
+//   if(session){
+//   return json({ user })
+//   }else{
+//     return null
+//   }
 // };
-
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }];
 }
 
-
 export default function Home() {
-  const navigate = useNavigate()
-  const handlePageChange = ()=> navigate(`/login`)
-  // const { users } = useLoaderData();
+  const navigate = useNavigate();
+  const handlePageChange = () => navigate(`/login`);
+  // const { user } = useLoaderData();
   return (
     // <Layout>
     //   {/* <Outlet /> */}
@@ -45,26 +48,46 @@ export default function Home() {
       }}
     >
       <Box>
-        <Text
-          className="welcomeText"
-        >
+        <Text className="welcomeText">
           Your Adventure
           <br /> Starts Here!
         </Text>
-        <Text
-        className="welcomeSubText"
-        >
-          A fully functioning tabletop simulator that les you create your character and play with friends without needing to all be in the same room.<br/><br/>Create your character and play with others! An incredible journey awaits! What are you waiting for?  
+        <Text className="welcomeSubText">
+          A fully functioning tabletop simulator that les you create your
+          character and play with friends without needing to all be in the same
+          room.
+          <br />
+          <br />
+          Create your character and play with others! An incredible journey
+          awaits! What are you waiting for?
         </Text>
+        <Box className="homePicContainer">
+          <Box className="homePic">
+            <Image
+              radius="xl"
+              src="https://techraptor.net/sites/default/files/styles/image_header/public/imports/2019/07/pathfinder2-header.jpg?itok=VwCBEwNC"
+              alt="pathfinder box art"
+            />
+          </Box>
+          <Box className="homePic">
+            <Image
+              radius="xl"
+              src="https://cdn.vox-cdn.com/thumbor/S_fGKR7uXBEndbN80Q6AATkvZhc=/1400x788/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/22289696/pathfinder_gm_screen_ekaterina_burmak.jpg"
+              alt="pathfinder box art"
+            />
+          </Box>
         </Box>
-      <AnimatedButton
-      onClick={handlePageChange}
+      </Box>
+      {/* <Box
+      className="tablePic"
       >
-      <Text 
-      sx={{ fontSize: "40px" }}>
-        Sign-in
-        </Text>
-        </AnimatedButton>
+      </Box> */}
+      <Form action="/logout" method="post" style={{opacity: "0"}}>
+            <Button type="submit" onClick={()=>console.log("works")}>Logout</Button>
+      </Form>
+      <AnimatedButton onClick={handlePageChange}>
+        <Text sx={{ fontSize: "40px" }}>Sign-in</Text>
+      </AnimatedButton>
     </Box>
   );
 }
