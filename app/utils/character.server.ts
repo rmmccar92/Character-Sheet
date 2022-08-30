@@ -10,7 +10,7 @@ export const createCharacter = async (
 ) => {
   const session = await getUserSession(request);
   const userId = session.get("userId");
-  const skills = JSON.parse(character.skills);
+  const skills = JSON.parse(character.skills!);
   character.skills = skills;
   console.log("character", character);
   // const newCharacter = await prisma.character.create({

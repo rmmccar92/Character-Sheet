@@ -2,21 +2,13 @@ import type { FC } from "react";
 import { FormField } from "~/components/form-field";
 import { Title } from "@mantine/core";
 import type { ChangeEvent } from "react";
-import { useLoaderData } from "@remix-run/react";
 
 interface GeneralInfoProps {
   formData: any;
-  setFormData: any;
+  handleChange: (e: ChangeEvent<HTMLInputElement>, field: string) => any;
 }
 
-const GeneralInfo: FC<GeneralInfoProps> = ({ formData, setFormData }) => {
-  const handleChange = (e: ChangeEvent<HTMLInputElement>, field: string) => {
-    setFormData((form: any) => ({
-      ...form,
-      [field]: e.target.value,
-    }));
-  };
-  console.log(formData);
+const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
   return (
     <>
       <Title color="white" align="center">
