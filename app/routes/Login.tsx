@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Container, Title, Button, Text } from "@mantine/core";
+import { Container, Title, Button, Text, Box } from "@mantine/core";
 import { FormField } from "~/components/form-field";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
@@ -14,7 +14,7 @@ import { login, register, getUser } from "~/utils/auth.server";
 import Layout from "~/components/Layout";
 
 export const loader: LoaderFunction = async ({ request }) => {
-  return (await getUser(request)) ? redirect("/") : null;
+  return (await getUser(request)) ? redirect("/hub") : null;
 };
 
 export const action: ActionFunction = async ({ request }) => {
@@ -126,24 +126,38 @@ export default function Login() {
   };
   return (
     <Layout>
+      <Box
+      sx={{
+        height: "90vh",
+        width: "80vw",
+        display: "flex",
+        justifyContent:"center",
+        flexDirection:"column",
+        // background: "linear-gradient(to right, rgba(0,0,0,.7), rgba(0, 0, 0, .2)), url(https://www.wallpaperflare.com/static/202/435/755/simple-background-purple-black-bokeh-wallpaper.jpg)",
+        backgroundSize:"cover",
+
+      }}
+      >
       <Container
         className="box"
-        style={{
+        sx={{
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          marginTop: "10%",
-          padding: "2%",
-          // height: "50vh",
-          width: "45vw",
+          height: "40vh",
+          fontFamily:"Uncial Antiqua",
+          width: "25vw",
           textAlign: "center",
-          background: "rgba(0, 0, 0)",
-          border: "2px solid white",
-          borderRadius: "5px",
+          background: "linear-gradient(to left, rgba(100,6,115,.3), rgba(100, 6, 205, .3))",
+          backgroundSize:"cover",
+          borderRadius: "20px",
+          backdropFilter:"blur(15px)",
+          boxShadow:"inset 0 0 100px rgba(110,5,150,.7)"
+          // boxShadow:`12px -10px 1px rgb(100, 6, 115), -13px 10px 1px rgb(100, 6, 205)`,
         }}
       >
-        <Title style={{ color: "white", marginBottom: "5%" }}>
+        <Title style={{ color: "white",fontSize: "80px", fontFamily:"Euphoria Script", letterSpacing:"6px"}}>
           {action === "login" ? "Login" : "Register"}
         </Title>
         <Form
@@ -159,6 +173,7 @@ export default function Login() {
                 type="text"
                 onChange={(e) => handleChange(e, "firstName")}
                 error={errors?.firstName}
+                style={{borderRadius:"10px", border: "none", fontSize:"20px"}}
               />
               <FormField
                 htmlFor="lastName"
@@ -167,17 +182,18 @@ export default function Login() {
                 type="text"
                 onChange={(e) => handleChange(e, "lastName")}
                 error={errors?.lastName}
+                style={{borderRadius:"10px", border: "none", fontSize:"20px"}}
               />
             </>
           )}
-
           <FormField
-            htmlFor="email"
-            label="Email"
+            htmlFor="email" 
+            label="Email"       
             value={formData.email}
             type="text"
             onChange={(e) => handleChange(e, "email")}
             error={errors?.email}
+            style={{borderRadius:"10px", border: "none", fontSize:"20px"}}
           />
           <FormField
             htmlFor="password"
@@ -186,6 +202,7 @@ export default function Login() {
             type="password"
             onChange={(e) => handleChange(e, "password")}
             error={errors?.password}
+            style={{borderRadius:"10px", border: "none", fontSize:"20px"}}
           />
           {/* 
           {action === "register" && (
@@ -202,7 +219,18 @@ export default function Login() {
             type="submit"
             name="_action"
             value={action}
-            style={{ margin: "10px" }}
+            sx={{ 
+              margin: "auto", 
+              marginTop:"1em",
+              background: "linear-gradient(to right,rgb(100, 6, 115), rgb(100,6,205), rgb(155, 55, 255), rgb(100,6,205), rgb(100, 6, 115))",  
+              transition:"all 1s",
+              backgroundSize:"400% auto",
+              width: "60%",
+              borderRadius:"20px",
+              "&:hover":{
+                backgroundPosition:"right",
+              }
+            }}
           >
             {action === "login" ? "Login" : "Register"}
           </Button>
@@ -212,10 +240,12 @@ export default function Login() {
         <Text color="red">{formError}</Text>
       </Container>
       <Button
+      style={{background: "none"}}
         onClick={() => setAction(action === "login" ? "register" : "login")}
       >
         {action === "login" ? "New Here? Register" : "Back to Login"}
       </Button>
+      </Box>
     </Layout>
   );
 }
