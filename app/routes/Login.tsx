@@ -157,7 +157,13 @@ export default function Login() {
           // boxShadow:`12px -10px 1px rgb(100, 6, 115), -13px 10px 1px rgb(100, 6, 205)`,
         }}
       >
-        <Title style={{ color: "white",fontSize: "80px", fontFamily:"Euphoria Script", letterSpacing:"6px"}}>
+        <Title style={{ 
+          color: "white",
+          fontSize: "80px", 
+          fontFamily:"Euphoria Script", 
+          letterSpacing:"6px",
+          textShadow:"2px 2px 5px black"
+          }}>
           {action === "login" ? "Login" : "Register"}
         </Title>
         <Form
@@ -227,6 +233,7 @@ export default function Login() {
               backgroundSize:"400% auto",
               width: "60%",
               borderRadius:"20px",
+              boxShadow:"0 3px 10px rgba(0,0,55,.4)",
               "&:hover":{
                 backgroundPosition:"right",
               }
