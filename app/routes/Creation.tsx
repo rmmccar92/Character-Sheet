@@ -13,6 +13,7 @@ import RadioButton from "~/components/Radio";
 import Defense from "~/components/Creation/Defense";
 import Offense from "~/components/Creation/Offense";
 import Skills from "~/components/Creation/Skills";
+import Preview from "~/components/Creation/Preview";
 
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
@@ -236,16 +237,8 @@ const Creation = () => {
                 </Form>
               </Container>
             </Container>
-            <Container
-              style={{
-                background: "white",
-                width: "50%",
-                height: "25em",
-                textAlign: "center",
-              }}
-            >
-              <Text>Character Preview</Text>
-            </Container>
+
+            <Preview />
           </Container>
         </Container>
       </Container>
