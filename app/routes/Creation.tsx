@@ -103,7 +103,6 @@ const Creation = () => {
     setActive((current) => (current > 0 ? current - 1 : current));
   };
   return (
-    // TODO: Simplify with components
     // TODO: Equipment Step
     <Layout>
       <Container
