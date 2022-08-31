@@ -1,5 +1,5 @@
 import type { LoaderFunction } from "@remix-run/node";
-import { getUserSession, requireUserId } from "~/utils/auth.server";
+import { getUser, requireUserId } from "~/utils/auth.server";
 import { HubPanel } from "~/components/hub-panel";
 import Layout from "~/components/Layout";
 import { getOtherUsers, getUserById } from "~/utils/users.server";
@@ -10,25 +10,24 @@ import AnimatedButton from "../components/AnimatedBtn";
 import { useNavigate } from "@remix-run/react";
 import styles from "../styles/home.css";
 
-// export const loader: LoaderFunction = async ({ request }) => {
-//   const session = await getUserSession(request);
-//   const userId = session.get("userId");
-//   const user = getUserById(userId) ;
-//   if(session){
-//   return json({ user })
-//   }else{
-//     return null
-//   }
-// };
+export const loader: LoaderFunction = async ({ request }) => {
+  const user = await getUser(request);
+  if (user) {
+    return json({ user });
+  }
+  return null;
+};
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }];
 }
 
 export default function Home() {
+  const { user } = useLoaderData() || {};
   const navigate = useNavigate();
-  const handlePageChange = () => navigate(`/login`);
-  // const { user } = useLoaderData();
+  const handlePageChange = () => {
+    user?.id ? navigate("/hub") : navigate(`/login`);
+  };
   return (
     // <Layout>
     //   {/* <Outlet /> */}
@@ -82,11 +81,13 @@ export default function Home() {
       className="tablePic"
       >
       </Box> */}
-      <Form action="/logout" method="post" style={{opacity: "0"}}>
-            <Button type="submit" onClick={()=>console.log("works")}>Logout</Button>
+      <Form action="/logout" method="post" style={{ opacity: "0" }}>
+        <Button type="submit" onClick={() => console.log("works")}>
+          Logout
+        </Button>
       </Form>
       <AnimatedButton onClick={handlePageChange}>
-        <Text sx={{ fontSize: "40px" }}>Sign-in</Text>
+        <Text sx={{ fontSize: "40px" }}>{user?.id ? "Continue" : "Login"}</Text>
       </AnimatedButton>
     </Box>
   );
