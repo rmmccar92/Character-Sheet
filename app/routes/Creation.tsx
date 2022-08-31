@@ -12,6 +12,7 @@ import skillsData from "~/utils/data.js";
 import RadioButton from "~/components/Radio";
 import Defense from "~/components/Creation/Defense";
 import Offense from "~/components/Creation/Offense";
+import Skills from "~/components/Creation/Skills";
 
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
@@ -174,42 +175,10 @@ const Creation = () => {
                   ) : active === 1 ? (
                     <Stats formData={formData} handleChange={handleChange} />
                   ) : active === 2 ? (
-                    <>
-                      <Title color="white" align="center">
-                        Skills
-                      </Title>
-                      {skillsData.map((skill) => (
-                        <Container
-                          key={skill.name}
-                          style={{
-                            display: "flex",
-                            flexDirection: "row",
-                          }}
-                        >
-                          <RadioButton
-                            value={formData.skills?.[skill.name]?.trained}
-                            skillName={skill.name}
-                            formData={formData}
-                            setFormData={setFormData}
-                          />
-                          <Text>{skill.name}</Text>
-                          <FormField
-                            htmlFor={skill.name}
-                            value={formData.skills?.[skill.name]?.ranks}
-                            type="string"
-                            label=""
-                            style={{
-                              width: "10%",
-                              marginLeft: "1%",
-                              justifySelf: "flex-end",
-                            }}
-                            onChange={(e) => {
-                              handleSkillChange(e, `${skill.name}`);
-                            }}
-                          />
-                        </Container>
-                      ))}
-                    </>
+                    <Skills
+                      formData={formData}
+                      handleSkillChange={handleSkillChange}
+                    />
                   ) : active === 3 ? (
                     <>
                       <Title color="white" align="center">
