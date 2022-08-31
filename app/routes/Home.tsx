@@ -2,10 +2,10 @@ import type { LoaderFunction } from "@remix-run/node";
 import { getUser, requireUserId } from "~/utils/auth.server";
 import { HubPanel } from "~/components/hub-panel";
 import Layout from "~/components/Layout";
-import { getOtherUsers } from "~/utils/users.server";
+import { getOtherUsers, getUserById } from "~/utils/users.server";
 import { json } from "@remix-run/node";
-import { Outlet, useLoaderData } from "@remix-run/react";
-import { Title, Box, Text } from "@mantine/core";
+import { Outlet, useLoaderData, Form } from "@remix-run/react";
+import { Image, Box, Text, Button } from "@mantine/core";
 import AnimatedButton from "../components/AnimatedBtn";
 import { useNavigate } from "@remix-run/react";
 import styles from "../styles/home.css";
@@ -60,7 +60,32 @@ export default function Home() {
           Create your character and play with others! An incredible journey
           awaits! What are you waiting for?
         </Text>
+        <Box className="homePicContainer">
+          <Box className="homePic">
+            <Image
+              radius="xl"
+              src="https://techraptor.net/sites/default/files/styles/image_header/public/imports/2019/07/pathfinder2-header.jpg?itok=VwCBEwNC"
+              alt="pathfinder box art"
+            />
+          </Box>
+          <Box className="homePic">
+            <Image
+              radius="xl"
+              src="https://cdn.vox-cdn.com/thumbor/S_fGKR7uXBEndbN80Q6AATkvZhc=/1400x788/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/22289696/pathfinder_gm_screen_ekaterina_burmak.jpg"
+              alt="pathfinder box art"
+            />
+          </Box>
+        </Box>
       </Box>
+      {/* <Box
+      className="tablePic"
+      >
+      </Box> */}
+      <Form action="/logout" method="post" style={{ opacity: "0" }}>
+        <Button type="submit" onClick={() => console.log("works")}>
+          Logout
+        </Button>
+      </Form>
       <AnimatedButton onClick={handlePageChange}>
         <Text sx={{ fontSize: "40px" }}>{user?.id ? "Continue" : "Login"}</Text>
       </AnimatedButton>

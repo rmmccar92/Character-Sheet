@@ -28,7 +28,7 @@ export function FormField({
 
   return (
     <>
-      <label htmlFor={htmlFor} style={{ color: "white", fontSize: "12px" }}>
+      <label htmlFor={htmlFor} style={{ color: "white", fontSize: "20px", textShadow:"2px 2px 3px black" }}>
         {label}
       </label>
       <input

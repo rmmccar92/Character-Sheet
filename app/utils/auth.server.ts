@@ -52,7 +52,7 @@ export const login = async (form: LoginForm) => {
   if (!user || !(await bcrypt.compare(form.password, user.password))) {
     return json({ error: "Login failed" }, { status: 400 });
   }
-  return createUserSession(user.id, "/");
+  return createUserSession(user.id, "/hub");
 };
 
 export const createUserSession = async (userId: string, redirectTo: string) => {

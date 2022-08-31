@@ -2,12 +2,13 @@
 :root{
     --main-purple: rgb(100, 6, 115);
     --secondary-purple: rgb(100,6,205);
-    --main-background: rgb(2,31,62);
+    --main-background: url("/images/woodbg.jpg");
     --highlight: rgb(244, 50, 224);
 }
 body{
 /* background-image:radial-gradient(black, black), url('https://wallpaperaccess.com/full/2796640.jpg'); */
 background: var(--main-background);
-background-size: cover;
+background-repeat: no-repeat;
+background-size: 100%;
 background-blend-mode: soft-light;
 }
