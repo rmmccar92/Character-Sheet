@@ -49,6 +49,18 @@ const Creation = () => {
     wisdom: actionData?.fields?.wisdom || "",
     charisma: actionData?.fields?.charisma || "",
     skills: actionData?.fields?.skills || {},
+    ac: actionData?.fields?.ac || "",
+    touch: actionData?.fields?.touch || "",
+    flatFooted: actionData?.fields?.flatFooted || "",
+    hp: actionData?.fields?.hp || "",
+    dr: actionData?.fields?.dr || "",
+    sr: actionData?.fields?.sr || "",
+    fortitude: actionData?.fields?.fortitude || "",
+    will: actionData?.fields?.will || "",
+    reflex: actionData?.fields?.reflex || "",
+    resistances: actionData?.fields?.resistances || "",
+    immunities: actionData?.fields?.immunities || "",
+    cmd: actionData?.fields?.cmd || "",
     initiative: actionData?.fields?.initiative || "",
     bab: actionData?.fields?.bab || "",
     cmb: actionData?.fields?.cmb || "",
@@ -185,7 +197,10 @@ const Creation = () => {
                     <>
                       <Title color="white" align="center">
                         Defensive Stats
-                        <Defense />
+                        <Defense
+                          formData={formData}
+                          handleChange={handleChange}
+                        />
                       </Title>
                     </>
                   ) : active === 4 ? (
