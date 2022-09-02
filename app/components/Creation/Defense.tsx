@@ -15,36 +15,42 @@ const Defense: FC<DefenseProps> = ({ formData, handleChange }) => {
         htmlFor="ac"
         value={formData.ac}
         type="text"
+        style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "ac")}
       />
       <FormField
         htmlFor="touch"
         value={formData.touch}
         type="text"
+        style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "touch")}
       />
       <FormField
         htmlFor="flatFooted"
         value={formData.flatFooted}
         type="text"
+        style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "flatFooted")}
       />
       <FormField
         htmlFor="hp"
         value={formData.hp}
         type="text"
+        style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "hp")}
       />
       <FormField
         htmlFor="dr"
         value={formData.dr}
         type="text"
+        style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "dr")}
       />
       <FormField
         htmlFor="sr"
         value={formData.sr}
         type="text"
+        style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "sr")}
       />
       <Text>
@@ -54,18 +60,21 @@ const Defense: FC<DefenseProps> = ({ formData, handleChange }) => {
         htmlFor="fortitude"
         value={formData.fortitude}
         type="text"
+        style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "fortitude")}
       />
       <FormField
         htmlFor="will"
         value={formData.will}
         type="text"
+        style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "will")}
       />
       <FormField
         htmlFor="reflex"
         value={formData.reflex}
         type="text"
+        style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "reflex")}
       />
       <Text>
@@ -75,18 +84,21 @@ const Defense: FC<DefenseProps> = ({ formData, handleChange }) => {
         htmlFor="resistances"
         value={formData.resistances}
         type="text"
+        style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "resistances")}
       />
       <FormField
         htmlFor="immunities"
         value={formData.immunities}
         type="text"
+        style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "immunities")}
       />
       <FormField
         htmlFor="cmd"
         value={formData.cmd}
         type="text"
+        style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "cmd")}
       />
     </>
