@@ -5,14 +5,12 @@ interface props {
   skillName: string;
   value: string;
   formData: any;
-  setFormData: any;
 }
 // TODO: connect radio value to backend
-const RadioButton = ({ skillName, value, formData, setFormData }: props) => {
+const RadioButton = ({ skillName, value, formData }: props) => {
   // Radio button funcions
   const [toggle, setToggle] = useState(false);
   const handleRadioChange = () => {
-    console.log(toggle);
     setToggle((prev) => !prev);
   };
   return (

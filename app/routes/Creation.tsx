@@ -2,16 +2,16 @@ import { useMemo, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import { Container, Title, Text, Button, Stepper } from "@mantine/core";
 import { Form, useActionData, useSubmit } from "@remix-run/react";
-import { FormField } from "~/components/form-field";
 import GeneralInfo from "~/components/Creation/GeneralInfo";
 import Layout from "~/components/Layout";
 import type { ActionFunction } from "@remix-run/node";
 import { createCharacter } from "~/utils/character.server";
 import Stats from "~/components/Creation/Stats";
 import skillsData from "~/utils/data.js";
-import RadioButton from "~/components/Radio";
 import Defense from "~/components/Creation/Defense";
 import Offense from "~/components/Creation/Offense";
+import Skills from "~/components/Creation/Skills";
+import Preview from "~/components/Creation/Preview";
 
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
@@ -49,6 +49,22 @@ const Creation = () => {
     wisdom: actionData?.fields?.wisdom || "",
     charisma: actionData?.fields?.charisma || "",
     skills: actionData?.fields?.skills || {},
+    ac: actionData?.fields?.ac || "",
+    touch: actionData?.fields?.touch || "",
+    flatFooted: actionData?.fields?.flatFooted || "",
+    hp: actionData?.fields?.hp || "",
+    dr: actionData?.fields?.dr || "",
+    sr: actionData?.fields?.sr || "",
+    fortitude: actionData?.fields?.fortitude || "",
+    will: actionData?.fields?.will || "",
+    reflex: actionData?.fields?.reflex || "",
+    resistances: actionData?.fields?.resistances || "",
+    immunities: actionData?.fields?.immunities || "",
+    cmd: actionData?.fields?.cmd || "",
+    initiative: actionData?.fields?.initiative || "",
+    bab: actionData?.fields?.bab || "",
+    cmb: actionData?.fields?.cmb || "",
+    speed: actionData?.fields?.speed || "",
   });
   useMemo(() => {
     skillsData.forEach((skill) => {
@@ -102,7 +118,6 @@ const Creation = () => {
     setActive((current) => (current > 0 ? current - 1 : current));
   };
   return (
-    // TODO: Simplify with components
     // TODO: Equipment Step
     <Layout>
       <Container
@@ -174,54 +189,28 @@ const Creation = () => {
                   ) : active === 1 ? (
                     <Stats formData={formData} handleChange={handleChange} />
                   ) : active === 2 ? (
-                    <>
-                      <Title color="white" align="center">
-                        Skills
-                      </Title>
-                      {skillsData.map((skill) => (
-                        <Container
-                          key={skill.name}
-                          style={{
-                            display: "flex",
-                            flexDirection: "row",
-                          }}
-                        >
-                          <RadioButton
-                            value={formData.skills?.[skill.name]?.trained}
-                            skillName={skill.name}
-                            formData={formData}
-                            setFormData={setFormData}
-                          />
-                          <Text>{skill.name}</Text>
-                          <FormField
-                            htmlFor={skill.name}
-                            value={formData.skills?.[skill.name]?.ranks}
-                            type="string"
-                            label=""
-                            style={{
-                              width: "10%",
-                              marginLeft: "1%",
-                              justifySelf: "flex-end",
-                            }}
-                            onChange={(e) => {
-                              handleSkillChange(e, `${skill.name}`);
-                            }}
-                          />
-                        </Container>
-                      ))}
-                    </>
+                    <Skills
+                      formData={formData}
+                      handleSkillChange={handleSkillChange}
+                    />
                   ) : active === 3 ? (
                     <>
                       <Title color="white" align="center">
                         Defensive Stats
-                        <Defense />
+                        <Defense
+                          formData={formData}
+                          handleChange={handleChange}
+                        />
                       </Title>
                     </>
                   ) : active === 4 ? (
                     <>
                       <Title color="white" align="center">
                         Offensive Stats
-                        <Offense />
+                        <Offense
+                          formData={formData}
+                          handleChange={handleChange}
+                        />
                       </Title>
                     </>
                   ) : active === 5 ? (
@@ -268,16 +257,8 @@ const Creation = () => {
                 </Form>
               </Container>
             </Container>
-            <Container
-              style={{
-                background: "white",
-                width: "50%",
-                height: "25em",
-                textAlign: "center",
-              }}
-            >
-              <Text>Character Preview</Text>
-            </Container>
+
+            <Preview />
           </Container>
         </Container>
       </Container>
