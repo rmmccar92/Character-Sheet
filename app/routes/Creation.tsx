@@ -49,6 +49,10 @@ const Creation = () => {
     wisdom: actionData?.fields?.wisdom || "",
     charisma: actionData?.fields?.charisma || "",
     skills: actionData?.fields?.skills || {},
+    initiative: actionData?.fields?.initiative || "",
+    bab: actionData?.fields?.bab || "",
+    cmb: actionData?.fields?.cmb || "",
+    speed: actionData?.fields?.speed || "",
   });
   useMemo(() => {
     skillsData.forEach((skill) => {
@@ -188,7 +192,10 @@ const Creation = () => {
                     <>
                       <Title color="white" align="center">
                         Offensive Stats
-                        <Offense />
+                        <Offense
+                          formData={formData}
+                          handleChange={handleChange}
+                        />
                       </Title>
                     </>
                   ) : active === 5 ? (
