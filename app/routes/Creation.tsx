@@ -1,9 +1,8 @@
 import { useMemo, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
-import { Container, Title, Text, Button, Stepper } from "@mantine/core";
+import { Container, Title, Button, Stepper } from "@mantine/core";
 import { Form, useActionData, useSubmit } from "@remix-run/react";
 import GeneralInfo from "~/components/Creation/GeneralInfo";
-import Layout from "~/components/Layout";
 import type { ActionFunction } from "@remix-run/node";
 import { createCharacter } from "~/utils/character.server";
 import Stats from "~/components/Creation/Stats";
@@ -11,6 +10,7 @@ import skillsData from "~/utils/data.js";
 import Defense from "~/components/Creation/Defense";
 import Offense from "~/components/Creation/Offense";
 import Skills from "~/components/Creation/Skills";
+import MyStepper from "~/components/Creation/MyStepper";
 import Preview from "~/components/Creation/Preview";
 
 export const action: ActionFunction = async ({ request }) => {
@@ -119,7 +119,6 @@ const Creation = () => {
   };
   return (
     // TODO: Equipment Step
-    // <Layout>
     <Container
       style={{
         display: "flex",
@@ -129,8 +128,6 @@ const Creation = () => {
         width: "100%",
       }}
     >
-      <Title>Character Creation</Title>
-      <Text>Coming Soon!</Text>
       <Container
         style={{
           display: "flex",
@@ -143,27 +140,14 @@ const Creation = () => {
           padding: 0,
         }}
       >
+        <Title style={{ color: "white" }}>Character Creation</Title>
+
         <Container
           style={{
             marginTop: "2%",
           }}
         >
-          <Stepper
-            size="xs"
-            active={active}
-            onStepClick={setActive}
-            color="teal"
-          >
-            <Stepper.Step label="Step 1" style={{ color: "white" }} />
-            <Stepper.Step label="Step 2" style={{ color: "white" }} />
-            <Stepper.Step label="Step 3" style={{ color: "white" }} />
-            <Stepper.Step label="Step 4" style={{ color: "white" }} />
-            <Stepper.Step label="Step 5" style={{ color: "white" }} />
-            <Stepper.Step label="Step 6" style={{ color: "white" }} />
-            <Stepper.Step label="Step 7" style={{ color: "white" }} />
-            <Stepper.Step label="Step 8" style={{ color: "white" }} />
-            <Stepper.Step label="Step 9" style={{ color: "white" }} />
-          </Stepper>
+          <MyStepper active={active} setActive={setActive} />
         </Container>
         <Container
           style={{
@@ -271,7 +255,6 @@ const Creation = () => {
         </Container>
       </Container>
     </Container>
-    // </Layout>
   );
 };
 
