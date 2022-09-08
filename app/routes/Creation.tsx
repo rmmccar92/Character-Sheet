@@ -119,150 +119,159 @@ const Creation = () => {
   };
   return (
     // TODO: Equipment Step
-    <Layout>
+    // <Layout>
+    <Container
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+        width: "100%",
+      }}
+    >
+      <Title>Character Creation</Title>
+      <Text>Coming Soon!</Text>
       <Container
         style={{
           display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
           flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
           width: "100%",
+          background: "black",
+          border: "1px solid white",
+          padding: 0,
         }}
       >
-        <Title>Character Creation</Title>
-        <Text>Coming Soon!</Text>
+        <Container
+          style={{
+            marginTop: "2%",
+          }}
+        >
+          <Stepper
+            size="xs"
+            active={active}
+            onStepClick={setActive}
+            color="teal"
+          >
+            <Stepper.Step label="Step 1" style={{ color: "white" }} />
+            <Stepper.Step label="Step 2" style={{ color: "white" }} />
+            <Stepper.Step label="Step 3" style={{ color: "white" }} />
+            <Stepper.Step label="Step 4" style={{ color: "white" }} />
+            <Stepper.Step label="Step 5" style={{ color: "white" }} />
+            <Stepper.Step label="Step 6" style={{ color: "white" }} />
+            <Stepper.Step label="Step 7" style={{ color: "white" }} />
+            <Stepper.Step label="Step 8" style={{ color: "white" }} />
+            <Stepper.Step label="Step 9" style={{ color: "white" }} />
+          </Stepper>
+        </Container>
         <Container
           style={{
             display: "flex",
-            flexDirection: "column",
+            flexDirection: "row-reverse",
+            justifyContent: "space-evenly",
             alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
-            background: "black",
-            border: "1px solid white",
             padding: 0,
+            margin: "5% 0 2% 0",
+            width: "100%",
           }}
         >
-          <Container style={{ marginTop: "2%" }}>
-            <Stepper active={active} onStepClick={setActive} color="teal">
-              <Stepper.Step label="Step 1" style={{ color: "white" }} />
-              <Stepper.Step label="Step 2" style={{ color: "white" }} />
-              <Stepper.Step label="Step 3" style={{ color: "white" }} />
-              <Stepper.Step label="Step 4" style={{ color: "white" }} />
-              <Stepper.Step label="Step 5" style={{ color: "white" }} />
-              <Stepper.Step label="Step 6" style={{ color: "white" }} />
-            </Stepper>
-          </Container>
           <Container
             style={{
-              display: "flex",
-              flexDirection: "row-reverse",
-              justifyContent: "space-evenly",
-              alignItems: "center",
-              padding: 0,
-              margin: "5% 0 2% 0",
-              width: "100%",
+              border: "1px solid red",
+              width: "40%",
+              height: "100%",
             }}
           >
             <Container
               style={{
-                border: "1px solid red",
-                width: "40%",
-                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                margin: "1%",
+                color: "white",
               }}
             >
-              <Container
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  margin: "1%",
-                  color: "white",
-                }}
-              >
-                <Form onSubmit={handleSubmit}>
-                  {active === 0 ? (
-                    <GeneralInfo
-                      formData={formData}
-                      handleChange={handleChange}
-                    />
-                  ) : active === 1 ? (
-                    <Stats formData={formData} handleChange={handleChange} />
-                  ) : active === 2 ? (
-                    <Skills
-                      formData={formData}
-                      handleSkillChange={handleSkillChange}
-                    />
-                  ) : active === 3 ? (
-                    <>
-                      <Title color="white" align="center">
-                        Defensive Stats
-                        <Defense
-                          formData={formData}
-                          handleChange={handleChange}
-                        />
-                      </Title>
-                    </>
-                  ) : active === 4 ? (
-                    <>
-                      <Title color="white" align="center">
-                        Offensive Stats
-                        <Offense
-                          formData={formData}
-                          handleChange={handleChange}
-                        />
-                      </Title>
-                    </>
-                  ) : active === 5 ? (
-                    <>
-                      <Title color="white" align="center">
-                        Feats and Traits
-                      </Title>
-                    </>
-                  ) : active === 6 ? (
-                    <>
-                      <Title color="white" align="center">
-                        Backstory
-                      </Title>
-                    </>
-                  ) : active === 7 ? (
-                    <>
-                      <Title color="white" align="center">
-                        Review
-                      </Title>
-                    </>
-                  ) : null}
-                  {active < 8 && (
-                    <Button
-                      name="_action"
-                      value={active === 5 ? "submit" : `step${active + 1}`}
-                      onClick={() => nextStep()}
-                      style={{ marginTop: "10%" }}
-                    >
-                      Next
-                    </Button>
-                  )}
+              <Form onSubmit={handleSubmit}>
+                {active === 0 ? (
+                  <GeneralInfo
+                    formData={formData}
+                    handleChange={handleChange}
+                  />
+                ) : active === 1 ? (
+                  <Stats formData={formData} handleChange={handleChange} />
+                ) : active === 2 ? (
+                  <Skills
+                    formData={formData}
+                    handleSkillChange={handleSkillChange}
+                  />
+                ) : active === 3 ? (
+                  <>
+                    <Title color="white" align="center">
+                      Defensive Stats
+                      <Defense
+                        formData={formData}
+                        handleChange={handleChange}
+                      />
+                    </Title>
+                  </>
+                ) : active === 4 ? (
+                  <>
+                    <Title color="white" align="center">
+                      Offensive Stats
+                      <Offense
+                        formData={formData}
+                        handleChange={handleChange}
+                      />
+                    </Title>
+                  </>
+                ) : active === 5 ? (
+                  <>
+                    <Title color="white" align="center">
+                      Feats and Traits
+                    </Title>
+                  </>
+                ) : active === 6 ? (
+                  <>
+                    <Title color="white" align="center">
+                      Backstory
+                    </Title>
+                  </>
+                ) : active === 7 ? (
+                  <>
+                    <Title color="white" align="center">
+                      Review
+                    </Title>
+                  </>
+                ) : null}
+                {active < 8 && (
                   <Button
-                    onClick={() => prevStep()}
+                    name="_action"
+                    value={active === 5 ? "submit" : `step${active + 1}`}
+                    onClick={() => nextStep()}
                     style={{ marginTop: "10%" }}
                   >
-                    Prev
+                    Next
                   </Button>
-                  {/* TODO: This condition should be === only like this for testing purposes */}
-                  {active < 8 && (
-                    <Button type="submit" style={{ marginTop: "40%" }}>
-                      Submit
-                    </Button>
-                  )}
-                </Form>
-              </Container>
+                )}
+                <Button onClick={() => prevStep()} style={{ marginTop: "10%" }}>
+                  Prev
+                </Button>
+                {/* TODO: This condition should be === only like this for testing purposes */}
+                {active < 8 && (
+                  <Button type="submit" style={{ marginTop: "40%" }}>
+                    Submit
+                  </Button>
+                )}
+              </Form>
             </Container>
-
-            <Preview />
           </Container>
+
+          <Preview />
         </Container>
       </Container>
-    </Layout>
+    </Container>
+    // </Layout>
   );
 };
 
