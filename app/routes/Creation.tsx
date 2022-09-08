@@ -104,7 +104,25 @@ const Creation = () => {
       ...form,
       skills: {
         ...form.skills,
-        [skill]: { ...form.skills[skill], ranks: e.target.value },
+        [skill]: {
+          ...form.skills[skill],
+          ranks: e.target.value,
+        },
+      },
+    }));
+  };
+
+  const [trained, setTrained] = useState(false);
+  const handleRadioSkillChange = (skill: string) => {
+    setTrained((prev) => !prev);
+    setFormData((form) => ({
+      ...form,
+      skills: {
+        ...form.skills,
+        [skill]: {
+          ...form.skills[skill],
+          trained: trained,
+        },
       },
     }));
   };
@@ -119,6 +137,7 @@ const Creation = () => {
   };
   return (
     // TODO: Equipment Step
+    // TODO: Form needs to track RadioButton change
     <Container
       style={{
         display: "flex",
@@ -187,7 +206,9 @@ const Creation = () => {
                 ) : active === 2 ? (
                   <Skills
                     formData={formData}
+                    setTrained={setTrained}
                     handleSkillChange={handleSkillChange}
+                    handleRadioSkillChange={handleRadioSkillChange}
                   />
                 ) : active === 3 ? (
                   <>
