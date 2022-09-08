@@ -9,8 +9,11 @@ import { Image, Box, Text, Button } from "@mantine/core";
 import AnimatedButton from "../components/AnimatedBtn";
 import { useNavigate } from "@remix-run/react";
 
-export default function hub(){
-    return(
-        <Text sx={{color: "white"}}>This is the Hub page</Text>
-    )
+export default function hub() {
+  return (
+    <Layout>
+      <Text sx={{ color: "white" }}>This is the Hub page</Text>
+      <HubPanel />
+    </Layout>
+  );
 }

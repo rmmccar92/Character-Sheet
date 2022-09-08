@@ -2,11 +2,11 @@ import { Button, Container, Title } from "@mantine/core";
 import { Form, useNavigate } from "@remix-run/react";
 import type { User } from "@prisma/client";
 import UserCircle from "./user-circle";
-interface props {
-  users: User[];
-}
+// interface props {
+//   users: User[];
+// }
 
-export function HubPanel({ users }: props) {
+export function HubPanel() {
   const navigate = useNavigate();
   return (
     <Container
@@ -52,13 +52,13 @@ export function HubPanel({ users }: props) {
       <Container
         style={{ display: "flex", justifyContent: "center", width: "100%" }}
       >
-        {users.map((user) => (
+        {/* {users.map((user) => (
           <UserCircle
             key={user.id}
             profile={user.profile}
             onClick={() => navigate(`/home/test/${user.id}`)}
           />
-        ))}
+        ))} */}
       </Container>
     </Container>
   );
