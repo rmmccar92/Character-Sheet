@@ -6,14 +6,17 @@ import RadioButton from "~/components/Radio";
 
 interface SkillsProps {
   formData: any;
-  setTrained: Dispatch<SetStateAction<boolean>>;
+  // setTrained: Dispatch<SetStateAction<boolean>>;
   handleSkillChange: (e: ChangeEvent<HTMLInputElement>, field: string) => any;
-  handleRadioSkillChange: (skill: string) => any;
+  handleRadioSkillChange: (
+    e: ChangeEvent<HTMLInputElement>,
+    skill: string
+  ) => any;
 }
 
 const Skills: FC<SkillsProps> = ({
   formData,
-  setTrained,
+  // setTrained,
   handleSkillChange,
   handleRadioSkillChange,
 }) => {
@@ -31,7 +34,7 @@ const Skills: FC<SkillsProps> = ({
           }}
         >
           <RadioButton
-            setTrained={setTrained}
+            // setTrained={setTrained}
             value={formData.skills?.[skill.name]?.trained}
             skillName={skill.name}
             handleRadioSkillChange={handleRadioSkillChange}

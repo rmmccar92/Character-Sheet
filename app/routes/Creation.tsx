@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
-import { Container, Title, Button, Stepper } from "@mantine/core";
+import { Container, Title, Button } from "@mantine/core";
 import { Form, useActionData, useSubmit } from "@remix-run/react";
 import GeneralInfo from "~/components/Creation/GeneralInfo";
 import type { ActionFunction } from "@remix-run/node";
@@ -112,16 +112,19 @@ const Creation = () => {
     }));
   };
 
-  const [trained, setTrained] = useState(false);
-  const handleRadioSkillChange = (skill: string) => {
-    setTrained((prev) => !prev);
+  // const [trained, setTrained] = useState(false);
+  const handleRadioSkillChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    skill: string
+  ) => {
+    // setTrained((prev) => !prev);
     setFormData((form) => ({
       ...form,
       skills: {
         ...form.skills,
         [skill]: {
           ...form.skills[skill],
-          trained: trained,
+          trained: e.target.checked,
         },
       },
     }));
@@ -206,7 +209,7 @@ const Creation = () => {
                 ) : active === 2 ? (
                   <Skills
                     formData={formData}
-                    setTrained={setTrained}
+                    // setTrained={setTrained}
                     handleSkillChange={handleSkillChange}
                     handleRadioSkillChange={handleRadioSkillChange}
                   />

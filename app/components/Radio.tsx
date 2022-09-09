@@ -1,26 +1,29 @@
 import React, { useState } from "react";
-import type { FC, Dispatch, SetStateAction } from "react";
+import type { FC, Dispatch, SetStateAction, ChangeEvent } from "react";
 import { Checkbox } from "@mantine/core";
 
 interface props {
-  setTrained: Dispatch<SetStateAction<boolean>>;
+  // setTrained: Dispatch<SetStateAction<boolean>>;
   skillName: string;
   value: string;
-  handleRadioSkillChange: (skill: string) => any;
+  handleRadioSkillChange: (
+    e: ChangeEvent<HTMLInputElement>,
+    skill: string
+  ) => any;
 }
 // TODO: connect radio value to backend
 const RadioButton: FC<props> = ({
-  setTrained,
+  // setTrained,
   skillName,
-  value,
+  // value,
   handleRadioSkillChange,
 }: props) => {
   // Radio button funcions
   const [toggle, setToggle] = useState(false);
-  const handleRadioChange = () => {
-    console.log("SKILL", skillName);
+  const handleRadioChange = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log("SKILL", skillName, "trained:", e.target.checked);
     setToggle((prev) => !prev);
-    handleRadioSkillChange(skillName);
+    handleRadioSkillChange(e, skillName);
   };
   return (
     <Checkbox
@@ -30,7 +33,7 @@ const RadioButton: FC<props> = ({
       radius="xl"
       size="xs"
       style={{ marginRight: "1%" }}
-      onChange={() => handleRadioChange()}
+      onChange={(e: ChangeEvent<HTMLInputElement>) => handleRadioChange(e)}
     />
   );
 };
