@@ -1,4 +1,4 @@
-import type { FC, ChangeEvent, Dispatch, SetStateAction } from "react";
+import type { FC, ChangeEvent } from "react";
 import skillsData from "~/utils/data.js";
 import { FormField } from "~/components/form-field";
 import { Title, Container, Text } from "@mantine/core";
@@ -6,7 +6,6 @@ import RadioButton from "~/components/Radio";
 
 interface SkillsProps {
   formData: any;
-  // setTrained: Dispatch<SetStateAction<boolean>>;
   handleSkillChange: (e: ChangeEvent<HTMLInputElement>, field: string) => any;
   handleRadioSkillChange: (
     e: ChangeEvent<HTMLInputElement>,
@@ -16,7 +15,6 @@ interface SkillsProps {
 
 const Skills: FC<SkillsProps> = ({
   formData,
-  // setTrained,
   handleSkillChange,
   handleRadioSkillChange,
 }) => {
@@ -34,7 +32,6 @@ const Skills: FC<SkillsProps> = ({
           }}
         >
           <RadioButton
-            // setTrained={setTrained}
             value={formData.skills?.[skill.name]?.trained}
             skillName={skill.name}
             handleRadioSkillChange={handleRadioSkillChange}

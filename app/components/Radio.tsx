@@ -13,9 +13,8 @@ interface props {
 }
 // TODO: connect radio value to backend
 const RadioButton: FC<props> = ({
-  // setTrained,
   skillName,
-  // value,
+  value,
   handleRadioSkillChange,
 }: props) => {
   // Radio button funcions
@@ -27,7 +26,7 @@ const RadioButton: FC<props> = ({
   };
   return (
     <Checkbox
-      // value={value}
+      value={value}
       checked={toggle}
       color="gray"
       radius="xl"
