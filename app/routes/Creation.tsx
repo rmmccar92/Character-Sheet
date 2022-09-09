@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
-import { Container, Title, Button, Stepper } from "@mantine/core";
-import { Form, useActionData, useSubmit } from "@remix-run/react";
+import { Container, Title, Button } from "@mantine/core";
+import { Outlet, Form, useActionData, useSubmit } from "@remix-run/react";
 import GeneralInfo from "~/components/Creation/GeneralInfo";
 import type { ActionFunction } from "@remix-run/node";
 import { createCharacter } from "~/utils/character.server";
@@ -12,6 +12,8 @@ import Offense from "~/components/Creation/Offense";
 import Skills from "~/components/Creation/Skills";
 import MyStepper from "~/components/Creation/MyStepper";
 import Preview from "~/components/Creation/Preview";
+import FeatsAndTraits from "~/components/Creation/FeatsAndTraits";
+import Layout from "~/components/Layout";
 
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
@@ -104,7 +106,26 @@ const Creation = () => {
       ...form,
       skills: {
         ...form.skills,
-        [skill]: { ...form.skills[skill], ranks: e.target.value },
+        [skill]: {
+          ...form.skills[skill],
+          ranks: e.target.value,
+        },
+      },
+    }));
+  };
+
+  const handleRadioSkillChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    skill: string
+  ) => {
+    setFormData((form) => ({
+      ...form,
+      skills: {
+        ...form.skills,
+        [skill]: {
+          ...form.skills[skill],
+          trained: e.target.checked,
+        },
       },
     }));
   };
@@ -119,142 +140,152 @@ const Creation = () => {
   };
   return (
     // TODO: Equipment Step
-    <Container
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-        width: "100%",
-      }}
-    >
+    // TODO: Form needs to track RadioButton change
+    <Layout>
+      <Outlet />
       <Container
         style={{
           display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
           justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
           width: "100%",
-          background: "black",
-          border: "1px solid white",
-          padding: 0,
         }}
       >
-        <Title style={{ color: "white" }}>Character Creation</Title>
-
-        <Container
-          style={{
-            marginTop: "2%",
-          }}
-        >
-          <MyStepper active={active} setActive={setActive} />
-        </Container>
         <Container
           style={{
             display: "flex",
-            flexDirection: "row-reverse",
-            justifyContent: "space-evenly",
+            flexDirection: "column",
             alignItems: "center",
-            padding: 0,
-            margin: "5% 0 2% 0",
+            justifyContent: "center",
             width: "100%",
+            background: "black",
+            border: "1px solid white",
+            padding: 0,
           }}
         >
+          <Title style={{ color: "white" }}>Character Creation</Title>
+
           <Container
             style={{
-              border: "1px solid red",
-              width: "40%",
-              height: "100%",
+              marginTop: "2%",
+            }}
+          >
+            <MyStepper active={active} setActive={setActive} />
+          </Container>
+          <Container
+            style={{
+              display: "flex",
+              flexDirection: "row-reverse",
+              justifyContent: "space-evenly",
+              alignItems: "center",
+              padding: 0,
+              margin: "5% 0 2% 0",
+              width: "100%",
             }}
           >
             <Container
               style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                margin: "1%",
-                color: "white",
+                border: "1px solid red",
+                width: "40%",
+                height: "100%",
               }}
             >
-              <Form onSubmit={handleSubmit}>
-                {active === 0 ? (
-                  <GeneralInfo
-                    formData={formData}
-                    handleChange={handleChange}
-                  />
-                ) : active === 1 ? (
-                  <Stats formData={formData} handleChange={handleChange} />
-                ) : active === 2 ? (
-                  <Skills
-                    formData={formData}
-                    handleSkillChange={handleSkillChange}
-                  />
-                ) : active === 3 ? (
-                  <>
-                    <Title color="white" align="center">
-                      Defensive Stats
-                      <Defense
-                        formData={formData}
-                        handleChange={handleChange}
-                      />
-                    </Title>
-                  </>
-                ) : active === 4 ? (
-                  <>
-                    <Title color="white" align="center">
-                      Offensive Stats
-                      <Offense
-                        formData={formData}
-                        handleChange={handleChange}
-                      />
-                    </Title>
-                  </>
-                ) : active === 5 ? (
-                  <>
-                    <Title color="white" align="center">
-                      Feats and Traits
-                    </Title>
-                  </>
-                ) : active === 6 ? (
-                  <>
-                    <Title color="white" align="center">
-                      Backstory
-                    </Title>
-                  </>
-                ) : active === 7 ? (
-                  <>
-                    <Title color="white" align="center">
-                      Review
-                    </Title>
-                  </>
-                ) : null}
-                {active < 8 && (
+              <Container
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  margin: "1%",
+                  color: "white",
+                }}
+              >
+                <Form onSubmit={handleSubmit}>
+                  {active === 0 ? (
+                    <GeneralInfo
+                      formData={formData}
+                      handleChange={handleChange}
+                    />
+                  ) : active === 1 ? (
+                    <Stats formData={formData} handleChange={handleChange} />
+                  ) : active === 2 ? (
+                    <Skills
+                      formData={formData}
+                      // setTrained={setTrained}
+                      handleSkillChange={handleSkillChange}
+                      handleRadioSkillChange={handleRadioSkillChange}
+                    />
+                  ) : active === 3 ? (
+                    <>
+                      <Title color="white" align="center">
+                        Defensive Stats
+                        <Defense
+                          formData={formData}
+                          handleChange={handleChange}
+                        />
+                      </Title>
+                    </>
+                  ) : active === 4 ? (
+                    <>
+                      <Title color="white" align="center">
+                        Offensive Stats
+                        <Offense
+                          formData={formData}
+                          handleChange={handleChange}
+                        />
+                      </Title>
+                    </>
+                  ) : active === 5 ? (
+                    <>
+                      <Title color="white" align="center">
+                        Feats and Traits
+                      </Title>
+                      <FeatsAndTraits />
+                    </>
+                  ) : active === 6 ? (
+                    <>
+                      <Title color="white" align="center">
+                        Backstory
+                      </Title>
+                    </>
+                  ) : active === 7 ? (
+                    <>
+                      <Title color="white" align="center">
+                        Review
+                      </Title>
+                    </>
+                  ) : null}
+                  {active < 8 && (
+                    <Button
+                      name="_action"
+                      value={active === 5 ? "submit" : `step${active + 1}`}
+                      onClick={() => nextStep()}
+                      style={{ marginTop: "10%" }}
+                    >
+                      Next
+                    </Button>
+                  )}
                   <Button
-                    name="_action"
-                    value={active === 5 ? "submit" : `step${active + 1}`}
-                    onClick={() => nextStep()}
+                    onClick={() => prevStep()}
                     style={{ marginTop: "10%" }}
                   >
-                    Next
+                    Prev
                   </Button>
-                )}
-                <Button onClick={() => prevStep()} style={{ marginTop: "10%" }}>
-                  Prev
-                </Button>
-                {/* TODO: This condition should be === only like this for testing purposes */}
-                {active < 8 && (
-                  <Button type="submit" style={{ marginTop: "40%" }}>
-                    Submit
-                  </Button>
-                )}
-              </Form>
+                  {/* TODO: This condition should be === only like this for testing purposes */}
+                  {active < 8 && (
+                    <Button type="submit" style={{ marginTop: "40%" }}>
+                      Submit
+                    </Button>
+                  )}
+                </Form>
+              </Container>
             </Container>
-          </Container>
 
-          <Preview />
+            <Preview />
+          </Container>
         </Container>
       </Container>
-    </Container>
+    </Layout>
   );
 };
 

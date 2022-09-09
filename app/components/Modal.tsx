@@ -6,20 +6,25 @@ import { Center, Container } from "@mantine/core";
 interface Props {
   children?: ReactNode;
   isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
   ariaLabel?: string;
   className?: string;
 }
 
-const Modal = ({ children, isOpen, ariaLabel, className }: Props) => {
-  const navigate = useNavigate();
-  if (!isOpen) return null;
+const Modal = ({
+  children,
+  isOpen,
+  setIsOpen,
+  ariaLabel,
+  className,
+}: Props) => {
   return (
     <Portal wrapperId="modal-wrapper">
       <div
         aria-labelledby={ariaLabel ?? "modal-title"}
         role="dialog"
         aria-modal="true"
-        onClick={() => navigate("/home")}
+        onClick={() => setIsOpen(false)}
         style={{
           position: "fixed",
           display: "flex",

@@ -1,16 +1,23 @@
-import type { FC } from "react";
+import type { FC, ChangeEvent } from "react";
 import skillsData from "~/utils/data.js";
 import { FormField } from "~/components/form-field";
 import { Title, Container, Text } from "@mantine/core";
-import type { ChangeEvent } from "react";
 import RadioButton from "~/components/Radio";
 
 interface SkillsProps {
   formData: any;
   handleSkillChange: (e: ChangeEvent<HTMLInputElement>, field: string) => any;
+  handleRadioSkillChange: (
+    e: ChangeEvent<HTMLInputElement>,
+    skill: string
+  ) => any;
 }
 
-const Skills: FC<SkillsProps> = ({ formData, handleSkillChange }) => {
+const Skills: FC<SkillsProps> = ({
+  formData,
+  handleSkillChange,
+  handleRadioSkillChange,
+}) => {
   return (
     <>
       <Title color="white" align="center">
@@ -27,7 +34,7 @@ const Skills: FC<SkillsProps> = ({ formData, handleSkillChange }) => {
           <RadioButton
             value={formData.skills?.[skill.name]?.trained}
             skillName={skill.name}
-            formData={formData}
+            handleRadioSkillChange={handleRadioSkillChange}
           />
           <Text>{skill.name}</Text>
           <FormField

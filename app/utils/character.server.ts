@@ -1,6 +1,7 @@
 import { prisma } from "./prisma.server";
 import type { CharacterForm } from "./types.server";
 import { getUserSession } from "./auth.server";
+import { Skills } from "@prisma/client";
 
 // TODO: Character creation
 
@@ -10,7 +11,7 @@ export const createCharacter = async (
 ) => {
   const session = await getUserSession(request);
   const userId = session.get("userId");
-  const skills = JSON.parse(character.skills!);
+  const skills = JSON.parse(character.skills! as any);
   character.skills = skills;
   console.log("character", character);
   // const newCharacter = await prisma.character.create({
