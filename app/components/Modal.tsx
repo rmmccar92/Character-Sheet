@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { useNavigate } from "@remix-run/react";
 import { Portal } from "./Portal";
 import { Center, Container } from "@mantine/core";
 
@@ -60,7 +59,12 @@ const Modal = ({
       >
         <Container
           className={className}
-          style={{ padding: "5%", width: "100%" }}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            padding: "5%",
+            width: "100%",
+          }}
         >
           {children}
         </Container>
