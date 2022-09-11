@@ -7,14 +7,16 @@ interface Props {
   children?: ReactNode;
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  type?: string;
   ariaLabel?: string;
   className?: string;
 }
-
+// TODO: Modal could be styled differently for different types
 const Modal = ({
   children,
   isOpen,
   setIsOpen,
+  type,
   ariaLabel,
   className,
 }: Props) => {
@@ -56,7 +58,10 @@ const Modal = ({
           borderRadius: "40px",
         }}
       >
-        <Container className={className} style={{ padding: "5%" }}>
+        <Container
+          className={className}
+          style={{ padding: "5%", width: "100%" }}
+        >
           {children}
         </Container>
       </Center>
