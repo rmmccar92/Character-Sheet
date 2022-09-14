@@ -12,7 +12,11 @@ export const createCharacter = async (
   const session = await getUserSession(request);
   const userId = session.get("userId");
   const skills = JSON.parse(character.skills! as any);
+  const feats = JSON.parse(character.feats! as any);
+  const traits = JSON.parse(character.traits! as any);
   character.skills = skills;
+  character.feats = feats;
+  character.traits = traits;
   console.log("character", character);
   // const newCharacter = await prisma.character.create({
   //   data: {

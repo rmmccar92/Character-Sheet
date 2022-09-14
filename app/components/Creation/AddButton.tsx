@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { FC, ChangeEvent } from "react";
 import { useState } from "react";
 import { Button, Title } from "@mantine/core";
 import Modal from "~/components/Modal";
@@ -6,9 +6,15 @@ import { FormField } from "~/components/form-field";
 
 interface AddButtonProps {
   type: string;
+  formData: any;
+  handleChange: (
+    e: ChangeEvent<HTMLInputElement>,
+    type: string,
+    field: string
+  ) => any;
 }
 
-const AddButton: FC<AddButtonProps> = ({ type }) => {
+const AddButton: FC<AddButtonProps> = ({ type, handleChange, formData }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
@@ -23,37 +29,47 @@ const AddButton: FC<AddButtonProps> = ({ type }) => {
             <>
               <Title>Add Feat</Title>
               <FormField
-                htmlFor="featName"
+                htmlFor="name"
                 type="text"
                 label="Feat Name"
-                value={"feat"}
+                value={formData.feats.name}
                 style={{ width: "100%", margin: "2% 0 2% 0" }}
+                onChange={(e) => handleChange(e, "feats", "name")}
               />
               <FormField
-                htmlFor="featDescription"
+                htmlFor="description"
                 type="text"
                 label="Feat Description"
-                value={"featD"}
+                value={formData.feats.description}
                 style={{ height: "15em", width: "100%" }}
+                onChange={(e) => handleChange(e, "feats", "description")}
               />
+              <Button type="submit" style={{ marginTop: "40%" }}>
+                Submit
+              </Button>
             </>
           ) : type === "trait" ? (
             <>
               <Title>Add Trait</Title>
               <FormField
-                htmlFor="traitName"
+                htmlFor="name"
                 type="text"
                 label="Trait Name"
-                value={"trait"}
+                value={formData.traits.name}
                 style={{ width: "100%", margin: "2% 0 2% 0" }}
+                onChange={(e) => handleChange(e, "traits", "name")}
               />
               <FormField
-                htmlFor="traitDescription"
+                htmlFor="description"
                 type="text"
                 label="Trait Description"
-                value={"traitD"}
+                value={formData.traits.description}
                 style={{ height: "15em", width: "100%" }}
+                onChange={(e) => handleChange(e, "traits", "description")}
               />
+              <Button type="submit" style={{ marginTop: "40%" }}>
+                Submit
+              </Button>
             </>
           ) : null}
         </Modal>

@@ -67,6 +67,8 @@ const Creation = () => {
     bab: actionData?.fields?.bab || "",
     cmb: actionData?.fields?.cmb || "",
     speed: actionData?.fields?.speed || "",
+    feats: actionData?.fields?.feats || {},
+    traits: actionData?.fields?.traits || {},
   });
   useMemo(() => {
     skillsData.forEach((skill) => {
@@ -88,6 +90,8 @@ const Creation = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     formData.skills = JSON.stringify(formData.skills);
+    formData.feats = JSON.stringify(formData.feats);
+    formData.traits = JSON.stringify(formData.traits);
     // console.log("formData", formData);
     submit(formData, { method: "post" });
   };
@@ -129,7 +133,19 @@ const Creation = () => {
       },
     }));
   };
-
+  const handleFeatsAndTraitsChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    type: string,
+    field: string
+  ) => {
+    setFormData((form) => ({
+      ...form,
+      [type]: {
+        ...form[type],
+        [field]: e.target.value,
+      },
+    }));
+  };
   //   Stepper Functions
   const [active, setActive] = useState(0);
   const nextStep = () => {
@@ -240,7 +256,11 @@ const Creation = () => {
                       <Title color="white" align="center">
                         Feats and Traits
                       </Title>
-                      <FeatsAndTraits />
+                      <FeatsAndTraits
+                        formData={formData}
+                        handleChange={handleFeatsAndTraitsChange}
+                        handleSubmit={handleSubmit}
+                      />
                     </>
                   ) : active === 6 ? (
                     <>
