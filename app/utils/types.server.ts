@@ -35,7 +35,7 @@ export interface CharacterForm {
   traits?: Traits;
 }
 
-type Skills = {
+export type Skills = {
   acrobatics: number | string;
   appraise: number | string;
   athletics: number | string;
@@ -74,12 +74,12 @@ type Skills = {
   knowledgeReligion: number | string;
 };
 
-type Feats = {
+export type Feats = {
   name: string;
   description: string;
 };
 
-type Traits = {
+export type Traits = {
   name: string;
   description: string;
 };

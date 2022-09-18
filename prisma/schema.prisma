@@ -30,8 +30,8 @@ model Character {
   user            User            @relation(fields: [userId], references: [id])
   userId          String
   characterName   String?         @default("")
-  alignment       alignment?      @default(LG)
-  level           Int?            @default(0)
+  alignment       Alignment?      @default(N)
+  level           String?         @default("0")
   class           String?         @default("")
   home            String?         @default("")
   gender          String?         @default("")
@@ -43,6 +43,7 @@ model Character {
   size            String?
   hair            String?
   eyes            String?
+  age             String?
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
   stats           Stats
@@ -70,7 +71,7 @@ model Character {
   image           String?         @default("https://i.imgur.com/0Z0Z0Z0.png")
 }
 
-enum alignment {
+enum Alignment {
   LG
   NG
   CG
@@ -191,46 +192,47 @@ type Stats {
 }
 
 type Skills {
-  acrobatics     Int        @default(0)
-  appraise       Int        @default(0)
-  athletics      Int        @default(0)
-  bluff          Int        @default(0)
-  climb          Int        @default(0)
-  craft          Int        @default(0)
-  diplomacy      Int        @default(0)
-  disableDevice  Int        @default(0)
-  disguise       Int        @default(0)
-  escapeArtist   Int        @default(0)
-  fly            Int        @default(0)
-  handleAnimal   Int        @default(0)
-  heal           Int        @default(0)
-  intimidation   Int        @default(0)
-  linguistics    Int        @default(0)
-  perception     Int        @default(0)
-  performance    Int        @default(0)
-  profession     Int        @default(0)
-  ride           Int        @default(0)
-  senseMotive    Int        @default(0)
-  sleightOfHand  Int        @default(0)
-  spellcraft     Int        @default(0)
-  stealth        Int        @default(0)
-  survival       Int        @default(0)
-  swim           Int        @default(0)
-  useMagicDevice Int        @default(0)
-  knowledges     Knowledges
+  acrobatics              Skill
+  appraise                Skill
+  athletics               Skill
+  bluff                   Skill
+  climb                   Skill
+  craft                   Skill
+  diplomacy               Skill
+  disableDevice           Skill
+  disguise                Skill
+  escapeArtist            Skill
+  fly                     Skill
+  handleAnimal            Skill
+  heal                    Skill
+  intimidation            Skill
+  linguistics             Skill
+  perception              Skill
+  performance             Skill
+  profession              Skill
+  ride                    Skill
+  senseMotive             Skill
+  sleightOfHand           Skill
+  spellcraft              Skill
+  stealth                 Skill
+  survival                Skill
+  swim                    Skill
+  useMagicDevice          Skill
+  knowwledgeArcana        Skill
+  knowwledgeDungeoneering Skill
+  knowwledgeEngineering   Skill
+  knowwledgeGeography     Skill
+  knowwledgeHistory       Skill
+  knowwledgeLocal         Skill
+  knowwledgeNature        Skill
+  knowwledgeNobility      Skill
+  knowwledgePlanes        Skill
+  knowwledgeReligion      Skill
 }
 
-type Knowledges {
-  arcana        Int @default(0)
-  dungeoneering Int @default(0)
-  engineering   Int @default(0)
-  geography     Int @default(0)
-  history       Int @default(0)
-  local         Int @default(0)
-  nature        Int @default(0)
-  nobility      Int @default(0)
-  planes        Int @default(0)
-  religion      Int @default(0)
+type Skill {
+  rank    String?
+  trained Boolean @default(false)
 }
 
 type KnownLanguages {

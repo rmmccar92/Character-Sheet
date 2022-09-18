@@ -18,29 +18,37 @@ export const createCharacter = async (
   character.feats = feats;
   character.traits = traits;
   console.log("character", character);
-  // const newCharacter = await prisma.character.create({
-  //   data: {
-  //     userId: userId,
-  //     characterName: character.characterName,
-  //     class: character.characterClass,
-  //     // alignment: character.alignment,
-  //     // level: character.level,
-  //     // deity: character.deity,
-  //     home: character.homeland,
-  //     // race: character.race,
-  //     // size: character.size,
-  //     gender: character.gender,
-  //     // characterAge: character.characterAge
-  //     stats: {
-  //       strength: parseInt(character?.strength) || 0,
-  //       dexterity: parseInt(character?.dexterity),
-  //       constitution: parseInt(character?.constitution),
-  //       wisdom: parseInt(character?.wisdom),
-  //       intelligence: parseInt(character?.intelligence),
-  //       charisma: parseInt(character?.charisma),
-  //     },
-  //   },
-  // });
-  // return { id: newCharacter.id, characterName: newCharacter.characterName };
-  return null;
+  const newCharacter = await prisma.character.create({
+    data: {
+      userId: userId,
+      characterName: character.characterName,
+      class: character.characterClass,
+      level: character.level,
+      deity: character.deity,
+      home: character.homeland,
+      race: character.race,
+      size: character.size,
+      gender: character.gender,
+      age: character.characterAge,
+      stats: {
+        strength: parseInt(character?.strength as any) || 0,
+        dexterity: parseInt(character?.dexterity as any) || 0,
+        constitution: parseInt(character?.constitution as any) || 0,
+        wisdom: parseInt(character?.wisdom as any) || 0,
+        intelligence: parseInt(character?.intelligence as any) || 0,
+        charisma: parseInt(character?.charisma as any) || 0,
+      },
+      skills: {
+        ...skills,
+      },
+      feats: {
+        ...feats,
+      },
+      traits: {
+        ...traits,
+      },
+    },
+  });
+  return { id: newCharacter.id, characterName: newCharacter.characterName };
+  // return null;
 };
