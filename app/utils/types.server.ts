@@ -31,11 +31,8 @@ export interface CharacterForm {
   intelligence?: number | string;
   charisma?: number | string;
   skills?: Skills;
-}
-
-export interface FormType {
-  name?: string;
-  description?: string;
+  feats?: Feats;
+  traits?: Traits;
 }
 
 type Skills = {
@@ -75,4 +72,14 @@ type Skills = {
   knowledgeNobility: number | string;
   knowledgePlanes: number | string;
   knowledgeReligion: number | string;
+};
+
+type Feats = {
+  name: string;
+  description: string;
+};
+
+type Traits = {
+  name: string;
+  description: string;
 };
