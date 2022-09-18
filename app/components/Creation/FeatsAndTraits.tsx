@@ -6,7 +6,7 @@ interface FeatsAndTraitsProps {
   formData: any;
   handleChange: (
     e: ChangeEvent<HTMLInputElement>,
-    type: string,
+    type: "feats" | "traits",
     field: string
   ) => any;
   handleSubmit: (e: FormEvent<HTMLFormElement>) => any;

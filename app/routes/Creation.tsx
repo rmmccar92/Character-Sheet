@@ -14,7 +14,6 @@ import MyStepper from "~/components/Creation/MyStepper";
 import Preview from "~/components/Creation/Preview";
 import FeatsAndTraits from "~/components/Creation/FeatsAndTraits";
 import Layout from "~/components/Layout";
-
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
   // Object to be submitted to the server created from values from the form
@@ -135,7 +134,7 @@ const Creation = () => {
   };
   const handleFeatsAndTraitsChange = (
     e: ChangeEvent<HTMLInputElement>,
-    type: string,
+    type: "feats" | "traits",
     field: string
   ) => {
     setFormData((form) => ({

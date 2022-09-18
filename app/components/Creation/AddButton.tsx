@@ -5,11 +5,11 @@ import Modal from "~/components/Modal";
 import { FormField } from "~/components/form-field";
 
 interface AddButtonProps {
-  type: string;
+  type: "feat" | "trait";
   formData: any;
   handleChange: (
     e: ChangeEvent<HTMLInputElement>,
-    type: string,
+    type: "feats" | "traits",
     field: string
   ) => any;
 }

@@ -33,6 +33,11 @@ export interface CharacterForm {
   skills?: Skills;
 }
 
+export interface FormType {
+  name?: string;
+  description?: string;
+}
+
 type Skills = {
   acrobatics: number | string;
   appraise: number | string;
