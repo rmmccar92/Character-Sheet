@@ -1,7 +1,7 @@
 import { prisma } from "./prisma.server";
 import type { CharacterForm } from "./types.server";
 import { getUserSession } from "./auth.server";
-import { Skills } from "@prisma/client";
+// import { Skills } from "@prisma/client";
 
 // TODO: Character creation
 
@@ -17,7 +17,7 @@ export const createCharacter = async (
   character.skills = skills;
   character.feats = feats;
   character.traits = traits;
-  console.log("character", character);
+  // console.log("character", character);
   const newCharacter = await prisma.character.create({
     data: {
       userId: userId,
@@ -39,13 +39,13 @@ export const createCharacter = async (
         charisma: parseInt(character?.charisma as any) || 0,
       },
       skills: {
-        ...skills,
+        ...(character.skills as any),
       },
       feats: {
-        ...feats,
+        ...(character.feats as any),
       },
       traits: {
-        ...traits,
+        ...(character.traits as any),
       },
     },
   });

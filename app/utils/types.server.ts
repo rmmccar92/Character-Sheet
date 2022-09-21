@@ -13,7 +13,7 @@ export interface CharacterForm {
   characterName?: string;
   characterClass?: string;
   alignment?: string;
-  level?: number;
+  level?: string;
   deity?: string;
   homeland?: string;
   race?: string;
