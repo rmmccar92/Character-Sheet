@@ -14,6 +14,8 @@ import MyStepper from "~/components/Creation/MyStepper";
 import Preview from "~/components/Creation/Preview";
 import FeatsAndTraits from "~/components/Creation/FeatsAndTraits";
 import Layout from "~/components/Layout";
+import { BiRightArrow, BiLeftArrow } from "react-icons/bi";
+
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
   // Object to be submitted to the server created from values from the form
@@ -155,7 +157,6 @@ const Creation = () => {
   };
   return (
     // TODO: Equipment Step
-    // TODO: Form needs to track RadioButton change
     <Layout>
       <Outlet />
       <Container
@@ -165,6 +166,7 @@ const Creation = () => {
           alignItems: "center",
           flexDirection: "column",
           width: "100%",
+          padding: "0",
         }}
       >
         <Container
@@ -175,8 +177,8 @@ const Creation = () => {
             justifyContent: "center",
             width: "100%",
             background: "black",
+            padding: "2%",
             border: "1px solid white",
-            padding: 0,
           }}
         >
           <Title style={{ color: "white" }}>Character Creation</Title>
@@ -184,6 +186,8 @@ const Creation = () => {
           <Container
             style={{
               marginTop: "2%",
+              padding: "2%",
+              border: "1px solid green",
             }}
           >
             <MyStepper active={active} setActive={setActive} />
@@ -197,25 +201,36 @@ const Creation = () => {
               padding: 0,
               margin: "5% 0 2% 0",
               width: "100%",
+              border: "1px solid orange",
             }}
           >
             <Container
               style={{
-                border: "1px solid red",
-                width: "40%",
-                height: "100%",
+                margin: "1%",
+                width: "80%",
+                color: "white",
+                border: "1px solid blue",
+                display: "flex",
+                flexWrap: "nowrap",
+                justifyContent: "center",
+                alignItems: "center",
+                padding: "0",
               }}
             >
-              <Container
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  margin: "1%",
-                  color: "white",
-                }}
-              >
-                <Form onSubmit={handleSubmit}>
+              {active > 0 && (
+                <BiLeftArrow
+                  style={{ cursor: "pointer", height: "4em", width: "4em" }}
+                  onClick={() => prevStep()}
+                />
+              )}
+              <Form onSubmit={handleSubmit}>
+                <Container
+                  style={{
+                    border: "1px solid red",
+                    padding: "0",
+                    width: "80%",
+                  }}
+                >
                   {active === 0 ? (
                     <GeneralInfo
                       formData={formData}
@@ -274,30 +289,20 @@ const Creation = () => {
                       </Title>
                     </>
                   ) : null}
-                  {active < 8 && (
-                    <Button
-                      name="_action"
-                      value={active === 5 ? "submit" : `step${active + 1}`}
-                      onClick={() => nextStep()}
-                      style={{ marginTop: "10%" }}
-                    >
-                      Next
-                    </Button>
-                  )}
-                  <Button
-                    onClick={() => prevStep()}
-                    style={{ marginTop: "10%" }}
-                  >
-                    Prev
+                </Container>
+
+                {active === 8 && (
+                  <Button type="submit" style={{ marginTop: "40%" }}>
+                    Submit
                   </Button>
-                  {/* TODO: This condition should be === only like this for testing purposes */}
-                  {active < 8 && (
-                    <Button type="submit" style={{ marginTop: "40%" }}>
-                      Submit
-                    </Button>
-                  )}
-                </Form>
-              </Container>
+                )}
+              </Form>
+              {active < 8 && (
+                <BiRightArrow
+                  style={{ cursor: "pointer", height: "4em", width: "4em" }}
+                  onClick={() => nextStep()}
+                />
+              )}
             </Container>
 
             <Preview />

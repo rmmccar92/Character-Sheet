@@ -1,4 +1,4 @@
-import { Container, Text } from "@mantine/core";
+import { Container } from "@mantine/core";
 import type { FC, ChangeEvent, FormEvent } from "react";
 import AddButton from "./AddButton";
 
