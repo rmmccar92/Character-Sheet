@@ -9,6 +9,8 @@ body{
 /* background-image:radial-gradient(black, black), url('https://wallpaperaccess.com/full/2796640.jpg'); */
 background: var(--main-background);
 background-repeat: no-repeat;
-background-size: 100%;
+background-size: cover;
+background-attachment: fixed;
+background-position: center;
 background-blend-mode: soft-light;
 }

@@ -1,10 +1,7 @@
 import type { LoaderFunction } from "@remix-run/node";
-import { getUser, requireUserId } from "~/utils/auth.server";
-import { HubPanel } from "~/components/hub-panel";
-import Layout from "~/components/Layout";
-import { getOtherUsers, getUserById } from "~/utils/users.server";
+import { getUser } from "~/utils/auth.server";
 import { json } from "@remix-run/node";
-import { Outlet, useLoaderData, Form } from "@remix-run/react";
+import { useLoaderData, Form } from "@remix-run/react";
 import { Image, Box, Text, Button } from "@mantine/core";
 import AnimatedButton from "../components/AnimatedBtn";
 import { useNavigate } from "@remix-run/react";
@@ -29,10 +26,6 @@ export default function Home() {
     user?.id ? navigate("/hub") : navigate(`/login`);
   };
   return (
-    // <Layout>
-    //   {/* <Outlet /> */}
-    //   {/* <HubPanel users={users} /> */}
-    // </Layout>
     <Box
       sx={{
         margin: "auto",
@@ -77,10 +70,6 @@ export default function Home() {
           </Box>
         </Box>
       </Box>
-      {/* <Box
-      className="tablePic"
-      >
-      </Box> */}
       <Form action="/logout" method="post" style={{ opacity: "0" }}>
         <Button type="submit" onClick={() => console.log("works")}>
           Logout

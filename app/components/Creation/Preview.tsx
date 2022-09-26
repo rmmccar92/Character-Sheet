@@ -4,15 +4,17 @@ interface PreviewProps {}
 
 const Preview: FC<PreviewProps> = () => {
   return (
-    <Container
-      style={{
-        background: "white",
-        width: "50%",
-        height: "25em",
-        textAlign: "center",
-      }}
-    >
-      <Text>Character Preview</Text>
+    <Container style={{ width: "48%", border: "1px solid yellow" }}>
+      <Container
+        style={{
+          background: "white",
+          width: "80%",
+          height: "30em",
+          textAlign: "center",
+        }}
+      >
+        <Text>Character Preview</Text>
+      </Container>
     </Container>
   );
 };

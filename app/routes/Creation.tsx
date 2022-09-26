@@ -157,159 +157,141 @@ const Creation = () => {
   };
   return (
     // TODO: Equipment Step
-    <Layout>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh",
+        background: "url(/images/book.png)",
+        backgroundSize: "contain",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        padding: "2%",
+        border: "1px solid white",
+      }}
+    >
       <Outlet />
+
+      <Title style={{ color: "black" }}>Character Creation</Title>
+
       <Container
         style={{
+          padding: "2%",
+          border: "1px solid green",
+        }}
+      >
+        <MyStepper active={active} setActive={setActive} />
+      </Container>
+      <div
+        style={{
           display: "flex",
-          justifyContent: "center",
+          flexDirection: "row-reverse",
+          justifyContent: "space-evenly",
           alignItems: "center",
-          flexDirection: "column",
-          width: "100%",
-          padding: "0",
+          padding: 0,
+          margin: "2% 0 2% 0",
+          width: "82%",
+          maxHeight: "80vh",
+          border: "1px solid orange",
         }}
       >
         <Container
           style={{
+            margin: "1%",
+            width: "50%",
+            color: "black",
+            border: "1px solid blue",
             display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            // flexWrap: "nowrap",
             justifyContent: "center",
-            width: "100%",
-            background: "black",
-            padding: "2%",
-            border: "1px solid white",
+            alignItems: "center",
+            padding: "0",
           }}
         >
-          <Title style={{ color: "white" }}>Character Creation</Title>
-
-          <Container
-            style={{
-              marginTop: "2%",
-              padding: "2%",
-              border: "1px solid green",
-            }}
-          >
-            <MyStepper active={active} setActive={setActive} />
-          </Container>
-          <Container
-            style={{
-              display: "flex",
-              flexDirection: "row-reverse",
-              justifyContent: "space-evenly",
-              alignItems: "center",
-              padding: 0,
-              margin: "5% 0 2% 0",
-              width: "100%",
-              border: "1px solid orange",
-            }}
-          >
+          {active > 0 && (
+            <BiLeftArrow
+              style={{ cursor: "pointer", height: "4em", width: "4em" }}
+              onClick={() => prevStep()}
+            />
+          )}
+          <Form onSubmit={handleSubmit}>
             <Container
               style={{
-                margin: "1%",
-                width: "80%",
-                color: "white",
-                border: "1px solid blue",
-                display: "flex",
-                flexWrap: "nowrap",
-                justifyContent: "center",
-                alignItems: "center",
+                border: "1px solid red",
                 padding: "0",
+                width: "80%",
               }}
             >
-              {active > 0 && (
-                <BiLeftArrow
-                  style={{ cursor: "pointer", height: "4em", width: "4em" }}
-                  onClick={() => prevStep()}
+              {active === 0 ? (
+                <GeneralInfo formData={formData} handleChange={handleChange} />
+              ) : active === 1 ? (
+                <Stats formData={formData} handleChange={handleChange} />
+              ) : active === 2 ? (
+                <Skills
+                  formData={formData}
+                  // setTrained={setTrained}
+                  handleSkillChange={handleSkillChange}
+                  handleRadioSkillChange={handleRadioSkillChange}
                 />
-              )}
-              <Form onSubmit={handleSubmit}>
-                <Container
-                  style={{
-                    border: "1px solid red",
-                    padding: "0",
-                    width: "80%",
-                  }}
-                >
-                  {active === 0 ? (
-                    <GeneralInfo
-                      formData={formData}
-                      handleChange={handleChange}
-                    />
-                  ) : active === 1 ? (
-                    <Stats formData={formData} handleChange={handleChange} />
-                  ) : active === 2 ? (
-                    <Skills
-                      formData={formData}
-                      // setTrained={setTrained}
-                      handleSkillChange={handleSkillChange}
-                      handleRadioSkillChange={handleRadioSkillChange}
-                    />
-                  ) : active === 3 ? (
-                    <>
-                      <Title color="white" align="center">
-                        Defensive Stats
-                        <Defense
-                          formData={formData}
-                          handleChange={handleChange}
-                        />
-                      </Title>
-                    </>
-                  ) : active === 4 ? (
-                    <>
-                      <Title color="white" align="center">
-                        Offensive Stats
-                        <Offense
-                          formData={formData}
-                          handleChange={handleChange}
-                        />
-                      </Title>
-                    </>
-                  ) : active === 5 ? (
-                    <>
-                      <Title color="white" align="center">
-                        Feats and Traits
-                      </Title>
-                      <FeatsAndTraits
-                        formData={formData}
-                        handleChange={handleFeatsAndTraitsChange}
-                        handleSubmit={handleSubmit}
-                      />
-                    </>
-                  ) : active === 6 ? (
-                    <>
-                      <Title color="white" align="center">
-                        Backstory
-                      </Title>
-                    </>
-                  ) : active === 7 ? (
-                    <>
-                      <Title color="white" align="center">
-                        Review
-                      </Title>
-                    </>
-                  ) : null}
-                </Container>
-
-                {active === 8 && (
-                  <Button type="submit" style={{ marginTop: "40%" }}>
-                    Submit
-                  </Button>
-                )}
-              </Form>
-              {active < 8 && (
-                <BiRightArrow
-                  style={{ cursor: "pointer", height: "4em", width: "4em" }}
-                  onClick={() => nextStep()}
-                />
-              )}
+              ) : active === 3 ? (
+                <>
+                  <Title color="black" align="center">
+                    Defensive Stats
+                    <Defense formData={formData} handleChange={handleChange} />
+                  </Title>
+                </>
+              ) : active === 4 ? (
+                <>
+                  <Title color="black" align="center">
+                    Offensive Stats
+                    <Offense formData={formData} handleChange={handleChange} />
+                  </Title>
+                </>
+              ) : active === 5 ? (
+                <>
+                  <Title color="black" align="center">
+                    Feats and Traits
+                  </Title>
+                  <FeatsAndTraits
+                    formData={formData}
+                    handleChange={handleFeatsAndTraitsChange}
+                    handleSubmit={handleSubmit}
+                  />
+                </>
+              ) : active === 6 ? (
+                <>
+                  <Title color="black" align="center">
+                    Backstory
+                  </Title>
+                </>
+              ) : active === 7 ? (
+                <>
+                  <Title color="black" align="center">
+                    Review
+                  </Title>
+                </>
+              ) : null}
             </Container>
 
-            <Preview />
-          </Container>
+            {active === 8 && (
+              <Button type="submit" style={{ marginTop: "40%" }}>
+                Submit
+              </Button>
+            )}
+          </Form>
+          {active < 8 && (
+            <BiRightArrow
+              style={{ cursor: "pointer", height: "4em", width: "4em" }}
+              onClick={() => nextStep()}
+            />
+          )}
         </Container>
-      </Container>
-    </Layout>
+
+        <Preview />
+      </div>
+    </div>
   );
 };
 
