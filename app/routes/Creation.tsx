@@ -13,8 +13,8 @@ import Skills from "~/components/Creation/Skills";
 import MyStepper from "~/components/Creation/MyStepper";
 import Preview from "~/components/Creation/Preview";
 import FeatsAndTraits from "~/components/Creation/FeatsAndTraits";
-import Layout from "~/components/Layout";
 import { BiRightArrow, BiLeftArrow } from "react-icons/bi";
+import styles from "../styles/creation.css";
 
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
@@ -164,8 +164,13 @@ const Creation = () => {
         alignItems: "center",
         justifyContent: "center",
         height: "100vh",
-        background: "url(/images/book.png)",
-        backgroundSize: "contain",
+        background:
+          "radial-gradient(rgba(95, 0, 115, 0.15)30%, rgba(0, 0, 0, 0.65)68%), url(/images/book.png)",
+        maskImage: 'url("/images/book.png")',
+        maskMode: "alpha",
+        // backgroundBlendMode: "multiply",
+        // mixBlendMode: "saturation",
+        backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         padding: "2%",
