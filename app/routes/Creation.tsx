@@ -14,7 +14,6 @@ import MyStepper from "~/components/Creation/MyStepper";
 import Preview from "~/components/Creation/Preview";
 import FeatsAndTraits from "~/components/Creation/FeatsAndTraits";
 import { BiRightArrow, BiLeftArrow } from "react-icons/bi";
-import styles from "../styles/creation.css";
 
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
