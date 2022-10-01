@@ -14,6 +14,11 @@ import MyStepper from "~/components/Creation/MyStepper";
 import Preview from "~/components/Creation/Preview";
 import FeatsAndTraits from "~/components/Creation/FeatsAndTraits";
 import { BiRightArrow, BiLeftArrow } from "react-icons/bi";
+import styles from "../styles/creation.css";
+
+export function links() {
+  return [{ rel: "stylesheet", href: styles }];
+}
 
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
@@ -156,78 +161,19 @@ const Creation = () => {
   };
   return (
     // TODO: Equipment Step
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
-        background:
-          "radial-gradient(rgba(95, 0, 115, 0.15)30%, rgba(0, 0, 0, 0.65)68%), url(/images/book.png)",
-        maskImage: 'url("/images/book.png")',
-        maskMode: "alpha",
-        // backgroundBlendMode: "multiply",
-        // mixBlendMode: "saturation",
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-        padding: "2%",
-        border: "1px solid white",
-      }}
-    >
+    <div className="creation-container">
       <Outlet />
-
-      <Title style={{ color: "black" }}>Character Creation</Title>
-
-      <Container
-        style={{
-          padding: "2%",
-          border: "1px solid green",
-        }}
-      >
+      <Title>Character Creation</Title>
+      <Container className="stepper-container">
         <MyStepper active={active} setActive={setActive} />
       </Container>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row-reverse",
-          justifyContent: "space-evenly",
-          alignItems: "center",
-          padding: 0,
-          margin: "2% 0 2% 0",
-          width: "82%",
-          maxHeight: "80vh",
-          border: "1px solid orange",
-        }}
-      >
-        <Container
-          style={{
-            margin: "1%",
-            width: "50%",
-            color: "black",
-            border: "1px solid blue",
-            display: "flex",
-            // flexWrap: "nowrap",
-            justifyContent: "center",
-            alignItems: "center",
-            padding: "0",
-          }}
-        >
+      <div className="content-container">
+        <Container className="form-container">
           {active > 0 && (
-            <BiLeftArrow
-              style={{ cursor: "pointer", height: "4em", width: "4em" }}
-              onClick={() => prevStep()}
-            />
+            <BiLeftArrow className="arrow" onClick={() => prevStep()} />
           )}
           <Form onSubmit={handleSubmit}>
-            <Container
-              style={{
-                border: "1px solid red",
-                padding: "0",
-                width: "80%",
-              }}
-            >
+            <Container className="fields-container">
               {active === 0 ? (
                 <GeneralInfo formData={formData} handleChange={handleChange} />
               ) : active === 1 ? (
@@ -235,29 +181,26 @@ const Creation = () => {
               ) : active === 2 ? (
                 <Skills
                   formData={formData}
-                  // setTrained={setTrained}
                   handleSkillChange={handleSkillChange}
                   handleRadioSkillChange={handleRadioSkillChange}
                 />
               ) : active === 3 ? (
                 <>
-                  <Title color="black" align="center">
+                  <Title>
                     Defensive Stats
                     <Defense formData={formData} handleChange={handleChange} />
                   </Title>
                 </>
               ) : active === 4 ? (
                 <>
-                  <Title color="black" align="center">
+                  <Title>
                     Offensive Stats
                     <Offense formData={formData} handleChange={handleChange} />
                   </Title>
                 </>
               ) : active === 5 ? (
                 <>
-                  <Title color="black" align="center">
-                    Feats and Traits
-                  </Title>
+                  <Title>Feats and Traits</Title>
                   <FeatsAndTraits
                     formData={formData}
                     handleChange={handleFeatsAndTraitsChange}
@@ -266,30 +209,23 @@ const Creation = () => {
                 </>
               ) : active === 6 ? (
                 <>
-                  <Title color="black" align="center">
-                    Backstory
-                  </Title>
+                  <Title>Backstory</Title>
                 </>
               ) : active === 7 ? (
                 <>
-                  <Title color="black" align="center">
-                    Review
-                  </Title>
+                  <Title>Review</Title>
                 </>
               ) : null}
             </Container>
 
             {active === 8 && (
-              <Button type="submit" style={{ marginTop: "40%" }}>
+              <Button type="submit" className="submit-button">
                 Submit
               </Button>
             )}
           </Form>
           {active < 8 && (
-            <BiRightArrow
-              style={{ cursor: "pointer", height: "4em", width: "4em" }}
-              onClick={() => nextStep()}
-            />
+            <BiRightArrow className="arrow" onClick={() => nextStep()} />
           )}
         </Container>
 
