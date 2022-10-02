@@ -28,10 +28,8 @@ export function FormField({
 
   return (
     <>
-      <label htmlFor={htmlFor} style={{ color: "white", fontSize: "20px", textShadow:"2px 2px 3px black" }}>
-        {label}
-      </label>
       <input
+        autoComplete="off"
         onChange={(e) => {
           onChange?.(e);
           setErrTxt("");
@@ -42,6 +40,8 @@ export function FormField({
         value={value}
         style={style}
       />
+      <label htmlFor={htmlFor}>{label}</label>
+
       {errTxt && (
         <div className="error">
           <p>{errTxt}</p>

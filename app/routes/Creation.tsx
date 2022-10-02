@@ -185,39 +185,21 @@ const Creation = () => {
                   handleRadioSkillChange={handleRadioSkillChange}
                 />
               ) : active === 3 ? (
-                <>
-                  <Title>
-                    Defensive Stats
-                    <Defense formData={formData} handleChange={handleChange} />
-                  </Title>
-                </>
+                <Defense formData={formData} handleChange={handleChange} />
               ) : active === 4 ? (
-                <>
-                  <Title>
-                    Offensive Stats
-                    <Offense formData={formData} handleChange={handleChange} />
-                  </Title>
-                </>
+                <Offense formData={formData} handleChange={handleChange} />
               ) : active === 5 ? (
-                <>
-                  <Title>Feats and Traits</Title>
-                  <FeatsAndTraits
-                    formData={formData}
-                    handleChange={handleFeatsAndTraitsChange}
-                    handleSubmit={handleSubmit}
-                  />
-                </>
+                <FeatsAndTraits
+                  formData={formData}
+                  handleChange={handleFeatsAndTraitsChange}
+                  handleSubmit={handleSubmit}
+                />
               ) : active === 6 ? (
-                <>
-                  <Title>Backstory</Title>
-                </>
+                <Title>Backstory</Title>
               ) : active === 7 ? (
-                <>
-                  <Title>Review</Title>
-                </>
+                <Title>Review</Title>
               ) : null}
             </Container>
-
             {active === 8 && (
               <Button type="submit" className="submit-button">
                 Submit
@@ -228,7 +210,6 @@ const Creation = () => {
             <BiRightArrow className="arrow" onClick={() => nextStep()} />
           )}
         </Container>
-
         <Preview />
       </div>
     </div>

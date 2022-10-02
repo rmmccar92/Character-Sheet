@@ -1,4 +1,4 @@
-import { Container } from "@mantine/core";
+import { Container, Title } from "@mantine/core";
 import type { FC, ChangeEvent, FormEvent } from "react";
 import AddButton from "./AddButton";
 
@@ -18,6 +18,7 @@ const FeatsAndTraits: FC<FeatsAndTraitsProps> = ({
 }) => {
   return (
     <Container>
+      <Title>Feats {"&"} Traits</Title>
       <AddButton
         handleChange={handleChange}
         formData={formData}

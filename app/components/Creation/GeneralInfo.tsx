@@ -19,7 +19,6 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         label="Character Name"
         value={formData.characterName}
         type="text"
-        style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "characterName")}
       />
       <FormField
@@ -27,7 +26,6 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         label="Alignment"
         value={formData.alignment}
         type="text"
-        style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "alignment")}
       />
       <FormField
@@ -35,7 +33,6 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         label="Deity"
         value={formData.deity}
         type="text"
-        style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "deity")}
       />
       <FormField
@@ -43,7 +40,6 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         label="Homeland"
         value={formData.homeland}
         type="text"
-        style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "homeland")}
       />
       <FormField
@@ -51,7 +47,6 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         label="Race"
         value={formData.race}
         type="text"
-        style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "race")}
       />
       <FormField
@@ -59,7 +54,6 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         label="Size"
         value={formData.size}
         type="text"
-        style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "size")}
       />
       <FormField
@@ -67,7 +61,6 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         label="Gender"
         value={formData.gender}
         type="text"
-        style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "gender")}
       />
       <FormField
@@ -75,7 +68,6 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         label="Age"
         value={formData.characterAge}
         type="text"
-        style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "characterAge")}
       />
       <FormField
@@ -83,7 +75,6 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         label="Height"
         value={formData.characterHeight}
         type="text"
-        style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "characterHeight")}
       />
       <FormField
@@ -91,7 +82,6 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         label="Weight"
         value={formData.weight}
         type="text"
-        style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "weight")}
       />
       <FormField
@@ -99,7 +89,6 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         label="Hair Color"
         value={formData.hairColor}
         type="text"
-        style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "hairColor")}
       />
       <FormField
@@ -107,7 +96,6 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         label="Eye Color"
         value={formData.eyeColor}
         type="text"
-        style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "eyeColor")}
       />
       <FormField
@@ -115,7 +103,6 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         label="Class"
         value={formData.characterClass}
         type="text"
-        style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "characterClass")}
       />
     </>

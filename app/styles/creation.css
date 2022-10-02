@@ -58,3 +58,45 @@
 .submit-button {
     margin-top: 40%;
 }
+
+.form-field {
+    width: 100%;
+    margin: 0 0 1em 0;
+}
+
+input {
+    background-color: transparent;
+    text-align: center;
+    width: 100%;
+    line-height: 1em;
+    border: none;
+    border-bottom: 2px solid black;
+    transition: line-height 0.5s ease, border-bottom 0.85s ease;
+
+}
+input:focus {
+    outline: none;
+    line-height: 2em;
+    border-bottom: 2px solid var(--secondary-purple);
+}
+
+label {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: black;
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+    transition: font-size 0.5s ease, color 0.85s ease;
+
+}
+
+input:focus + label{
+    color: var(--secondary-purple);
+    font-size: 1.75em;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
+}

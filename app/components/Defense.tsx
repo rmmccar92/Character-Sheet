@@ -1,11 +1,4 @@
-import {
-  Center,
-  Container,
-  Paper,
-  TextInput,
-  Text,
-  Button,
-} from "@mantine/core";
+import { Center, Container, Paper, TextInput, Text } from "@mantine/core";
 // import characterData from "../../data/data.js";
 
 export default function Defense() {
