@@ -8,15 +8,15 @@ const MySelect: FC<MySelectProps> = ({ onChange }) => {
   return (
     <>
       <select className="alignment-select" onChange={(e) => onChange?.(e)}>
-        <option value="lg">Lawful Good</option>
-        <option value="ng">Neutral Good</option>
-        <option value="cg">Chaotic Good</option>
-        <option value="ln">Lawful Neutral</option>
-        <option value="n">Neutral</option>
-        <option value="cn">Chaotic Neutral</option>
-        <option value="le">Lawful Evil</option>
-        <option value="ne">Neutral Evil</option>
-        <option value="ce">Chaotic Evil</option>
+        <option value="LG">Lawful Good</option>
+        <option value="NG">Neutral Good</option>
+        <option value="CG">Chaotic Good</option>
+        <option value="LN">Lawful Neutral</option>
+        <option value="N">Neutral</option>
+        <option value="CN">Chaotic Neutral</option>
+        <option value="LE">Lawful Evil</option>
+        <option value="NE">Neutral Evil</option>
+        <option value="CE">Chaotic Evil</option>
       </select>
       <label>Alignment</label>
     </>
