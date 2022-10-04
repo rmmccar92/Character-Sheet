@@ -138,6 +138,7 @@ const Creation = () => {
       },
     }));
   };
+
   const handleFeatsAndTraitsChange = (
     e: ChangeEvent<HTMLInputElement>,
     type: "feats" | "traits",

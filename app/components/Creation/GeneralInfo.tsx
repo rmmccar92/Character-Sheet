@@ -29,7 +29,7 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         type="text"
         onChange={(e) => handleChange(e, "alignment")}
       /> */}
-      <MySelect />
+      <MySelect onChange={(e) => handleChange(e, "alignment")}/>
       <FormField
         htmlFor="deity"
         label="Deity"
