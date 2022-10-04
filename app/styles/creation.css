@@ -100,3 +100,19 @@ input:-webkit-autofill,
 input:-webkit-autofill:focus {
   transition: background-color 600000s 0s, color 600000s 0s;
 }
+
+.alignment-select {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    margin: 0.5em 0 0.5em 0;
+    font-size: 16px;
+    text-align: center;
+    border-bottom: 2px solid black;
+    transition: line-height 0.5s ease, border-bottom 0.85s ease;
+}
+
+.alignment-select:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+    outline: none;
+}

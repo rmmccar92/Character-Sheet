@@ -2,6 +2,7 @@ import type { FC } from "react";
 import { FormField } from "~/components/form-field";
 import { Title } from "@mantine/core";
 import type { ChangeEvent } from "react";
+import MySelect from "./MySelect";
 
 interface GeneralInfoProps {
   formData: any;
@@ -21,13 +22,14 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         type="text"
         onChange={(e) => handleChange(e, "characterName")}
       />
-      <FormField
+      {/* <FormField
         htmlFor="alignment"
         label="Alignment"
         value={formData.alignment}
         type="text"
         onChange={(e) => handleChange(e, "alignment")}
-      />
+      /> */}
+      <MySelect />
       <FormField
         htmlFor="deity"
         label="Deity"
