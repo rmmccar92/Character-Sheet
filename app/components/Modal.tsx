@@ -51,8 +51,7 @@ const Modal = ({
           maxHeight: "100vh",
           overflow: "hidden",
           textAlign: "center",
-          color: "white",
-          backgroundColor: "black",
+          backgroundColor: "white",
           border: "1px solid white",
           borderRadius: "40px",
         }}

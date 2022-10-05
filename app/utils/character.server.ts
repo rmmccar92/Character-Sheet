@@ -17,38 +17,47 @@ export const createCharacter = async (
   character.skills = skills;
   character.feats = feats;
   character.traits = traits;
-  console.log("character", character);
-  // const newCharacter = await prisma.character.create({
-  //   data: {
-  //     userId: userId,
-  //     characterName: character.characterName,
-  //     class: character.characterClass,
-  //     level: character.level,
-  //     deity: character.deity,
-  //     home: character.homeland,
-  //     race: character.race,
-  //     size: character.size,
-  //     gender: character.gender,
-  //     age: character.characterAge,
-  //     stats: {
-  //       strength: parseInt(character?.strength as any) || 0,
-  //       dexterity: parseInt(character?.dexterity as any) || 0,
-  //       constitution: parseInt(character?.constitution as any) || 0,
-  //       wisdom: parseInt(character?.wisdom as any) || 0,
-  //       intelligence: parseInt(character?.intelligence as any) || 0,
-  //       charisma: parseInt(character?.charisma as any) || 0,
-  //     },
-  //     skills: {
-  //       ...(character.skills as any),
-  //     },
-  //     feats: {
-  //       ...(character.feats as any),
-  //     },
-  //     traits: {
-  //       ...(character.traits as any),
-  //     },
-  //   },
-  // });
-  // return { id: newCharacter.id, characterName: newCharacter.characterName };
-  return null;
+
+  // console.log("character", character);
+  // Creation process
+  const newCharacter = await prisma.character.create({
+    data: {
+      user: {
+        connect: {
+          id: userId,
+        },
+      },
+      characterName: character.characterName,
+      class: character.characterClass,
+      alignment: character.alignment,
+      level: character.level,
+      deity: character.deity,
+      home: character.homeland,
+      race: character.race,
+      size: character.size,
+      gender: character.gender,
+      age: character.characterAge,
+      stats: {
+        strength: parseInt(character?.strength as any) || 0,
+        dexterity: parseInt(character?.dexterity as any) || 0,
+        constitution: parseInt(character?.constitution as any) || 0,
+        wisdom: parseInt(character?.wisdom as any) || 0,
+        intelligence: parseInt(character?.intelligence as any) || 0,
+        charisma: parseInt(character?.charisma as any) || 0,
+      },
+      skills: {
+        ...(character.skills as any),
+      },
+
+      // BUG: Argument data.feats/traits of type FeatListCreateEnvelopeInput needs at least one argument.
+      feats: {
+        ...((character.feats as any) || {}),
+      },
+      traits: {
+        ...((character.traits as any) || {}),
+      },
+    },
+  });
+  return { id: newCharacter.id, characterName: newCharacter.characterName };
+  // return null;
 };

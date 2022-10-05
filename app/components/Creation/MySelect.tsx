@@ -1,22 +1,31 @@
 import type { FC } from "react";
+import { useEffect } from "react";
+import { alignmentMap } from "~/utils/constants";
 
 interface MySelectProps {
   onChange: (...args: any) => any;
 }
 
 const MySelect: FC<MySelectProps> = ({ onChange }) => {
+  const getOptions = (data: any) =>
+    Object.keys(data).reduce((acc: any[], curr) => {
+      acc.push({
+        value: curr.charAt(0) + curr.slice(1),
+        name: data[curr],
+      });
+      return acc;
+    }, []);
+
+  const alignments = getOptions(alignmentMap);
+
   return (
     <>
       <select className="alignment-select" onChange={(e) => onChange?.(e)}>
-        <option value="LG">Lawful Good</option>
-        <option value="NG">Neutral Good</option>
-        <option value="CG">Chaotic Good</option>
-        <option value="LN">Lawful Neutral</option>
-        <option value="N">Neutral</option>
-        <option value="CN">Chaotic Neutral</option>
-        <option value="LE">Lawful Evil</option>
-        <option value="NE">Neutral Evil</option>
-        <option value="CE">Chaotic Evil</option>
+        {alignments.map((alignment) => (
+          <option key={alignment.value} value={alignment.value}>
+            {alignment.name}
+          </option>
+        ))}
       </select>
       <label>Alignment</label>
     </>

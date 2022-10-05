@@ -10,9 +10,10 @@ export interface LoginForm {
   password: string;
 }
 export interface CharacterForm {
+  userId: string;
   characterName?: string;
   characterClass?: string;
-  alignment?: string;
+  alignment: string;
   level?: string;
   deity?: string;
   homeland?: string;
