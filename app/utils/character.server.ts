@@ -29,7 +29,7 @@ export const createCharacter = async (
       },
       characterName: character.characterName,
       class: character.characterClass,
-      alignment: character.alignment,
+      alignment: character.alignment as any,
       level: character.level,
       deity: character.deity,
       home: character.homeland,
@@ -60,4 +60,21 @@ export const createCharacter = async (
   });
   return { id: newCharacter.id, characterName: newCharacter.characterName };
   // return null;
+};
+
+export const getAllCharacters = async (userId: string) => {
+  return await prisma.character.findMany({
+    where: {
+      userId,
+    },
+  });
+};
+
+export const getCharacter = async (id: string, request: Request) => {
+  const character = await prisma.character.findUnique({
+    where: {
+      id,
+    },
+  });
+  return character;
 };

@@ -1,7 +1,7 @@
 import { Button, Container, Title } from "@mantine/core";
 import { Form, useNavigate } from "@remix-run/react";
-import type { User } from "@prisma/client";
-import UserCircle from "./user-circle";
+// import type { User } from "@prisma/client";
+// import UserCircle from "./user-circle";
 // interface props {
 //   users: User[];
 // }
@@ -38,7 +38,9 @@ export function HubPanel() {
             border: "1px solid black",
           }}
         >
-          <Button>My Characters</Button>
+          <Button onClick={() => navigate("/mycharacters")}>
+            My Characters
+          </Button>
           <Button onClick={() => navigate("/creation")}>New Character</Button>
         </Container>
         <Container>
