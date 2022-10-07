@@ -13,6 +13,7 @@ import Skills from "~/components/Creation/Skills";
 import MyStepper from "~/components/Creation/MyStepper";
 import Preview from "~/components/Creation/Preview";
 import FeatsAndTraits from "~/components/Creation/FeatsAndTraits";
+import ImageUploader from "~/components/Image-Uploader";
 import { BiRightArrow, BiLeftArrow } from "react-icons/bi";
 import styles from "../styles/creation.css";
 
@@ -211,7 +212,7 @@ const Creation = () => {
             <BiRightArrow className="arrow" onClick={() => nextStep()} />
           )}
         </Container>
-        <Preview />
+        <ImageUploader />
       </div>
     </div>
   );

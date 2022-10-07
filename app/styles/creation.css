@@ -116,3 +116,11 @@ input:-webkit-autofill:focus {
     transition: background-color 600000s 0s, color 600000s 0s;
     outline: none;
 }
+
+.drag-over-true {
+    border: 2px solid var(--secondary-purple);
+}
+
+.drag-over-false {
+    border: 2px solid red;
+}
