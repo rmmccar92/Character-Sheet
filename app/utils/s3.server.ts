@@ -39,7 +39,7 @@ export async function uploadImage(request: Request) {
     uploadHandler
   );
 
-  const file = formData.get("profile-pic")?.toString() || "";
-
+  const file = formData.get("character-portrait")?.toString() || "";
+  // console.log("file", file);
   return file;
 }

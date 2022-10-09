@@ -117,10 +117,21 @@ input:-webkit-autofill:focus {
     outline: none;
 }
 
-.drag-over-true {
-    border: 2px solid var(--secondary-purple);
+.image-uploader {
+    width: 50%;
+    height: 95%;
+    display: flex;
+    border: dashed 3px var(--main-purple);
+    border-radius: 2%;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.25s;
 }
 
-.drag-over-false {
-    border: 2px solid red;
+.drag-over-true {
+    border-color: var(--secondary-purple);
 }
+
+/* .drag-over-false {
+    border: 2px solid red;
+} */

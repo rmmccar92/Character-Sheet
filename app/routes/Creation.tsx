@@ -17,6 +17,7 @@ import FeatsAndTraits from "~/components/Creation/FeatsAndTraits";
 import ImageUploader from "~/components/Image-Uploader";
 import { BiRightArrow, BiLeftArrow } from "react-icons/bi";
 import styles from "../styles/creation.css";
+import { useLocalStorage } from "usehooks-ts";
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }];
@@ -36,6 +37,7 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 const Creation = () => {
+  const [imageUrl, setImageUrl] = useLocalStorage("imageUrl", "");
   const actionData = useActionData();
   const [formData, setFormData] = useState({
     characterName: actionData?.fields?.characterName || "",
@@ -165,11 +167,11 @@ const Creation = () => {
       method: "POST",
       body: inputFormData,
     });
-    const { imageUrl } = await response.json();
-
+    const upload = await response.json();
+    setImageUrl(upload);
     setFormData({
       ...formData,
-      image: imageUrl,
+      image: upload,
     });
   };
 
@@ -232,7 +234,7 @@ const Creation = () => {
             <BiRightArrow className="arrow" onClick={() => nextStep()} />
           )}
         </Container>
-        <ImageUploader onChange={handleUpload} imageUrl={formData.image} />
+        <ImageUploader onChange={handleUpload} imageUrl={imageUrl} />
       </div>
     </div>
   );

@@ -33,12 +33,18 @@ const ImageUploader: FC<ImageUploaderProps> = ({ onChange, imageUrl }) => {
   return (
     <div
       ref={dropRef}
-      className={`${dragOver ? "drag-over-true" : "drag-over-false"}`}
+      className={`${
+        dragOver ? "drag-over-true" : "drag-over-false"
+      } image-uploader`}
       style={{
         backgroundSize: "cover",
         ...(imageUrl ? { backgroundImage: `url(${imageUrl})` } : {}),
       }}
-      onDragEnter={() => setDragOver(true)}
+      onDragEnter={() => {
+        setDragOver(true);
+        console.log("IMAGE STRING", imageUrl);
+      }}
+      onDragLeave={() => setDragOver(false)}
       onDragStart={preventDefaults}
       onDragEnd={preventDefaults}
       onDragOver={preventDefaults}
