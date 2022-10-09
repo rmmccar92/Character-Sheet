@@ -5,9 +5,9 @@ import S3 from "aws-sdk/clients/s3";
 import cuid from "cuid";
 
 const s3 = new S3({
-  region: process.env.AWS_REGION,
-  accessKeyId: process.env.AWS_ACCESS_KEY,
-  secretAccessKey: process.env.AWS_SECRET_KEY,
+  region: process.env.CS_AWS_REGION,
+  accessKeyId: process.env.CS_AWS_ACCESS_KEY,
+  secretAccessKey: process.env.CS_AWS_SECRET_KEY,
 });
 
 const uploadHandler: UploadHandler = async ({ name, filename, data }) => {
@@ -20,7 +20,7 @@ const uploadHandler: UploadHandler = async ({ name, filename, data }) => {
     try {
       const { Location } = await s3
         .upload({
-          Bucket: process.env.AWS_BUCKET_NAME || "",
+          Bucket: process.env.CS_AWS_BUCKET_NAME || "",
           Key: `${cuid()}.${filename.split(".").slice(-1)}`,
           Body: stream,
         })
