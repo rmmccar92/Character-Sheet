@@ -70,10 +70,11 @@ export const getAllCharacters = async (userId: string) => {
   });
 };
 
-export const getCharacter = async (id: string, request: Request) => {
+export const getCharacter = async (characterId: string) => {
+  if (!characterId) return null;
   const character = await prisma.character.findUnique({
     where: {
-      id,
+      id: characterId,
     },
   });
   return character;

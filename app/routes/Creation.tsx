@@ -1,12 +1,13 @@
 import { useMemo, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
-import { Container, Title, Button } from "@mantine/core";
 import { Outlet, Form, useActionData, useSubmit } from "@remix-run/react";
-import GeneralInfo from "~/components/Creation/GeneralInfo";
-import type { ActionFunction } from "@remix-run/node";
-import { createCharacter } from "~/utils/character.server";
-import Stats from "~/components/Creation/Stats";
+import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import { createCharacter, getCharacter } from "~/utils/character.server";
 import skillsData from "~/utils/data.js";
+import { Container, Title, Button } from "@mantine/core";
+import GeneralInfo from "~/components/Creation/GeneralInfo";
+import Stats from "~/components/Creation/Stats";
 import Defense from "~/components/Creation/Defense";
 import Offense from "~/components/Creation/Offense";
 import Skills from "~/components/Creation/Skills";
@@ -33,6 +34,7 @@ export const action: ActionFunction = async ({ request }) => {
     request
   );
 };
+
 const Creation = () => {
   const actionData = useActionData();
   const [formData, setFormData] = useState({
@@ -75,6 +77,7 @@ const Creation = () => {
     speed: actionData?.fields?.speed || "",
     feats: actionData?.fields?.feats || {},
     traits: actionData?.fields?.traits || {},
+    image: "",
   });
   useMemo(() => {
     skillsData.forEach((skill) => {
@@ -153,6 +156,23 @@ const Creation = () => {
       },
     }));
   };
+
+  // Image upload handler
+  const handleUpload = async (file: File) => {
+    let inputFormData = new FormData();
+    inputFormData.append("character-portrait", file);
+    const response = await fetch("/upload-image", {
+      method: "POST",
+      body: inputFormData,
+    });
+    const { imageUrl } = await response.json();
+
+    setFormData({
+      ...formData,
+      image: imageUrl,
+    });
+  };
+
   //   Stepper Functions
   const [active, setActive] = useState(0);
   const nextStep = () => {
@@ -212,7 +232,7 @@ const Creation = () => {
             <BiRightArrow className="arrow" onClick={() => nextStep()} />
           )}
         </Container>
-        <ImageUploader />
+        <ImageUploader onChange={handleUpload} imageUrl={formData.image} />
       </div>
     </div>
   );
