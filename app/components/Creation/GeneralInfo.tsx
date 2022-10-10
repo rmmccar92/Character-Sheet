@@ -15,21 +15,7 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
       <Title color="white" align="center">
         General Info
       </Title>
-      <FormField
-        htmlFor="characterName"
-        label="Character Name"
-        value={formData.characterName}
-        type="text"
-        onChange={(e) => handleChange(e, "characterName")}
-      />
-      {/* <FormField
-        htmlFor="alignment"
-        label="Alignment"
-        value={formData.alignment}
-        type="text"
-        onChange={(e) => handleChange(e, "alignment")}
-      /> */}
-      <MySelect onChange={(e) => handleChange(e, "alignment")}/>
+      <MySelect onChange={(e) => handleChange(e, "alignment")} />
       <FormField
         htmlFor="deity"
         label="Deity"
