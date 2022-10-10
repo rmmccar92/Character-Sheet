@@ -1,12 +1,6 @@
 import { useMemo, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
-import {
-  Outlet,
-  Form,
-  useActionData,
-  useLoaderData,
-  useSubmit,
-} from "@remix-run/react";
+import { Outlet, Form, useActionData, useSubmit } from "@remix-run/react";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { updateCharacter, getCharacter } from "~/utils/character.server";
@@ -49,7 +43,6 @@ export const action: ActionFunction = async ({ request, params }) => {
 };
 
 const Creation = () => {
-  const { character } = useLoaderData();
   const [imageUrl, setImageUrl] = useLocalStorage("imageUrl", "");
   const actionData = useActionData();
   const [formData, setFormData] = useState({
@@ -205,12 +198,12 @@ const Creation = () => {
         <MyStepper active={active} setActive={setActive} />
       </Container>
       <div className="content-container">
-        <Container className="form-container">
+        <div className="form-container">
           {active > 0 && (
             <BiLeftArrow className="arrow" onClick={() => prevStep()} />
           )}
           <Form onSubmit={handleSubmit}>
-            <Container className="fields-container">
+            <div className="fields-container">
               {active === 0 ? (
                 <GeneralInfo formData={formData} handleChange={handleChange} />
               ) : active === 1 ? (
@@ -236,7 +229,7 @@ const Creation = () => {
               ) : active === 7 ? (
                 <Title>Review</Title>
               ) : null}
-            </Container>
+            </div>
             {active === 8 && (
               <Button type="submit" className="submit-button">
                 Submit
@@ -246,7 +239,7 @@ const Creation = () => {
           {active < 8 && (
             <BiRightArrow className="arrow" onClick={() => nextStep()} />
           )}
-        </Container>
+        </div>
         <ImageUploader onChange={handleUpload} imageUrl={imageUrl} />
       </div>
     </div>

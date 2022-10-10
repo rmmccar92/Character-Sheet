@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { FormField } from "~/components/form-field";
-import { Title } from "@mantine/core";
+import { Title, Center } from "@mantine/core";
 import type { ChangeEvent } from "react";
 import MySelect from "./MySelect";
 
@@ -12,9 +12,7 @@ interface GeneralInfoProps {
 const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
   return (
     <>
-      <Title color="white" align="center">
-        General Info
-      </Title>
+      <Title>General Info</Title>
       <MySelect onChange={(e) => handleChange(e, "alignment")} />
       <FormField
         htmlFor="deity"
@@ -22,6 +20,7 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         value={formData.deity}
         type="text"
         onChange={(e) => handleChange(e, "deity")}
+        style={{ width: "100%" }}
       />
       <FormField
         htmlFor="homeland"
@@ -29,6 +28,7 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         value={formData.homeland}
         type="text"
         onChange={(e) => handleChange(e, "homeland")}
+        style={{ width: "100%" }}
       />
       <FormField
         htmlFor="race"
@@ -36,6 +36,7 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         value={formData.race}
         type="text"
         onChange={(e) => handleChange(e, "race")}
+        style={{ width: "100%" }}
       />
       <FormField
         htmlFor="size"
@@ -43,6 +44,7 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         value={formData.size}
         type="text"
         onChange={(e) => handleChange(e, "size")}
+        style={{ width: "100%" }}
       />
       <FormField
         htmlFor="gender"
@@ -50,6 +52,7 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         value={formData.gender}
         type="text"
         onChange={(e) => handleChange(e, "gender")}
+        style={{ width: "100%" }}
       />
       <FormField
         htmlFor="characterAge"
@@ -57,6 +60,7 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         value={formData.characterAge}
         type="text"
         onChange={(e) => handleChange(e, "characterAge")}
+        style={{ width: "100%" }}
       />
       <FormField
         htmlFor="characterHeight"
@@ -64,6 +68,7 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         value={formData.characterHeight}
         type="text"
         onChange={(e) => handleChange(e, "characterHeight")}
+        style={{ width: "100%" }}
       />
       <FormField
         htmlFor="weight"
@@ -71,6 +76,7 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         value={formData.weight}
         type="text"
         onChange={(e) => handleChange(e, "weight")}
+        style={{ width: "100%" }}
       />
       <FormField
         htmlFor="hairColor"
@@ -78,6 +84,7 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         value={formData.hairColor}
         type="text"
         onChange={(e) => handleChange(e, "hairColor")}
+        style={{ width: "100%" }}
       />
       <FormField
         htmlFor="eyeColor"
@@ -85,6 +92,7 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         value={formData.eyeColor}
         type="text"
         onChange={(e) => handleChange(e, "eyeColor")}
+        style={{ width: "100%" }}
       />
       <FormField
         htmlFor="characterClass"
@@ -92,7 +100,9 @@ const GeneralInfo: FC<GeneralInfoProps> = ({ formData, handleChange }) => {
         value={formData.characterClass}
         type="text"
         onChange={(e) => handleChange(e, "characterClass")}
+        style={{ width: "100%" }}
       />
+      {/* </Center> */}
     </>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import type { FC } from "react";
-
+import { Text } from "@mantine/core";
+import { ImDownload } from "react-icons/im";
 interface ImageUploaderProps {
   onChange: (file: File) => void;
   imageUrl?: string;
@@ -61,6 +62,12 @@ const ImageUploader: FC<ImageUploaderProps> = ({ onChange, imageUrl }) => {
         onChange={handleChange}
         className="image-uploader-input"
       />
+      {/* {!imageUrl && ( */}
+      <div className="image-uploader-text">
+        <ImDownload className="image-uploader-icon" />
+        <Text> Drag and drop or click to add an image!</Text>
+      </div>
+      {/* )} */}
     </div>
   );
 };

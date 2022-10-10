@@ -20,39 +20,40 @@ const Skills: FC<SkillsProps> = ({
 }) => {
   return (
     <>
-      <Title color="white" align="center">
-        Skills
-      </Title>
-      {skillsData.map((skill) => (
-        <Container
-          key={skill.name}
-          style={{
-            display: "flex",
-            flexDirection: "row",
-          }}
-        >
-          <RadioButton
-            value={formData.skills?.[skill.name]?.trained}
-            skillName={skill.name}
-            handleRadioSkillChange={handleRadioSkillChange}
-          />
-          <Text>{skill.name}</Text>
-          <FormField
-            htmlFor={skill.name}
-            value={formData.skills?.[skill.name]?.ranks}
-            type="string"
-            label=""
+      <Title className="skills-title">Skills</Title>
+      <div className="skills-container">
+        {skillsData.map((skill) => (
+          <Container
+            key={skill.name}
             style={{
-              width: "10%",
-              marginLeft: "1%",
-              justifySelf: "flex-end",
+              display: "flex",
+              flexDirection: "row",
+              width: "100%",
             }}
-            onChange={(e) => {
-              handleSkillChange(e, `${skill.name}`);
-            }}
-          />
-        </Container>
-      ))}
+          >
+            <RadioButton
+              value={formData.skills?.[skill.name]?.trained}
+              skillName={skill.name}
+              handleRadioSkillChange={handleRadioSkillChange}
+            />
+            <Text>{skill.name}</Text>
+            <FormField
+              htmlFor={skill.name}
+              value={formData.skills?.[skill.name]?.ranks}
+              type="string"
+              label=""
+              style={{
+                width: "10%",
+                marginLeft: "1%",
+                justifySelf: "flex-end",
+              }}
+              onChange={(e) => {
+                handleSkillChange(e, `${skill.name}`);
+              }}
+            />
+          </Container>
+        ))}
+      </div>
     </>
   );
 };
