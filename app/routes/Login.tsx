@@ -2,8 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Container, Title, Button, Text, Box } from "@mantine/core";
 import { FormField } from "~/components/form-field";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
-import { json } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import {
   validEmail,
@@ -127,90 +126,100 @@ export default function Login() {
   return (
     <Layout>
       <Box
-      sx={{
-        height: "90vh",
-        width: "80vw",
-        display: "flex",
-        justifyContent:"center",
-        flexDirection:"column",
-        // background: "linear-gradient(to right, rgba(0,0,0,.7), rgba(0, 0, 0, .2)), url(https://www.wallpaperflare.com/static/202/435/755/simple-background-purple-black-bokeh-wallpaper.jpg)",
-        backgroundSize:"cover",
-
-      }}
-      >
-      <Container
-        className="box"
         sx={{
+          height: "90vh",
+          width: "80vw",
           display: "flex",
-          flexDirection: "column",
           justifyContent: "center",
-          alignItems: "center",
-          height: "40vh",
-          fontFamily:"Uncial Antiqua",
-          width: "25vw",
-          textAlign: "center",
-          background: "linear-gradient(to left, rgba(100,6,115,.3), rgba(100, 6, 205, .3))",
-          backgroundSize:"cover",
-          borderRadius: "20px",
-          backdropFilter:"blur(15px)",
-          boxShadow:"inset 0 0 100px rgba(110,5,150,.7)"
-          // boxShadow:`12px -10px 1px rgb(100, 6, 115), -13px 10px 1px rgb(100, 6, 205)`,
+          flexDirection: "column",
+          // background: "linear-gradient(to right, rgba(0,0,0,.7), rgba(0, 0, 0, .2)), url(https://www.wallpaperflare.com/static/202/435/755/simple-background-purple-black-bokeh-wallpaper.jpg)",
+          backgroundSize: "cover",
         }}
       >
-        <Title style={{ 
-          color: "white",
-          fontSize: "80px", 
-          fontFamily:"Euphoria Script", 
-          letterSpacing:"6px",
-          textShadow:"2px 2px 5px black"
-          }}>
-          {action === "login" ? "Login" : "Register"}
-        </Title>
-        <Form
-          method="post"
-          style={{ display: "Flex", flexDirection: "column", width: "60%" }}
+        <Container
+          className="box"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "40vh",
+            fontFamily: "Uncial Antiqua",
+            width: "25vw",
+            textAlign: "center",
+            background:
+              "linear-gradient(to left, rgba(100,6,115,.3), rgba(100, 6, 205, .3))",
+            backgroundSize: "cover",
+            borderRadius: "20px",
+            backdropFilter: "blur(15px)",
+            boxShadow: "inset 0 0 100px rgba(110,5,150,.7)",
+            // boxShadow:`12px -10px 1px rgb(100, 6, 115), -13px 10px 1px rgb(100, 6, 205)`,
+          }}
         >
-          {action === "register" && (
-            <>
-              <FormField
-                htmlFor="firstName"
-                label="First Name"
-                value={formData.firstName}
-                type="text"
-                onChange={(e) => handleChange(e, "firstName")}
-                error={errors?.firstName}
-                style={{borderRadius:"10px", border: "none", fontSize:"20px"}}
-              />
-              <FormField
-                htmlFor="lastName"
-                label="Last Name"
-                value={formData.lastName}
-                type="text"
-                onChange={(e) => handleChange(e, "lastName")}
-                error={errors?.lastName}
-                style={{borderRadius:"10px", border: "none", fontSize:"20px"}}
-              />
-            </>
-          )}
-          <FormField
-            htmlFor="email" 
-            label="Email"       
-            value={formData.email}
-            type="text"
-            onChange={(e) => handleChange(e, "email")}
-            error={errors?.email}
-            style={{borderRadius:"10px", border: "none", fontSize:"20px"}}
-          />
-          <FormField
-            htmlFor="password"
-            label="Password"
-            value={formData.password}
-            type="password"
-            onChange={(e) => handleChange(e, "password")}
-            error={errors?.password}
-            style={{borderRadius:"10px", border: "none", fontSize:"20px"}}
-          />
-          {/* 
+          <Title
+            style={{
+              color: "white",
+              fontSize: "80px",
+              fontFamily: "Euphoria Script",
+              letterSpacing: "6px",
+              textShadow: "2px 2px 5px black",
+            }}
+          >
+            {action === "login" ? "Login" : "Register"}
+          </Title>
+          <Form
+            method="post"
+            style={{ display: "Flex", flexDirection: "column", width: "60%" }}
+          >
+            {action === "register" && (
+              <>
+                <FormField
+                  htmlFor="firstName"
+                  label="First Name"
+                  value={formData.firstName}
+                  type="text"
+                  onChange={(e) => handleChange(e, "firstName")}
+                  error={errors?.firstName}
+                  style={{
+                    borderRadius: "10px",
+                    border: "none",
+                    fontSize: "20px",
+                  }}
+                />
+                <FormField
+                  htmlFor="lastName"
+                  label="Last Name"
+                  value={formData.lastName}
+                  type="text"
+                  onChange={(e) => handleChange(e, "lastName")}
+                  error={errors?.lastName}
+                  style={{
+                    borderRadius: "10px",
+                    border: "none",
+                    fontSize: "20px",
+                  }}
+                />
+              </>
+            )}
+            <FormField
+              htmlFor="email"
+              label="Email"
+              value={formData.email}
+              type="text"
+              onChange={(e) => handleChange(e, "email")}
+              error={errors?.email}
+              style={{ borderRadius: "10px", border: "none", fontSize: "20px" }}
+            />
+            <FormField
+              htmlFor="password"
+              label="Password"
+              value={formData.password}
+              type="password"
+              onChange={(e) => handleChange(e, "password")}
+              error={errors?.password}
+              style={{ borderRadius: "10px", border: "none", fontSize: "20px" }}
+            />
+            {/* 
           {action === "register" && (
             <FormField
               htmlFor="passwordConfirm"
@@ -221,37 +230,38 @@ export default function Login() {
               error={errors.passwordConfirm}
             />
           )} */}
-          <Button
-            type="submit"
-            name="_action"
-            value={action}
-            sx={{ 
-              margin: "auto", 
-              marginTop:"1em",
-              background: "linear-gradient(to right,rgb(100, 6, 115), rgb(100,6,205), rgb(155, 55, 255), rgb(100,6,205), rgb(100, 6, 115))",  
-              transition:"all 1s",
-              backgroundSize:"400% auto",
-              width: "60%",
-              borderRadius:"20px",
-              boxShadow:"0 3px 10px rgba(0,0,55,.4)",
-              "&:hover":{
-                backgroundPosition:"right",
-              }
-            }}
-          >
-            {action === "login" ? "Login" : "Register"}
-          </Button>
-        </Form>
-      </Container>
-      <Container>
-        <Text color="red">{formError}</Text>
-      </Container>
-      <Button
-      style={{background: "none"}}
-        onClick={() => setAction(action === "login" ? "register" : "login")}
-      >
-        {action === "login" ? "New Here? Register" : "Back to Login"}
-      </Button>
+            <Button
+              type="submit"
+              name="_action"
+              value={action}
+              sx={{
+                margin: "auto",
+                marginTop: "1em",
+                background:
+                  "linear-gradient(to right,rgb(100, 6, 115), rgb(100,6,205), rgb(155, 55, 255), rgb(100,6,205), rgb(100, 6, 115))",
+                transition: "all 1s",
+                backgroundSize: "400% auto",
+                width: "60%",
+                borderRadius: "20px",
+                boxShadow: "0 3px 10px rgba(0,0,55,.4)",
+                "&:hover": {
+                  backgroundPosition: "right",
+                },
+              }}
+            >
+              {action === "login" ? "Login" : "Register"}
+            </Button>
+          </Form>
+        </Container>
+        <Container>
+          <Text color="red">{formError}</Text>
+        </Container>
+        <Button
+          style={{ background: "none" }}
+          onClick={() => setAction(action === "login" ? "register" : "login")}
+        >
+          {action === "login" ? "New Here? Register" : "Back to Login"}
+        </Button>
       </Box>
     </Layout>
   );

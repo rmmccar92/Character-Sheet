@@ -3,7 +3,7 @@ import type { FC } from "react";
 
 interface ImageUploaderProps {
   onChange: (file: File) => void;
-  imageUrl: string;
+  imageUrl?: string;
 }
 
 const ImageUploader: FC<ImageUploaderProps> = ({ onChange, imageUrl }) => {

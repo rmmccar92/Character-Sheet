@@ -23,6 +23,13 @@ export function links() {
   return [{ rel: "stylesheet", href: styles }];
 }
 
+export const loader: LoaderFunction = async ({ params }) => {
+  const characterId = params.id;
+  if (characterId) {
+    return json(await getCharacter(characterId));
+  }
+  return null;
+};
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
   // Object to be submitted to the server created from values from the form
