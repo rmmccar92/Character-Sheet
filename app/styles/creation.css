@@ -119,13 +119,19 @@ input:-webkit-autofill:focus {
 
 .image-uploader {
     width: 50%;
-    height: 95%;
+    height: 70vh;
+    background: transparent;
     display: flex;
     border: dashed 3px var(--main-purple);
     border-radius: 2%;
     justify-content: center;
     align-items: center;
     transition: all 0.25s;
+}
+
+.image-uploader:hover {
+    background: rgb(100, 100, 100, 0.2);
+
 }
 
 .drag-over-true {
@@ -135,3 +141,7 @@ input:-webkit-autofill:focus {
 /* .drag-over-false {
     border: 2px solid red;
 } */
+
+.image-uploader button {
+    display: none;
+}

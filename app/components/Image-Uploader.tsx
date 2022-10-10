@@ -37,8 +37,10 @@ const ImageUploader: FC<ImageUploaderProps> = ({ onChange, imageUrl }) => {
         dragOver ? "drag-over-true" : "drag-over-false"
       } image-uploader`}
       style={{
-        backgroundSize: "cover",
-        ...(imageUrl ? { backgroundImage: `url(${imageUrl})` } : {}),
+        backgroundSize: "contain",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundImage: `url(${imageUrl})`,
       }}
       onDragEnter={() => {
         setDragOver(true);
