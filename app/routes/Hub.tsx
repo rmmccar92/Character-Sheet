@@ -108,7 +108,6 @@ const Hub: FC = () => {
             <Button onClick={() => navigate("/mycharacters")}>
               My Characters
             </Button>
-            {/* <Button onClick={() => navigate("/creation")}>New Character</Button> */}
             <Button onClick={handleClick}>New Character</Button>
           </Container>
           <Container>
@@ -121,15 +120,7 @@ const Hub: FC = () => {
         <Title>Companions</Title>
         <Container
           style={{ display: "flex", justifyContent: "center", width: "100%" }}
-        >
-          {/* {users.map((user) => (
-          <UserCircle
-            key={user.id}
-            profile={user.profile}
-            onClick={() => navigate(`/home/test/${user.id}`)}
-          />
-        ))} */}
-        </Container>
+        ></Container>
       </Container>
     </>
   );

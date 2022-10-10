@@ -1,9 +1,15 @@
 import { useMemo, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
-import { Outlet, Form, useActionData, useSubmit } from "@remix-run/react";
+import {
+  Outlet,
+  Form,
+  useActionData,
+  useLoaderData,
+  useSubmit,
+} from "@remix-run/react";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { createCharacter, getCharacter } from "~/utils/character.server";
+import { updateCharacter, getCharacter } from "~/utils/character.server";
 import skillsData from "~/utils/data.js";
 import { Container, Title, Button } from "@mantine/core";
 import GeneralInfo from "~/components/Creation/GeneralInfo";
@@ -12,7 +18,6 @@ import Defense from "~/components/Creation/Defense";
 import Offense from "~/components/Creation/Offense";
 import Skills from "~/components/Creation/Skills";
 import MyStepper from "~/components/Creation/MyStepper";
-import Preview from "~/components/Creation/Preview";
 import FeatsAndTraits from "~/components/Creation/FeatsAndTraits";
 import ImageUploader from "~/components/Image-Uploader";
 import { BiRightArrow, BiLeftArrow } from "react-icons/bi";
@@ -24,26 +29,27 @@ export function links() {
 }
 
 export const loader: LoaderFunction = async ({ params }) => {
-  const characterId = params.id;
-  if (characterId) {
-    return json(await getCharacter(characterId));
+  const character = await getCharacter(params.characterId as string);
+  if (character) {
+    return json({ character });
   }
   return null;
 };
-export const action: ActionFunction = async ({ request }) => {
+export const action: ActionFunction = async ({ request, params }) => {
   const form = await request.formData();
   // Object to be submitted to the server created from values from the form
   const values = Object.fromEntries(form);
   // TODO error handling
-  return await createCharacter(
+  return await updateCharacter(
     {
       ...values,
     },
-    request
+    params.characterId as string
   );
 };
 
 const Creation = () => {
+  const { character } = useLoaderData();
   const [imageUrl, setImageUrl] = useLocalStorage("imageUrl", "");
   const actionData = useActionData();
   const [formData, setFormData] = useState({
