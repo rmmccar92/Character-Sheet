@@ -5,3 +5,10 @@
 .character-card {
     border: 1px solid red;
 }
+
+.delete-icon {
+   color: white;
+   outline: 1px solid black;
+   cursor: pointer;
+
+}

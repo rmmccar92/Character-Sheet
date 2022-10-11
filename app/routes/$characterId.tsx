@@ -46,7 +46,7 @@ const Creation = () => {
   const [imageUrl, setImageUrl] = useLocalStorage("imageUrl", "");
   const actionData = useActionData();
   const [formData, setFormData] = useState({
-    characterName: actionData?.fields?.characterName || "",
+    // characterName: actionData?.fields?.characterName || "",
     characterClass: actionData?.fields?.characterClass || "",
     alignment: actionData?.fields?.alignment || "",
     level: actionData?.fields?.level || "",

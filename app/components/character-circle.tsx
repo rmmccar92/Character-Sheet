@@ -1,13 +1,13 @@
-import { Container, Text } from "@mantine/core";
-import type { Profile } from "@prisma/client";
+import { Container, BackgroundImage } from "@mantine/core";
 
 interface props {
-  profile: Profile;
+  image: string;
   className?: string;
   onClick?: (...args: any) => any;
 }
-export default function UserCircle({ profile, onClick, className }: props) {
+export default function UserCircle({ image, onClick, className }: props) {
   return (
+    // <BackgroundImage src={image}>
     <Container
       onClick={onClick}
       className={className}
@@ -23,12 +23,15 @@ export default function UserCircle({ profile, onClick, className }: props) {
         border: "1px solid black",
         backgroundColor: "grey",
         cursor: "pointer",
+        backgroundImage: `url(${image})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
-      <Text>
+      {/* <Text>
         {profile.firstName.charAt(0).toUpperCase()}
         {profile.lastName.charAt(0).toUpperCase()}
-      </Text>
+      </Text> */}
     </Container>
   );
 }

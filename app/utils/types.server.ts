@@ -33,6 +33,7 @@ export interface CharacterForm {
   skills?: Skills;
   feats?: Feats;
   traits?: Traits;
+  image?: string;
 }
 
 export type Skills = {

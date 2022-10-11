@@ -16,7 +16,6 @@ export const createCharacter = async (
   // character.feats = feats;
   // character.traits = traits;
 
-  // console.log("character", character);
   // Creation process
   const newCharacter = await prisma.character.create({
     data: {
@@ -26,39 +25,8 @@ export const createCharacter = async (
         },
       },
       characterName: character.characterName,
-      // class: character.characterClass,
-      // alignment: character.alignment as any,
-      // level: character.level,
-      // deity: character.deity,
-      // home: character.homeland,
-      // race: character.race,
-      // size: character.size,
-      // gender: character.gender,
-      // age: character.characterAge,
-      // stats: {
-      //   strength: parseInt(character?.strength as any) || 0,
-      //   dexterity: parseInt(character?.dexterity as any) || 0,
-      //   constitution: parseInt(character?.constitution as any) || 0,
-      //   wisdom: parseInt(character?.wisdom as any) || 0,
-      //   intelligence: parseInt(character?.intelligence as any) || 0,
-      //   charisma: parseInt(character?.charisma as any) || 0,
-      // },
-      // skills: {
-      //   ...(character.skills as any),
-      // },
-
-      // // BUG: Argument data.feats/traits of type FeatListCreateEnvelopeInput needs at least one argument.
-      // feats: {
-      //   ...((character.feats as any) || {}),
-      // },
-      // traits: {
-      //   ...((character.traits as any) || {}),
-      // },
     },
   });
-
-  // return { id: newCharacter.id, characterName: newCharacter.characterName };
-  // return null;
   return redirect(`/${newCharacter.id}`);
 };
 
@@ -71,6 +39,8 @@ export const updateCharacter = async (
       id: characterId,
     },
   });
+  console.log("character", character);
+
   const skills = JSON.parse(character.skills! as any);
   const feats = JSON.parse(character.feats! as any);
   const traits = JSON.parse(character.traits! as any);
@@ -111,13 +81,14 @@ export const updateCharacter = async (
         traits: {
           ...((character.traits as any) || {}),
         },
+        image: character.image,
       },
     });
-    console.log("update", update);
+    console.log("update");
   } catch (err) {
     console.error("ERROR", err);
   }
-  return { id: characterId, characterName: characterToUpdate?.characterName };
+  return redirect(`/mycharacters`);
 };
 
 export const getAllCharacters = async (userId: string) => {
@@ -136,4 +107,17 @@ export const getCharacter = async (characterId: string) => {
     },
   });
   return character;
+};
+
+export const deleteCharacter = async (characterId: string) => {
+  try {
+    const deleteCharacter = await prisma.character.delete({
+      where: {
+        id: characterId,
+      },
+    });
+    return { message: "Character deleted" };
+  } catch (err) {
+    console.error("ERROR", err);
+  }
 };
