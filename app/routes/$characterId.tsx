@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import { Outlet, Form, useActionData, useSubmit } from "@remix-run/react";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
@@ -16,19 +16,18 @@ import FeatsAndTraits from "~/components/Creation/FeatsAndTraits";
 import ImageUploader from "~/components/Image-Uploader";
 import { BiRightArrow, BiLeftArrow } from "react-icons/bi";
 import styles from "../styles/creation.css";
-import { useLocalStorage } from "usehooks-ts";
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }];
 }
 
-export const loader: LoaderFunction = async ({ params }) => {
-  const character = await getCharacter(params.characterId as string);
-  if (character) {
-    return json({ character });
-  }
-  return null;
-};
+// export const loader: LoaderFunction = async ({ params }) => {
+//   const character = await getCharacter(params.characterId as string);
+//   if (character) {
+//     return json({ character });
+//   }
+//   return null;
+// };
 export const action: ActionFunction = async ({ request, params }) => {
   const form = await request.formData();
   // Object to be submitted to the server created from values from the form
@@ -43,7 +42,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 };
 
 const Creation = () => {
-  const [imageUrl, setImageUrl] = useLocalStorage("imageUrl", "");
+  const [imageUrl, setImageUrl] = useState("");
   const actionData = useActionData();
   const [formData, setFormData] = useState({
     // characterName: actionData?.fields?.characterName || "",
@@ -102,6 +101,7 @@ const Creation = () => {
       }));
     });
   }, []);
+
   // console.log("formData", formData);
   const submit = useSubmit();
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {

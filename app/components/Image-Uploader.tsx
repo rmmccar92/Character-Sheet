@@ -9,6 +9,7 @@ interface ImageUploaderProps {
 
 const ImageUploader: FC<ImageUploaderProps> = ({ onChange, imageUrl }) => {
   const [dragOver, setDragOver] = useState(false);
+  const [uploaded, setUploaded] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const dropRef = useRef(null);
 
@@ -28,6 +29,7 @@ const ImageUploader: FC<ImageUploaderProps> = ({ onChange, imageUrl }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.files && e.currentTarget.files[0]) {
       onChange(e.currentTarget.files[0]);
+      setUploaded(true);
     }
   };
 
@@ -60,10 +62,12 @@ const ImageUploader: FC<ImageUploaderProps> = ({ onChange, imageUrl }) => {
         type="file"
         ref={fileInputRef}
         onChange={handleChange}
-        className="image-uploader-input"
+        className={"image-uploader-input"}
       />
       {/* {!imageUrl && ( */}
-      <div className="image-uploader-text">
+      <div
+        className={uploaded ? "image-uploader-hidden" : "image-uploader-text"}
+      >
         <ImDownload className="image-uploader-icon" />
         <Text> Drag and drop or click to add an image!</Text>
       </div>

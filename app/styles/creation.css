@@ -176,3 +176,8 @@ input:-webkit-autofill:focus {
     color: var(--main-purple);
     margin: 2%;
 }
+
+.image-uploader-hidden {
+    color: transparent;
+    font-size: 0;
+}

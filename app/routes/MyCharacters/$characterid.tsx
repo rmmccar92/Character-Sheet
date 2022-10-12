@@ -1,5 +1,5 @@
 import type { ActionFunction } from "@remix-run/node";
-import { json, redirect } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 import { deleteCharacter } from "~/utils/character.server";
 
 export const action: ActionFunction = async ({ params }) => {
