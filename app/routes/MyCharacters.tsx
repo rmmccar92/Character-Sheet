@@ -9,6 +9,7 @@ import Layout from "~/components/Layout";
 import styles from "../styles/roster.css";
 import CharacterCircle from "~/components/character-circle";
 import { MdDeleteForever } from "react-icons/md";
+import { useNavigate } from "@remix-run/react";
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }];
@@ -23,6 +24,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 interface MyCharactersProps {}
 
 const MyCharacters: FC<MyCharactersProps> = ({}) => {
+  const navigate = useNavigate();
   const { characters } = useLoaderData();
   return (
     <Layout>
@@ -43,7 +45,11 @@ const MyCharacters: FC<MyCharactersProps> = ({}) => {
             ))}
           </>
         ) : (
-          <Title>Roster Empty Click Here To Make a New Character</Title>
+          <div onClick={() => navigate("/hub")}>
+            <Title style={{ cursor: "pointer" }}>
+              Roster Empty Click Here To Go Back
+            </Title>
+          </div>
         )}
       </Container>
     </Layout>
