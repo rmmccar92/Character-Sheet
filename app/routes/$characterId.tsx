@@ -200,7 +200,10 @@ const Creation = () => {
       <div className="content-container">
         <div className="form-container">
           {active > 0 && (
-            <BiLeftArrow className="arrow" onClick={() => prevStep()} />
+            <BiLeftArrow
+              className="arrow arrow-left"
+              onClick={() => prevStep()}
+            />
           )}
           <Form onSubmit={handleSubmit}>
             <div className="fields-container">
@@ -237,7 +240,10 @@ const Creation = () => {
             )}
           </Form>
           {active < 8 && (
-            <BiRightArrow className="arrow" onClick={() => nextStep()} />
+            <BiRightArrow
+              className="arrow arrow-right"
+              onClick={() => nextStep()}
+            />
           )}
         </div>
         <ImageUploader onChange={handleUpload} imageUrl={imageUrl} />

@@ -36,7 +36,7 @@ const Skills: FC<SkillsProps> = ({
               skillName={skill.name}
               handleRadioSkillChange={handleRadioSkillChange}
             />
-            <Text>{skill.name}</Text>
+            <Text>{skill.label}</Text>
             <FormField
               htmlFor={skill.name}
               value={formData.skills?.[skill.name]?.ranks}

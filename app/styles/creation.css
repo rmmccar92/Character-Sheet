@@ -5,7 +5,6 @@
     justify-content: center;
     height: 100vh;
     color: black;
-    /* background:radial-gradient(  rgba(95, 100, 115, 0.15)10%, rgba(0, 0, 0, 0.45)40%, rgba(0, 0, 0, 0)80%), url(/images/book.png); */
     background: url(/images/book.png);
     background-size: contain;
     background-repeat: no-repeat;
@@ -46,8 +45,8 @@
 .fields-container{
     /* border: 1px solid red; */
     padding: 0px;
-    /* width: 80%; */
     text-align: center;
+    width: 90%;
 }
 
 .skills-title {
@@ -58,17 +57,20 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    width: 60%;
+    width: 54%;
     height: 60vh;
     align-items: flex-start;
     justify-content: flex-start;
+    text-align: left;
 }
 
 .arrow {
-    cursor: pointer; 
-    height: 4em; 
-    width: 4em;
+    cursor: pointer;
+    min-width: 45px;
+    height: auto;
+    margin: 2%;    
 }
+
 
 .submit-button {
     margin-top: 40%;
