@@ -11,17 +11,15 @@ interface StatsProps {
 const Stats: FC<StatsProps> = ({ formData, handleChange }) => {
   return (
     <>
-      <Title color="white" align="center">
-        Stats
-      </Title>
-      <Container
+      <Title align="center">Stats</Title>
+      <div
         style={{
           display: "flex",
           flexDirection: "row",
           width: "100%",
         }}
       >
-        <Container
+        <div
           style={{
             width: "50%",
             display: "flex",
@@ -33,7 +31,7 @@ const Stats: FC<StatsProps> = ({ formData, handleChange }) => {
             label="Strength"
             value={formData.strength}
             type="string"
-            style={{ width: "51%" }}
+            style={{ width: "90%" }}
             onChange={(e) => handleChange(e, "strength")}
           />
           <FormField
@@ -41,7 +39,7 @@ const Stats: FC<StatsProps> = ({ formData, handleChange }) => {
             label="Dexterity"
             value={formData.dexterity}
             type="string"
-            style={{ width: "51%" }}
+            style={{ width: "90%" }}
             onChange={(e) => handleChange(e, "dexterity")}
           />
           <FormField
@@ -49,11 +47,11 @@ const Stats: FC<StatsProps> = ({ formData, handleChange }) => {
             label="Constitution"
             value={formData.constitution}
             type="string"
-            style={{ width: "51%" }}
+            style={{ width: "90%" }}
             onChange={(e) => handleChange(e, "constitution")}
           />
-        </Container>
-        <Container
+        </div>
+        <div
           style={{
             width: "50%",
             display: "flex",
@@ -65,7 +63,7 @@ const Stats: FC<StatsProps> = ({ formData, handleChange }) => {
             label="Intelligence"
             value={formData.intelligence}
             type="string"
-            style={{ width: "51%" }}
+            style={{ width: "90%" }}
             onChange={(e) => handleChange(e, "intelligence")}
           />
           <FormField
@@ -73,7 +71,7 @@ const Stats: FC<StatsProps> = ({ formData, handleChange }) => {
             label="Wisdom"
             value={formData.wisdom}
             type="string"
-            style={{ width: "51%" }}
+            style={{ width: "90%" }}
             onChange={(e) => handleChange(e, "wisdom")}
           />
           <FormField
@@ -81,11 +79,11 @@ const Stats: FC<StatsProps> = ({ formData, handleChange }) => {
             label="Charisma"
             value={formData.charisma}
             type="string"
-            style={{ width: "51%" }}
+            style={{ width: "90%" }}
             onChange={(e) => handleChange(e, "charisma")}
           />
-        </Container>
-      </Container>
+        </div>
+      </div>
     </>
   );
 };

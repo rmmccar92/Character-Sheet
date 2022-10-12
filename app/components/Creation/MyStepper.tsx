@@ -8,7 +8,7 @@ interface MyStepperProps {
 
 const MyStepper: FC<MyStepperProps> = ({ active, setActive }) => {
   return (
-    <Stepper size="xs" active={active} onStepClick={setActive} color="teal">
+    <Stepper size="xs" active={active} onStepClick={setActive} color="grape">
       <Stepper.Step label="Step 1" />
       <Stepper.Step label="Step 2" />
       <Stepper.Step label="Step 3" />
