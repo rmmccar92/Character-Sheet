@@ -34,7 +34,7 @@ const MyCharacters: FC<MyCharactersProps> = ({}) => {
   return (
     <Layout>
       <Title>Characters</Title>
-      <Container className="card-container">
+      <Container className="card-container" onClick={() => navigate("/sheet")}>
         {characters.length > 0 ? (
           <>
             {characters.map((character: any) => (
