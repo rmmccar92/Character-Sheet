@@ -26,6 +26,11 @@ interface MyCharactersProps {}
 const MyCharacters: FC<MyCharactersProps> = ({}) => {
   const navigate = useNavigate();
   const { characters } = useLoaderData();
+
+  const handleDate = (date: string) => {
+    const readableDate = new Date(date).toLocaleDateString("en-US");
+    return readableDate;
+  };
   return (
     <Layout>
       <Title>Characters</Title>
@@ -36,10 +41,19 @@ const MyCharacters: FC<MyCharactersProps> = ({}) => {
               <div className="character-card" key={character.id}>
                 <h2>{character.characterName}</h2>
                 <CharacterCircle image={character.image} />
+                <p>{character.class === "" ? "Unknown" : character.class}</p>
+                <div className="character-card-info">
+                  <h4>Created:</h4>
+                  <p>{handleDate(character.createdAt)}</p>
+                </div>
+                <div className="character-card-info">
+                  <h4>Modified:</h4>
+                  <p>{handleDate(character.updatedAt)}</p>
+                </div>
                 <Form method="post" action={`/mycharacters/${character.id}`}>
-                  <Button type="submit" name="delete">
+                  <button type="submit" name="delete" className="delete-button">
                     <MdDeleteForever className="delete-icon" />
-                  </Button>
+                  </button>
                 </Form>
               </div>
             ))}

@@ -1,14 +1,42 @@
 .card-container {
-    border: 1px solid #ccc;
+    display: grid;
+    /* grid-template-columns: repeat(auto-fit, minmax(2%, 1fr)); */
+    grid-gap: 0.5rem;
+    width: 100%;
+    height: 80vh;
+    border: 1px solid white;
+    padding: 0.5%;
 }
 
 .character-card {
-    border: 1px solid red;
+    /* border: 1px solid red; */
+    background: radial-gradient(rgba(1, 5, 7, 0.135)52%, rgba(0, 0, 0, 0.582)90%), url(/images/background.webp) no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 25%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+.character-card-info {
+    width: 100%;
+    display: flex;
+    border: 1px solid green;
+    justify-content: space-evenly;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+
+.delete-button {
+    background: none;
+    border: none;
+    margin: 4%;
 }
 
 .delete-icon {
-   color: white;
-   outline: 1px solid black;
+   color: red;
+   font-size: 1.75em;
    cursor: pointer;
-
 }
