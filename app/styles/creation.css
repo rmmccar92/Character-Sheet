@@ -184,3 +184,42 @@ input:-webkit-autofill:focus {
     color: transparent;
     font-size: 0;
 }
+
+.modal-overlay {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-container {
+    position: fixed;
+    display: flex;
+    left: 28%;
+    top: 10%;
+    width: 42%;
+    height: 75%;
+    justify-content: center;
+    align-items: center;
+    max-height: 100vh;
+    overflow: hidden;
+    text-align: center;
+    background: radial-gradient(rgba(1, 5, 7, 0.135)52%, rgba(0, 0, 0, 0.582)90%), url(/images/background.webp) no-repeat;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid rgb(0, 0, 0);
+    filter: drop-shadow(0px 0px 6px var(--main-purple));
+    border-radius: 40px;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
+    width: 100%;
+}

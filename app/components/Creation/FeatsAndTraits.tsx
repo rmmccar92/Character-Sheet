@@ -22,12 +22,12 @@ const FeatsAndTraits: FC<FeatsAndTraitsProps> = ({
       <AddButton
         handleChange={handleChange}
         formData={formData}
-        type={"feat"}
+        type={"feats"}
       />
       <AddButton
         handleChange={handleChange}
         formData={formData}
-        type={"trait"}
+        type={"traits"}
       />
     </Container>
   );

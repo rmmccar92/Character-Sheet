@@ -47,6 +47,11 @@ export const updateCharacter = async (
   character.skills = skills;
   character.feats = feats;
   character.traits = traits;
+
+  // Testing values
+  // console.log("character", character);
+  // return null;
+
   try {
     const update = await prisma.character.update({
       where: {

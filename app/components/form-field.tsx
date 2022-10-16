@@ -9,6 +9,7 @@ interface FormFieldProps {
   style?: CSSProperties;
   onChange?: (...args: any) => any;
   error?: string;
+  className?: string;
 }
 
 export function FormField({
@@ -19,6 +20,7 @@ export function FormField({
   style,
   onChange,
   error,
+  className,
 }: FormFieldProps) {
   const [errTxt, setErrTxt] = useState(error);
 
@@ -28,20 +30,37 @@ export function FormField({
 
   return (
     <>
-      <input
-        autoComplete="off"
-        onChange={(e) => {
-          onChange?.(e);
-          setErrTxt("");
-        }}
-        type={type}
-        id={htmlFor}
-        name={htmlFor}
-        value={value}
-        style={style}
-      />
+      {type === "textarea" ? (
+        <textarea
+          id={htmlFor}
+          name={htmlFor}
+          value={value}
+          autoComplete="off"
+          onChange={(e) => {
+            onChange?.(e);
+            setErrTxt("");
+          }}
+          style={style}
+          className={className}
+        />
+      ) : (
+        <>
+          <input
+            autoComplete="off"
+            onChange={(e) => {
+              onChange?.(e);
+              setErrTxt("");
+            }}
+            type={type}
+            id={htmlFor}
+            name={htmlFor}
+            value={value}
+            style={style}
+            className={className}
+          />
+        </>
+      )}
       <label htmlFor={htmlFor}>{label}</label>
-
       {errTxt && (
         <div className="error">
           <p>{errTxt}</p>

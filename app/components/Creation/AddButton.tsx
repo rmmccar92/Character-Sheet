@@ -5,7 +5,7 @@ import Modal from "~/components/Modal";
 import { FormField } from "~/components/form-field";
 
 interface AddButtonProps {
-  type: "feat" | "trait";
+  type: "feats" | "traits";
   formData: any;
   handleChange: (
     e: ChangeEvent<HTMLInputElement>,
@@ -24,33 +24,43 @@ const AddButton: FC<AddButtonProps> = ({ type, handleChange, formData }) => {
   return (
     <>
       {isOpen && (
-        <Modal isOpen={isOpen} setIsOpen={setIsOpen} type={type}>
-          {type === "feat" ? (
+        <Modal
+          ariaLabel={`${type}-modal`}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          type={type}
+        >
+          <Title>{`Add ${type}`}</Title>
+          {/* {type === "feat" ? ( */}
+          <>
+            <FormField
+              htmlFor="name"
+              type="text"
+              label={`${
+                type.charAt(0).toUpperCase() + type.substring(1).slice(0, -1)
+              } Name`}
+              value={formData[type].name}
+              style={{ width: "100%", margin: "2% 0 2% 0" }}
+              onChange={(e) => handleChange(e, `${type}`, "name")}
+              className="add-input"
+            />
+            <FormField
+              htmlFor="description"
+              type="textarea"
+              label={`${
+                type.charAt(0).toUpperCase() + type.substring(1).slice(0, -1)
+              } Description`}
+              value={formData[type].description}
+              style={{ height: "15em", width: "100%" }}
+              onChange={(e) => handleChange(e, `${type}`, "description")}
+              className="add-textarea"
+            />
+            <Button type="submit" style={{ marginTop: "40%" }}>
+              Submit
+            </Button>
+          </>
+          {/* ) : type === "trait" ? (
             <>
-              <Title>Add Feat</Title>
-              <FormField
-                htmlFor="name"
-                type="text"
-                label="Feat Name"
-                value={formData.feats.name}
-                style={{ width: "100%", margin: "2% 0 2% 0" }}
-                onChange={(e) => handleChange(e, "feats", "name")}
-              />
-              <FormField
-                htmlFor="description"
-                type="text"
-                label="Feat Description"
-                value={formData.feats.description}
-                style={{ height: "15em", width: "100%" }}
-                onChange={(e) => handleChange(e, "feats", "description")}
-              />
-              <Button type="submit" style={{ marginTop: "40%" }}>
-                Submit
-              </Button>
-            </>
-          ) : type === "trait" ? (
-            <>
-              <Title>Add Trait</Title>
               <FormField
                 htmlFor="name"
                 type="text"
@@ -58,20 +68,22 @@ const AddButton: FC<AddButtonProps> = ({ type, handleChange, formData }) => {
                 value={formData.traits.name}
                 style={{ width: "100%", margin: "2% 0 2% 0" }}
                 onChange={(e) => handleChange(e, "traits", "name")}
+                className="add-input"
               />
               <FormField
                 htmlFor="description"
-                type="text"
+                type="textarea"
                 label="Trait Description"
                 value={formData.traits.description}
                 style={{ height: "15em", width: "100%" }}
                 onChange={(e) => handleChange(e, "traits", "description")}
+                className="add-textarea"
               />
               <Button type="submit" style={{ marginTop: "40%" }}>
                 Submit
               </Button>
             </>
-          ) : null}
+          ) : null} */}
         </Modal>
       )}
       <Button
