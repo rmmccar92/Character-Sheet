@@ -1,14 +1,14 @@
 import { Container } from "@mantine/core";
-import Abilities from "~/components/Abilities";
-import Defense from "~/components/Defense";
-import Equipment from "~/components/Equipment";
-import Feats from "~/components/Feats";
-import General from "~/components/General";
+import Abilities from "~/components/Sheet/Abilities";
+import Defense from "~/components/Sheet/Defense";
+import Equipment from "~/components/Sheet/Equipment";
+import Feats from "~/components/Sheet/Feats";
+import General from "~/components/Sheet/General";
 import Layout from "~/components/Layout";
-import Notes from "~/components/Notes";
-import Offense from "~/components/Offense";
-import Skills from "~/components/Skills";
-import Spells from "~/components/Spells";
+import Notes from "~/components/Sheet/Notes";
+import Offense from "~/components/Sheet/Offense";
+import Skills from "~/components/Sheet/Skills";
+import Spells from "~/components/Sheet/Spells";
 export default function Sheet() {
   return (
     <Layout>

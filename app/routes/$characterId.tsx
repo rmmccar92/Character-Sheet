@@ -1,8 +1,8 @@
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import { Outlet, Form, useActionData, useSubmit } from "@remix-run/react";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-import { json } from "@remix-run/node";
+// import { json } from "@remix-run/node";
 import { updateCharacter, getCharacter } from "~/utils/character.server";
 import skillsData from "~/utils/data.js";
 import { Container, Title, Button } from "@mantine/core";
