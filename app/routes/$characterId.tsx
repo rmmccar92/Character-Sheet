@@ -164,11 +164,14 @@ const Creation = () => {
     }));
   };
 
-  const handleFeatsAndTraitsSubmit = async (
-    e: FormEvent<HTMLFormElement>,
-    type: "feats" | "traits",
-    field: string
-  ) => {};
+  // Feats and traits submit
+  const handleFeatsAndTraits = async (e: any, type: "feats" | "traits") => {
+    e.preventDefault();
+    const response = await fetch(`/upload-${type}`, {
+      method: "POST",
+      body: JSON.stringify(formData),
+    });
+  };
 
   // Image upload handler
   const handleUpload = async (file: File) => {

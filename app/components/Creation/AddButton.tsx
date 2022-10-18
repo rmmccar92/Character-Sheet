@@ -22,14 +22,6 @@ const AddButton: FC<AddButtonProps> = ({ type, handleChange, formData }) => {
     setIsOpen((prev) => !prev);
   };
 
-  const handleSubmit = async (e: any, type: "feats" | "traits", formData) => {
-    e.preventDefault();
-    const response = await fetch(`/upload-${type}`, {
-      method: "POST",
-      body: JSON.stringify(formData),
-    });
-  };
-
   return (
     <>
       {isOpen && (
