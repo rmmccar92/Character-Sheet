@@ -1,7 +1,8 @@
 import { prisma } from "./prisma.server";
-import type { CharacterForm } from "./types.server";
+import type { CharacterForm, FeatsAndTraits } from "./types.server";
 import { getUserSession } from "./auth.server";
 import { redirect } from "@remix-run/node";
+import { json } from "@remix-run/node";
 
 export const createCharacter = async (
   character: CharacterForm,
@@ -9,12 +10,6 @@ export const createCharacter = async (
 ) => {
   const session = await getUserSession(request);
   const userId = session.get("userId");
-  // const skills = JSON.parse(character.skills! as any);
-  // const feats = JSON.parse(character.feats! as any);
-  // const traits = JSON.parse(character.traits! as any);
-  // character.skills = skills;
-  // character.feats = feats;
-  // character.traits = traits;
 
   // Creation process
   const newCharacter = await prisma.character.create({
@@ -94,6 +89,52 @@ export const updateCharacter = async (
     console.error("ERROR", err);
   }
   return redirect(`/mycharacters`);
+};
+
+export const updateFeats = async (
+  feat: FeatsAndTraits,
+  characterId: string
+) => {
+  try {
+    const feats = await prisma.feat.create({
+      data: {
+        character: {
+          connect: {
+            id: characterId,
+          },
+        },
+        name: feat.name,
+        description: feat.description,
+      },
+    });
+    console.log("feats", feats);
+    return json(feats, { status: 200 });
+  } catch (err) {
+    console.error("ERROR", err);
+  }
+};
+
+export const updateTraits = async (
+  trait: FeatsAndTraits,
+  characterId: string
+) => {
+  try {
+    const traits = await prisma.feat.create({
+      data: {
+        character: {
+          connect: {
+            id: characterId,
+          },
+        },
+        name: trait.name,
+        description: trait.description,
+      },
+    });
+    console.log("feats", traits);
+    return json(traits, { status: 200 });
+  } catch (err) {
+    console.error("ERROR", err);
+  }
 };
 
 export const getAllCharacters = async (userId: string) => {

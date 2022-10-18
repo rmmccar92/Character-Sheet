@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button, Title } from "@mantine/core";
 import Modal from "~/components/Modal";
 import { FormField } from "~/components/form-field";
+import { Form } from "@remix-run/react";
 
 interface AddButtonProps {
   type: "feats" | "traits";
@@ -19,6 +20,14 @@ const AddButton: FC<AddButtonProps> = ({ type, handleChange, formData }) => {
   // TODO: setup tracking for multiple feats/traits
   const handleClick = () => {
     setIsOpen((prev) => !prev);
+  };
+
+  const handleSubmit = async (e: any, type: "feats" | "traits", formData) => {
+    e.preventDefault();
+    const response = await fetch(`/upload-${type}`, {
+      method: "POST",
+      body: JSON.stringify(formData),
+    });
   };
 
   return (
@@ -54,7 +63,9 @@ const AddButton: FC<AddButtonProps> = ({ type, handleChange, formData }) => {
                 className="add-textarea"
               />
             </div>
-            <Button type="submit">Submit</Button>
+            <Button onClick={(e) => handleSubmit(e, type, formData)}>
+              Add
+            </Button>
           </div>
         </Modal>
       )}

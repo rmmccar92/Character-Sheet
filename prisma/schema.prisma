@@ -239,12 +239,18 @@ type KnownLanguages {
   name String
 }
 
-type Feat {
+model Feat {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  character   Character @relation(fields: [characterId], references: [id])
+  characterId String
   name        String
   description String
 }
 
-type Trait {
+model Trait {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  character   Character @relation(fields: [characterId], references: [id])
+  characterId String
   name        String
   description String
 }

@@ -45,7 +45,6 @@ const Creation = () => {
   const [imageUrl, setImageUrl] = useState("");
   const actionData = useActionData();
   const [formData, setFormData] = useState({
-    // characterName: actionData?.fields?.characterName || "",
     characterClass: actionData?.fields?.characterClass || "",
     alignment: actionData?.fields?.alignment || "",
     level: actionData?.fields?.level || "",
@@ -164,6 +163,12 @@ const Creation = () => {
       },
     }));
   };
+
+  const handleFeatsAndTraitsSubmit = async (
+    e: FormEvent<HTMLFormElement>,
+    type: "feats" | "traits",
+    field: string
+  ) => {};
 
   // Image upload handler
   const handleUpload = async (file: File) => {

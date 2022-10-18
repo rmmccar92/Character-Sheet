@@ -64,14 +64,12 @@ const ImageUploader: FC<ImageUploaderProps> = ({ onChange, imageUrl }) => {
         onChange={handleChange}
         className={"image-uploader-input"}
       />
-      {/* {!imageUrl && ( */}
       <div
         className={uploaded ? "image-uploader-hidden" : "image-uploader-text"}
       >
         <ImDownload className="image-uploader-icon" />
         <Text> Drag and drop or click to add an image!</Text>
       </div>
-      {/* )} */}
     </div>
   );
 };

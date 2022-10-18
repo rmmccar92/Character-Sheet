@@ -31,8 +31,8 @@ export interface CharacterForm {
   intelligence?: number | string;
   charisma?: number | string;
   skills?: Skills;
-  feats?: Feats;
-  traits?: Traits;
+  feats?: FeatsAndTraits;
+  traits?: FeatsAndTraits;
   image?: string;
 }
 
@@ -75,12 +75,7 @@ export type Skills = {
   knowledgeReligion: number | string;
 };
 
-export type Feats = {
+export interface FeatsAndTraits {
   name: string;
   description: string;
-};
-
-export type Traits = {
-  name: string;
-  description: string;
-};
+}
