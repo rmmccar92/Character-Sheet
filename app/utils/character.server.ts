@@ -29,12 +29,12 @@ export const updateCharacter = async (
   character: CharacterForm,
   characterId: string
 ) => {
-  const characterToUpdate = await prisma.character.findUnique({
-    where: {
-      id: characterId,
-    },
-  });
-  console.log("character", character);
+  // const characterToUpdate = await prisma.character.findUnique({
+  //   where: {
+  //     id: characterId,
+  //   },
+  // });
+  // console.log("character", character);
 
   const skills = JSON.parse(character.skills! as any);
   const feats = JSON.parse(character.feats! as any);
@@ -48,47 +48,97 @@ export const updateCharacter = async (
   // return null;
 
   try {
-    const update = await prisma.character.update({
-      where: {
-        id: characterId,
-      },
-      data: {
-        class: character.characterClass,
-        alignment: character.alignment as any,
-        level: character.level,
-        deity: character.deity,
-        home: character.homeland,
-        race: character.race,
-        size: character.size,
-        gender: character.gender,
-        age: character.characterAge,
-        stats: {
-          strength: parseInt(character?.strength as any) || 0,
-          dexterity: parseInt(character?.dexterity as any) || 0,
-          constitution: parseInt(character?.constitution as any) || 0,
-          wisdom: parseInt(character?.wisdom as any) || 0,
-          intelligence: parseInt(character?.intelligence as any) || 0,
-          charisma: parseInt(character?.charisma as any) || 0,
-        },
-        skills: {
-          ...(character.skills as any),
-        },
-
-        // BUG: Argument data.feats/traits of type FeatListCreateEnvelopeInput needs at least one argument.
-        feats: {
-          ...((character.feats as any) || {}),
-        },
-        traits: {
-          ...((character.traits as any) || {}),
-        },
-        image: character.image,
-      },
-    });
+    // const update = await prisma.character.update({
+    //   where: {
+    //     id: characterId,
+    //   },
+    //   data: {
+    //     class: character.characterClass,
+    //     alignment: character.alignment as any,
+    //     level: character.level,
+    //     deity: character.deity,
+    //     home: character.homeland,
+    //     race: character.race,
+    //     size: character.size,
+    //     gender: character.gender,
+    //     age: character.characterAge,
+    //     stats: {
+    //       strength: parseInt(character?.strength as any) || 0,
+    //       dexterity: parseInt(character?.dexterity as any) || 0,
+    //       constitution: parseInt(character?.constitution as any) || 0,
+    //       wisdom: parseInt(character?.wisdom as any) || 0,
+    //       intelligence: parseInt(character?.intelligence as any) || 0,
+    //       charisma: parseInt(character?.charisma as any) || 0,
+    //     },
+    //     skills: {
+    //       ...(character.skills as any),
+    //     },
+    //     image: character.image,
+    //   },
+    // });
+    console.log("updating", characterId);
     console.log("update");
   } catch (err) {
     console.error("ERROR", err);
   }
-  return redirect(`/mycharacters`);
+  await updateFeatsAndTraits(characterId, feats, traits);
+  return null;
+  // return redirect(`/mycharacters`);
+};
+
+export const updateFeatsAndTraits = async (
+  characterId: string,
+  feats?: [],
+  traits?: []
+) => {
+  if (feats && traits === undefined) return null;
+  feats?.forEach(async (feat: any) => {
+    console.log("feat", feat);
+    try {
+      const newFeat = await prisma.feat.create({
+        data: {
+          character: {
+            connect: {
+              id: characterId,
+            },
+          },
+          name: feat.name,
+          description: feat.description,
+        },
+      });
+      console.log("newFeat", newFeat);
+    } catch (err) {
+      console.error("ERROR", err);
+    }
+  });
+  traits?.forEach(async (trait: any) => {
+    const newTrait = await prisma.trait.create({
+      data: {
+        character: {
+          connect: {
+            id: characterId,
+          },
+        },
+        name: trait.name,
+        description: trait.description,
+      },
+    });
+  });
+};
+
+export const getAllFeats = async (characterId: string) => {
+  return await prisma.feat.findMany({
+    where: {
+      characterId,
+    },
+  });
+};
+export const getAllTraits = async (characterId: string) => {
+  return await prisma.feat.findMany({
+    where: {
+      characterId,
+    },
+  });
 };
 
 export const updateFeats = async (

@@ -1,6 +1,10 @@
 import type { FC } from "react";
 import type { LoaderFunction } from "@remix-run/node";
-import { getAllCharacters } from "~/utils/character.server";
+import {
+  getAllCharacters,
+  getAllFeats,
+  getAllTraits,
+} from "~/utils/character.server";
 import { json } from "@remix-run/node";
 import { requireUserId } from "~/utils/auth.server";
 import { Form, useLoaderData } from "@remix-run/react";
@@ -18,6 +22,12 @@ export function links() {
 export const loader: LoaderFunction = async ({ request }) => {
   const userId = await requireUserId(request);
   const characters = await getAllCharacters(userId);
+  // HARDCODED FOR TESTING
+  // TODO actually pass in the character id
+  const feats = await getAllFeats("634f6050a3efcc25f320fc90");
+  const traits = await getAllTraits("634f6050a3efcc25f320fc90");
+  console.log("feats", feats);
+  console.log("traits", traits);
   return json({ characters });
 };
 

@@ -115,8 +115,8 @@ const Creation = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     formData.skills = JSON.stringify(formData.skills);
-    formData.feats = JSON.stringify(formData.feats);
-    formData.traits = JSON.stringify(formData.traits);
+    formData.feats = JSON.stringify(feats);
+    formData.traits = JSON.stringify(traits);
     // console.log("formData", formData);
     submit(formData, { method: "post" });
   };

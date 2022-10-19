@@ -8,6 +8,12 @@ import { createCharacter } from "~/utils/character.server";
 import Modal from "~/components/Modal";
 import { FormField } from "~/components/form-field";
 
+import styles from "../styles/creation.css";
+
+export function links() {
+  return [{ rel: "stylesheet", href: styles }];
+}
+
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
   const characterName = form.get("characterName");
@@ -58,7 +64,7 @@ const Hub: FC = () => {
     <>
       {isOpen && (
         <Modal isOpen={isOpen} setIsOpen={setIsOpen} type={"initial"}>
-          <>
+          <div className="modal-inner">
             <Title>Get Started!</Title>
             <p>Character Name</p>
             <Form method="post">
@@ -73,7 +79,7 @@ const Hub: FC = () => {
                 Submit
               </Button>
             </Form>
-          </>
+          </div>
         </Modal>
       )}
       <Container
