@@ -76,6 +76,6 @@ export type Skills = {
 };
 
 export interface FeatsAndTraits {
-  name: string;
-  description: string;
+  name?: string;
+  description?: string;
 }

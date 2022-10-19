@@ -13,9 +13,15 @@ interface AddButtonProps {
     type: "feats" | "traits",
     field: string
   ) => any;
+  handleAdd: (type: "feats" | "traits") => any;
 }
 
-const AddButton: FC<AddButtonProps> = ({ type, handleChange, formData }) => {
+const AddButton: FC<AddButtonProps> = ({
+  type,
+  handleChange,
+  formData,
+  handleAdd,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   // TODO: setup tracking for multiple feats/traits
   const handleClick = () => {
@@ -55,9 +61,7 @@ const AddButton: FC<AddButtonProps> = ({ type, handleChange, formData }) => {
                 className="add-textarea"
               />
             </div>
-            <Button onClick={(e) => handleSubmit(e, type, formData)}>
-              Add
-            </Button>
+            <Button onClick={() => handleAdd(type)}>Add</Button>
           </div>
         </Modal>
       )}

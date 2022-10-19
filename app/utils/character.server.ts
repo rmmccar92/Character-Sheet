@@ -95,6 +95,13 @@ export const updateFeats = async (
   feat: FeatsAndTraits,
   characterId: string
 ) => {
+  if (
+    feat.name === "" ||
+    feat.name === undefined ||
+    feat.description === "" ||
+    feat.description === undefined
+  )
+    return null;
   try {
     const feats = await prisma.feat.create({
       data: {
@@ -103,7 +110,7 @@ export const updateFeats = async (
             id: characterId,
           },
         },
-        name: feat.name,
+        name: feat?.name,
         description: feat.description,
       },
     });
@@ -118,6 +125,13 @@ export const updateTraits = async (
   trait: FeatsAndTraits,
   characterId: string
 ) => {
+  if (
+    trait.name === "" ||
+    trait.name === undefined ||
+    trait.description === "" ||
+    trait.description === undefined
+  )
+    return null;
   try {
     const traits = await prisma.feat.create({
       data: {

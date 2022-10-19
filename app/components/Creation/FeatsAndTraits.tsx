@@ -9,12 +9,13 @@ interface FeatsAndTraitsProps {
     type: "feats" | "traits",
     field: string
   ) => any;
-  handleSubmit: (e: FormEvent<HTMLFormElement>) => any;
+  handleAdd: (type: "feats" | "traits") => any;
 }
 
 const FeatsAndTraits: FC<FeatsAndTraitsProps> = ({
   handleChange,
   formData,
+  handleAdd,
 }) => {
   return (
     <Container>
@@ -23,11 +24,13 @@ const FeatsAndTraits: FC<FeatsAndTraitsProps> = ({
         handleChange={handleChange}
         formData={formData}
         type={"feats"}
+        handleAdd={handleAdd}
       />
       <AddButton
         handleChange={handleChange}
         formData={formData}
         type={"traits"}
+        handleAdd={handleAdd}
       />
     </Container>
   );

@@ -1,8 +1,14 @@
 import { useMemo, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
-import { Outlet, Form, useActionData, useSubmit } from "@remix-run/react";
+import {
+  Outlet,
+  Form,
+  useActionData,
+  useSubmit,
+  useLoaderData,
+} from "@remix-run/react";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-// import { json } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { updateCharacter, getCharacter } from "~/utils/character.server";
 import skillsData from "~/utils/data.js";
 import { Container, Title, Button } from "@mantine/core";
@@ -21,13 +27,13 @@ export function links() {
   return [{ rel: "stylesheet", href: styles }];
 }
 
-// export const loader: LoaderFunction = async ({ params }) => {
-//   const character = await getCharacter(params.characterId as string);
-//   if (character) {
-//     return json({ character });
-//   }
-//   return null;
-// };
+export const loader: LoaderFunction = async ({ params }) => {
+  const character = await getCharacter(params.characterId as string);
+  if (character) {
+    return json({ character });
+  }
+  return null;
+};
 export const action: ActionFunction = async ({ request, params }) => {
   const form = await request.formData();
   // Object to be submitted to the server created from values from the form
@@ -42,8 +48,11 @@ export const action: ActionFunction = async ({ request, params }) => {
 };
 
 const Creation = () => {
+  const { character } = useLoaderData();
   const [imageUrl, setImageUrl] = useState("");
   const actionData = useActionData();
+  const [feats, setFeats] = useState(character.feats || []);
+  const [traits, setTraits] = useState(character.traits || []);
   const [formData, setFormData] = useState({
     characterClass: actionData?.fields?.characterClass || "",
     alignment: actionData?.fields?.alignment || "",
@@ -165,12 +174,14 @@ const Creation = () => {
   };
 
   // Feats and traits submit
-  const handleFeatsAndTraits = async (e: any, type: "feats" | "traits") => {
-    e.preventDefault();
-    const response = await fetch(`/upload-${type}`, {
-      method: "POST",
-      body: JSON.stringify(formData),
-    });
+  const submitFeatsAndTraits = async (type: "feats" | "traits") => {
+    console.log("FEATS", feats, "TRAITS", traits);
+    if (type === "feats") {
+      return setFeats((prev: any) => [...prev, formData.feats]);
+    }
+    if (type === "traits") {
+      return setTraits((prev: any) => [...prev, formData.traits]);
+    }
   };
 
   // Image upload handler
@@ -233,7 +244,8 @@ const Creation = () => {
                 <FeatsAndTraits
                   formData={formData}
                   handleChange={handleFeatsAndTraitsChange}
-                  handleSubmit={handleSubmit}
+                  // handleSubmit={handleSubmit}
+                  handleAdd={submitFeatsAndTraits}
                 />
               ) : active === 6 ? (
                 <Title>Backstory</Title>
