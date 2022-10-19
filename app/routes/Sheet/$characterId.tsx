@@ -1,5 +1,6 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { Container } from "@mantine/core";
+import { json } from "@remix-run/node";
 import { getCharacter } from "~/utils/character.server";
 import Abilities from "~/components/Sheet/Abilities";
 import Defense from "~/components/Sheet/Defense";
@@ -13,10 +14,10 @@ import Skills from "~/components/Sheet/Skills";
 import Spells from "~/components/Sheet/Spells";
 
 export const loader: LoaderFunction = async ({ request, params }) => {
-  // const characters = await getCharacter();
-  console.log(params);
-  // return json({ characters });
-  return null;
+  const { characterId } = params;
+  const character = await getCharacter(characterId as string);
+  console.log(character);
+  return json({ character });
 };
 
 export default function Sheet() {

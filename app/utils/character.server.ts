@@ -48,34 +48,34 @@ export const updateCharacter = async (
   // return null;
 
   try {
-    // const update = await prisma.character.update({
-    //   where: {
-    //     id: characterId,
-    //   },
-    //   data: {
-    //     class: character.characterClass,
-    //     alignment: character.alignment as any,
-    //     level: character.level,
-    //     deity: character.deity,
-    //     home: character.homeland,
-    //     race: character.race,
-    //     size: character.size,
-    //     gender: character.gender,
-    //     age: character.characterAge,
-    //     stats: {
-    //       strength: parseInt(character?.strength as any) || 0,
-    //       dexterity: parseInt(character?.dexterity as any) || 0,
-    //       constitution: parseInt(character?.constitution as any) || 0,
-    //       wisdom: parseInt(character?.wisdom as any) || 0,
-    //       intelligence: parseInt(character?.intelligence as any) || 0,
-    //       charisma: parseInt(character?.charisma as any) || 0,
-    //     },
-    //     skills: {
-    //       ...(character.skills as any),
-    //     },
-    //     image: character.image,
-    //   },
-    // });
+    const update = await prisma.character.update({
+      where: {
+        id: characterId,
+      },
+      data: {
+        class: character.characterClass,
+        alignment: character.alignment as any,
+        level: character.level,
+        deity: character.deity,
+        home: character.homeland,
+        race: character.race,
+        size: character.size,
+        gender: character.gender,
+        age: character.characterAge,
+        stats: {
+          strength: parseInt(character?.strength as any) || 0,
+          dexterity: parseInt(character?.dexterity as any) || 0,
+          constitution: parseInt(character?.constitution as any) || 0,
+          wisdom: parseInt(character?.wisdom as any) || 0,
+          intelligence: parseInt(character?.intelligence as any) || 0,
+          charisma: parseInt(character?.charisma as any) || 0,
+        },
+        skills: {
+          ...(character.skills as any),
+        },
+        image: character.image,
+      },
+    });
     console.log("updating", characterId);
     console.log("update");
   } catch (err) {
@@ -95,7 +95,7 @@ export const updateFeatsAndTraits = async (
   feats?.forEach(async (feat: any) => {
     console.log("feat", feat);
     try {
-      const newFeat = await prisma.feat.create({
+      const newFeat: FeatsAndTraits = await prisma.feat.create({
         data: {
           character: {
             connect: {
@@ -214,6 +214,10 @@ export const getCharacter = async (characterId: string) => {
   const character = await prisma.character.findUnique({
     where: {
       id: characterId,
+    },
+    include: {
+      feats: true,
+      traits: true,
     },
   });
   return character;

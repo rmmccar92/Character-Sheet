@@ -24,10 +24,6 @@ export const loader: LoaderFunction = async ({ request }) => {
   const characters = await getAllCharacters(userId);
   // HARDCODED FOR TESTING
   // TODO actually pass in the character id
-  const feats = await getAllFeats("634f6050a3efcc25f320fc90");
-  const traits = await getAllTraits("634f6050a3efcc25f320fc90");
-  console.log("feats", feats);
-  console.log("traits", traits);
   return json({ characters });
 };
 
@@ -44,38 +40,47 @@ const MyCharacters: FC<MyCharactersProps> = ({}) => {
   return (
     <Layout>
       <Title>Characters</Title>
-      <Container className="card-container" onClick={() => navigate("/sheet")}>
-        {characters.length > 0 ? (
-          <>
-            {characters.map((character: any) => (
-              <div className="character-card" key={character.id}>
-                <h2>{character.characterName}</h2>
-                <CharacterCircle image={character.image} />
-                <p>{character.class === "" ? "Unknown" : character.class}</p>
-                <div className="character-card-info">
-                  <h4>Created:</h4>
-                  <p>{handleDate(character.createdAt)}</p>
+      {characters.length > 0 ? (
+        <>
+          {characters.map((character: any) => (
+            <>
+              <Container
+                className="card-container"
+                onClick={() => navigate(`/sheet/${character.id}`)}
+              >
+                <div className="character-card" key={character.id}>
+                  <h2>{character.characterName}</h2>
+                  <CharacterCircle image={character.image} />
+                  <p>{character.class === "" ? "Unknown" : character.class}</p>
+                  <div className="character-card-info">
+                    <h4>Created:</h4>
+                    <p>{handleDate(character.createdAt)}</p>
+                  </div>
+                  <div className="character-card-info">
+                    <h4>Modified:</h4>
+                    <p>{handleDate(character.updatedAt)}</p>
+                  </div>
+                  <Form method="post" action={`/mycharacters/${character.id}`}>
+                    <button
+                      type="submit"
+                      name="delete"
+                      className="delete-button"
+                    >
+                      <MdDeleteForever className="delete-icon" />
+                    </button>
+                  </Form>
                 </div>
-                <div className="character-card-info">
-                  <h4>Modified:</h4>
-                  <p>{handleDate(character.updatedAt)}</p>
-                </div>
-                <Form method="post" action={`/mycharacters/${character.id}`}>
-                  <button type="submit" name="delete" className="delete-button">
-                    <MdDeleteForever className="delete-icon" />
-                  </button>
-                </Form>
-              </div>
-            ))}
-          </>
-        ) : (
-          <div onClick={() => navigate("/hub")}>
-            <Title style={{ cursor: "pointer" }}>
-              Roster Empty Click Here To Go Back
-            </Title>
-          </div>
-        )}
-      </Container>
+              </Container>
+            </>
+          ))}
+        </>
+      ) : (
+        <div onClick={() => navigate("/hub")}>
+          <Title style={{ cursor: "pointer" }}>
+            Roster Empty Click Here To Go Back
+          </Title>
+        </div>
+      )}
     </Layout>
   );
 };
