@@ -1,24 +1,29 @@
-.card-container {
-    display: grid;
-    /* grid-template-columns: repeat(auto-fit, minmax(30%, 4fr)); */
-    grid-gap: 0.5rem;
+.mycharacters-container {
     width: 100%;
-    /* height: 80vh; */
-    border: 1px solid white;
-    padding: 0.5%;
+    border: 1px solid blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
+
 .character-card {
-    /* border: 1px solid red; */
+    border: 1px solid red;
     background: radial-gradient(rgba(1, 5, 7, 0.135)52%, rgba(0, 0, 0, 0.582)90%), url(/images/background.webp) no-repeat;
     background-size: cover;
     background-position: center;
-    width: 25%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     cursor: pointer;
+    margin: 2%;
+    padding: 0;
+    width: 25%;
+    max-width: 400px;
+    height: 50vh;
+
 }
 
 .character-card-info {

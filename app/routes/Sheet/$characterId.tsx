@@ -16,7 +16,7 @@ import Spells from "~/components/Sheet/Spells";
 export const loader: LoaderFunction = async ({ request, params }) => {
   const { characterId } = params;
   const character = await getCharacter(characterId as string);
-  console.log(character);
+  // console.log(character);
   return json({ character });
 };
 

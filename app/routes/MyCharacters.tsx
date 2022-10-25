@@ -40,40 +40,36 @@ const MyCharacters: FC<MyCharactersProps> = ({}) => {
   return (
     <Layout>
       <Title>Characters</Title>
+
       {characters.length > 0 ? (
-        <>
+        <div className="mycharacters-container">
           {characters.map((character: any) => (
             <>
-              <Container
-                className="card-container"
+              <div
+                className="character-card"
+                key={character.id}
                 onClick={() => navigate(`/sheet/${character.id}`)}
               >
-                <div className="character-card" key={character.id}>
-                  <h2>{character.characterName}</h2>
-                  <CharacterCircle image={character.image} />
-                  <p>{character.class === "" ? "Unknown" : character.class}</p>
-                  <div className="character-card-info">
-                    <h4>Created:</h4>
-                    <p>{handleDate(character.createdAt)}</p>
-                  </div>
-                  <div className="character-card-info">
-                    <h4>Modified:</h4>
-                    <p>{handleDate(character.updatedAt)}</p>
-                  </div>
-                  <Form method="post" action={`/mycharacters/${character.id}`}>
-                    <button
-                      type="submit"
-                      name="delete"
-                      className="delete-button"
-                    >
-                      <MdDeleteForever className="delete-icon" />
-                    </button>
-                  </Form>
+                <h2>{character.characterName}</h2>
+                <CharacterCircle image={character.image} />
+                <p>{character.class === "" ? "Unknown" : character.class}</p>
+                <div className="character-card-info">
+                  <h4>Created:</h4>
+                  <p>{handleDate(character.createdAt)}</p>
                 </div>
-              </Container>
+                <div className="character-card-info">
+                  <h4>Modified:</h4>
+                  <p>{handleDate(character.updatedAt)}</p>
+                </div>
+                <Form method="post" action={`/mycharacters/${character.id}`}>
+                  <button type="submit" name="delete" className="delete-button">
+                    <MdDeleteForever className="delete-icon" />
+                  </button>
+                </Form>
+              </div>
             </>
           ))}
-        </>
+        </div>
       ) : (
         <div onClick={() => navigate("/hub")}>
           <Title style={{ cursor: "pointer" }}>
