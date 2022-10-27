@@ -26,20 +26,8 @@ export default function Home() {
     user?.id ? navigate("/hub") : navigate(`/login`);
   };
   return (
-    <Box
-      sx={{
-        margin: "auto",
-        marginTop: "3em",
-        height: "90vh",
-        width: "95%",
-        display: "flex",
-        background:
-          "linear-gradient(to left, rgba(100, 6, 115, 0.22)52%, rgba(0, 0, 0, 0.7)70%), url(https://cdn.wallpapersafari.com/7/23/e84ObF.jpg) no-repeat",
-        backgroundSize: "cover",
-        boxShadow: "4px 15px 45px black",
-      }}
-    >
-      <Box>
+    <Box className="home-container">
+      <Box className="home-content">
         <Text className="welcomeText">
           Your Adventure
           <br /> Starts Here!
@@ -70,11 +58,11 @@ export default function Home() {
           </Box>
         </Box>
       </Box>
-      <Form action="/logout" method="post" style={{ opacity: "0" }}>
+      {/* <Form action="/logout" method="post" style={{ opacity: "0" }}>
         <Button type="submit" onClick={() => console.log("works")}>
           Logout
         </Button>
-      </Form>
+      </Form> */}
       <AnimatedButton onClick={handlePageChange}>
         <Text sx={{ fontSize: "40px" }}>{user?.id ? "Continue" : "Login"}</Text>
       </AnimatedButton>
