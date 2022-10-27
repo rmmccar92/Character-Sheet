@@ -2,6 +2,7 @@ import type { LoaderFunction } from "@remix-run/node";
 import { Container } from "@mantine/core";
 import { json } from "@remix-run/node";
 import { getCharacter } from "~/utils/character.server";
+import { useLoaderData } from "@remix-run/react";
 import Abilities from "~/components/Sheet/Abilities";
 import Defense from "~/components/Sheet/Defense";
 import Equipment from "~/components/Sheet/Equipment";
@@ -26,10 +27,12 @@ export function links() {
 }
 
 export default function Sheet() {
+  const { character } = useLoaderData();
+
   return (
     <Layout>
       <Container size={840} className="box">
-        <General />
+        <General character={character} />
         <Abilities />
         <Offense />
         <Defense />
