@@ -21,7 +21,7 @@ import MyStepper from "~/components/Creation/MyStepper";
 import FeatsAndTraits from "~/components/Creation/FeatsAndTraits";
 import ImageUploader from "~/components/Image-Uploader";
 import { BiRightArrow, BiLeftArrow } from "react-icons/bi";
-import styles from "../styles/creation.css";
+import styles from "~/styles/creation.css";
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }];
@@ -188,7 +188,7 @@ const Creation = () => {
   const handleUpload = async (file: File) => {
     let inputFormData = new FormData();
     inputFormData.append("character-portrait", file);
-    const response = await fetch("/upload-image", {
+    const response = await fetch("/api/upload-image", {
       method: "POST",
       body: inputFormData,
     });

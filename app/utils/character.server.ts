@@ -22,7 +22,7 @@ export const createCharacter = async (
       characterName: character.characterName,
     },
   });
-  return redirect(`/${newCharacter.id}`);
+  return redirect(`/creation/${newCharacter.id}`);
 };
 
 export const updateCharacter = async (
@@ -82,8 +82,8 @@ export const updateCharacter = async (
     console.error("ERROR", err);
   }
   await updateFeatsAndTraits(characterId, feats, traits);
-  return null;
-  // return redirect(`/mycharacters`);
+  // return null;
+  return redirect(`/mycharacters`);
 };
 
 export const updateFeatsAndTraits = async (

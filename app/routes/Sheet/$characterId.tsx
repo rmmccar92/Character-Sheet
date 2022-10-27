@@ -12,6 +12,7 @@ import Notes from "~/components/Sheet/Notes";
 import Offense from "~/components/Sheet/Offense";
 import Skills from "~/components/Sheet/Skills";
 import Spells from "~/components/Sheet/Spells";
+import styles from "~/styles/sheet.css";
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   const { characterId } = params;
@@ -20,19 +21,14 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   return json({ character });
 };
 
+export function links() {
+  return [{ rel: "stylesheet", href: styles }];
+}
+
 export default function Sheet() {
   return (
     <Layout>
-      <Container
-        size={840}
-        className="box"
-        style={{
-          border: `2px solid black`,
-          padding: 0,
-          textAlign: `center`,
-          backgroundImage: `url(https://tierrasuratherzog.com/wp-content/uploads/2019/05/TS-Wedding-Paper-BG.jpg)`,
-        }}
-      >
+      <Container size={840} className="box">
         <General />
         <Abilities />
         <Offense />
