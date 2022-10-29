@@ -22,7 +22,11 @@ import FeatsAndTraits from "~/components/Creation/FeatsAndTraits";
 import ImageUploader from "~/components/Image-Uploader";
 import { BiRightArrow, BiLeftArrow } from "react-icons/bi";
 import styles from "~/styles/creation.css";
-import type { CharacterForm, SkillIndex } from "~/utils/types.server";
+import type {
+  CharacterForm,
+  SkillIndex,
+  SkillsType,
+} from "~/utils/types.server";
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }];
@@ -116,13 +120,16 @@ const Creation = () => {
     image: "",
   });
   useMemo(() => {
+    type SkillName = {
+      [name: string]: string;
+    };
     skillsData.forEach((skill) => {
       setFormData((prev) => ({
         ...prev,
         skills: {
           ...prev.skills,
           [skill.name]: actionData?.fields?.skills[skill.name] || {
-            ...prev.skills[skill.name],
+            // ...prev.skills[skill.name],
             ranks: actionData?.fields?.ranks || "",
             trained: actionData?.fields?.trained || false,
           },
