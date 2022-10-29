@@ -129,7 +129,7 @@ const Creation = () => {
         skills: {
           ...prev.skills,
           [skill.name]: actionData?.fields?.skills[skill.name] || {
-            // ...prev.skills[skill.name],
+            ...prev.skills[skill.name as keyof CharacterForm["skills"]],
             ranks: actionData?.fields?.ranks || "",
             trained: actionData?.fields?.trained || false,
           },
