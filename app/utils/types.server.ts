@@ -24,58 +24,103 @@ export interface CharacterForm {
   weight?: string;
   hairColor?: string | null;
   eyeColor?: string;
-  strength?: number | string;
-  dexterity?: number | string;
-  constitution?: number | string;
-  wisdom?: number | string;
-  intelligence?: number | string;
-  charisma?: number | string;
-  skills?: Skills;
+  ac?: string;
+  touch?: string;
+  flatFooted?: string;
+  hp?: string;
+  dr?: string;
+  sr?: string;
+  fortitude?: string;
+  will?: string;
+  reflex?: string;
+  resistances?: string;
+  immunities?: string;
+  cmd?: string;
+  cmb?: string;
+  bab?: string;
+  initiative?: string;
+  speed?: string;
+  // strength?: number | string;
+  // dexterity?: number | string;
+  // constitution?: number | string;
+  // wisdom?: number | string;
+  // intelligence?: number | string;
+  // charisma?: number | string;
+  stats: {
+    strength: {
+      value: number | string | 10;
+    };
+    dexterity: {
+      value: number | string | 10;
+    };
+    constitution: {
+      value: number | string | 10;
+    };
+    wisdom: {
+      value: number | string | 10;
+    };
+    intelligence: {
+      value: number | string | 10;
+    };
+    charisma: {
+      value: number | string | 10;
+    };
+  };
+  skills: SkillsType;
   feats?: FeatsAndTraits;
   traits?: FeatsAndTraits;
   image?: string;
 }
 
-export type Skills = {
-  acrobatics: number | string;
-  appraise: number | string;
-  athletics: number | string;
-  bluff: number | string;
-  climb: number | string;
-  craft: number | string;
-  diplomacy: number | string;
-  disableDevice: number | string;
-  disguise: number | string;
-  escapeArtist: number | string;
-  fly: number | string;
-  handleAnimal: number | string;
-  heal: number | string;
-  intimidation: number | string;
-  linguistics: number | string;
-  perception: number | string;
-  performance: number | string;
-  profession: number | string;
-  ride: number | string;
-  senseMotive: number | string;
-  sleightOfHand: number | string;
-  spellcraft: number | string;
-  stealth: number | string;
-  survival: number | string;
-  swim: number | string;
-  useMagicDevice: number | string;
-  knowledgeArcana: number | string;
-  knowledgeDungeoneering: number | string;
-  knowledgeEngineering: number | string;
-  knowledgeGeography: number | string;
-  knowledgeHistory: number | string;
-  knowledgeLocal: number | string;
-  knowledgeNature: number | string;
-  knowledgeNobility: number | string;
-  knowledgePlanes: number | string;
-  knowledgeReligion: number | string;
-};
+export interface SkillsType {
+  acrobatics: Skill;
+  appraise: Skill;
+  athletics: Skill;
+  bluff: Skill;
+  climb: Skill;
+  craft: Skill;
+  diplomacy: Skill;
+  disableDevice: Skill;
+  disguise: Skill;
+  escapeArtist: Skill;
+  fly: Skill;
+  handleAnimal: Skill;
+  heal: Skill;
+  intimidation: Skill;
+  linguistics: Skill;
+  perception: Skill;
+  performance: Skill;
+  profession: Skill;
+  ride: Skill;
+  senseMotive: Skill;
+  sleightOfHand: Skill;
+  spellcraft: Skill;
+  stealth: Skill;
+  survival: Skill;
+  swim: Skill;
+  useMagicDevice: Skill;
+  knowledgeArcana: Skill;
+  knowledgeDungeoneering: Skill;
+  knowledgeEngineering: Skill;
+  knowledgeGeography: Skill;
+  knowledgeHistory: Skill;
+  knowledgeLocal: Skill;
+  knowledgeNature: Skill;
+  knowledgeNobility: Skill;
+  knowledgePlanes: Skill;
+  knowledgeReligion: Skill;
+}
+
+export interface Skill {
+  ranks: number | string;
+  trained: boolean;
+}
 
 export interface FeatsAndTraits {
   name?: string;
   description?: string;
 }
+
+export type SkillIndex<SkillsType> = {
+  [name in keyof SkillsType]: string;
+};

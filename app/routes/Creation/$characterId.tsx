@@ -22,6 +22,7 @@ import FeatsAndTraits from "~/components/Creation/FeatsAndTraits";
 import ImageUploader from "~/components/Image-Uploader";
 import { BiRightArrow, BiLeftArrow } from "react-icons/bi";
 import styles from "~/styles/creation.css";
+import type { CharacterForm, SkillIndex } from "~/utils/types.server";
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }];
@@ -53,7 +54,7 @@ const Creation = () => {
   const actionData = useActionData();
   const [feats, setFeats] = useState(character.feats || []);
   const [traits, setTraits] = useState(character.traits || []);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<CharacterForm>({
     characterClass: actionData?.fields?.characterClass || "",
     alignment: actionData?.fields?.alignment || "",
     level: actionData?.fields?.level || "",
@@ -67,12 +68,32 @@ const Creation = () => {
     weight: actionData?.fields?.weight || "",
     hairColor: actionData?.fields?.hairColor || "",
     eyeColor: actionData?.fields?.eyeColor || "",
-    strength: actionData?.fields?.strength || "",
-    dexterity: actionData?.fields?.dexterity || "",
-    constitution: actionData?.fields?.constitution || "",
-    intelligence: actionData?.fields?.intelligence || "",
-    wisdom: actionData?.fields?.wisdom || "",
-    charisma: actionData?.fields?.charisma || "",
+    // strength: actionData?.fields?.strength || "",
+    // dexterity: actionData?.fields?.dexterity || "",
+    // constitution: actionData?.fields?.constitution || "",
+    // intelligence: actionData?.fields?.intelligence || "",
+    // wisdom: actionData?.fields?.wisdom || "",
+    // charisma: actionData?.fields?.charisma || "",
+    stats: {
+      strength: {
+        value: actionData?.fields?.strength || 10,
+      },
+      dexterity: {
+        value: actionData?.fields?.dexterity || 10,
+      },
+      constitution: {
+        value: actionData?.fields?.constitution || 10,
+      },
+      intelligence: {
+        value: actionData?.fields?.intelligence || 10,
+      },
+      wisdom: {
+        value: actionData?.fields?.wisdom || 10,
+      },
+      charisma: {
+        value: actionData?.fields?.charisma || 10,
+      },
+    },
     skills: actionData?.fields?.skills || {},
     ac: actionData?.fields?.ac || "",
     touch: actionData?.fields?.touch || "",

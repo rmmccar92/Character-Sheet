@@ -63,21 +63,39 @@ export const updateCharacter = async (
         gender: character.gender,
         age: character.characterAge,
         stats: {
-          strength: parseInt(character?.strength as any) || 0,
-          dexterity: parseInt(character?.dexterity as any) || 0,
-          constitution: parseInt(character?.constitution as any) || 0,
-          wisdom: parseInt(character?.wisdom as any) || 0,
-          intelligence: parseInt(character?.intelligence as any) || 0,
-          charisma: parseInt(character?.charisma as any) || 0,
+          strength: {
+            value: parseInt(character.stats.strength.value as any) || 0,
+            modifier: calcAbilityMod(character.stats.strength.value as number),
+          },
+          dexterity:{ 
+            value: parseInt(character?.stats.dexterity.value as any) || 0,
+            modifier: calcAbilityMod(character.stats.dexterity.value as number),
+          },
+          constitution:{
+          value:parseInt(character?.stats.constitution.value as any) || 0,
+          modifier: calcAbilityMod(character.stats.constitution.value as number),
         },
+          wisdom: {
+          value: parseInt(character?.stats.wisdom.value as any) || 0,
+          modifier: calcAbilityMod(character.stats.wisdom.value as number),
+          },
+          intelligence:{ 
+           value: parseInt(character?.stats.intelligence.value as any) || 0,
+            modifier: calcAbilityMod(character.stats.intelligence.value as number),
+          }
+          charisma: {
+            value:parseInt(character?.stats.charisma.value as any) || 0,
+            modifier: calcAbilityMod(character.stats.charisma.value as number),
+          },
+          },
         skills: {
           ...(character.skills as any),
         },
         image: character.image,
       },
     });
-    console.log("updating", characterId);
-    console.log("update");
+    // console.log("updating", characterId);
+    // console.log("update");
   } catch (err) {
     console.error("ERROR", err);
   }
@@ -199,6 +217,10 @@ export const updateTraits = async (
   } catch (err) {
     console.error("ERROR", err);
   }
+};
+
+export const calcAbilityMod = (abilityScore: number) => {
+  return Math.floor((abilityScore - 10) / 2);
 };
 
 export const getAllCharacters = async (userId: string) => {
