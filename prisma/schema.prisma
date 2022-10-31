@@ -183,12 +183,17 @@ type CMB {
 }
 
 type Stats {
-  strength     Int? @default(0)
-  dexterity    Int? @default(0)
-  constitution Int? @default(0)
-  intelligence Int? @default(0)
-  wisdom       Int? @default(0)
-  charisma     Int? @default(0)
+  strength     Stat
+  dexterity    Stat
+  constitution Stat
+  intelligence Stat
+  wisdom       Stat
+  charisma     Stat
+}
+
+type Stat {
+  value    Int @default(0)
+  modifier Int @default(0)
 }
 
 type Skills {
