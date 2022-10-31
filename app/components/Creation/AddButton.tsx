@@ -23,7 +23,6 @@ const AddButton: FC<AddButtonProps> = ({
   handleAdd,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  // TODO: setup tracking for multiple feats/traits
   const handleClick = () => {
     setIsOpen((prev) => !prev);
   };

@@ -22,11 +22,7 @@ import FeatsAndTraits from "~/components/Creation/FeatsAndTraits";
 import ImageUploader from "~/components/Image-Uploader";
 import { BiRightArrow, BiLeftArrow } from "react-icons/bi";
 import styles from "~/styles/creation.css";
-import type {
-  CharacterForm,
-  SkillIndex,
-  SkillsType,
-} from "~/utils/types.server";
+import type { CharacterForm } from "~/utils/types.server";
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }];
@@ -43,8 +39,11 @@ export const action: ActionFunction = async ({ request, params }) => {
   const form = await request.formData();
   // Object to be submitted to the server created from values from the form
   const values = Object.fromEntries(form);
+
   // TODO error handling
   return await updateCharacter(
+    // TODO: Not sure why this ts error is being thrown claims that stats and skills are missing from formdata/values
+    // @ts-ignore
     {
       ...values,
     },
@@ -58,7 +57,7 @@ const Creation = () => {
   const actionData = useActionData();
   const [feats, setFeats] = useState(character.feats || []);
   const [traits, setTraits] = useState(character.traits || []);
-  const [formData, setFormData] = useState<CharacterForm>({
+  const [formData, setFormData] = useState({
     characterClass: actionData?.fields?.characterClass || "",
     alignment: actionData?.fields?.alignment || "",
     level: actionData?.fields?.level || "",
@@ -72,32 +71,7 @@ const Creation = () => {
     weight: actionData?.fields?.weight || "",
     hairColor: actionData?.fields?.hairColor || "",
     eyeColor: actionData?.fields?.eyeColor || "",
-    // strength: actionData?.fields?.strength || "",
-    // dexterity: actionData?.fields?.dexterity || "",
-    // constitution: actionData?.fields?.constitution || "",
-    // intelligence: actionData?.fields?.intelligence || "",
-    // wisdom: actionData?.fields?.wisdom || "",
-    // charisma: actionData?.fields?.charisma || "",
-    stats: {
-      strength: {
-        value: actionData?.fields?.strength || 10,
-      },
-      dexterity: {
-        value: actionData?.fields?.dexterity || 10,
-      },
-      constitution: {
-        value: actionData?.fields?.constitution || 10,
-      },
-      intelligence: {
-        value: actionData?.fields?.intelligence || 10,
-      },
-      wisdom: {
-        value: actionData?.fields?.wisdom || 10,
-      },
-      charisma: {
-        value: actionData?.fields?.charisma || 10,
-      },
-    },
+    stats: actionData?.fields?.stats || {},
     skills: actionData?.fields?.skills || {},
     ac: actionData?.fields?.ac || "",
     touch: actionData?.fields?.touch || "",
@@ -120,16 +94,13 @@ const Creation = () => {
     image: "",
   });
   useMemo(() => {
-    type SkillName = {
-      [name: string]: string;
-    };
     skillsData.forEach((skill) => {
       setFormData((prev) => ({
         ...prev,
         skills: {
-          ...prev.skills,
+          ...(prev.skills as any),
           [skill.name]: actionData?.fields?.skills[skill.name] || {
-            ...prev.skills[skill.name as keyof CharacterForm["skills"]],
+            // ...prev.skills[skill.name as any],
             ranks: actionData?.fields?.ranks || "",
             trained: actionData?.fields?.trained || false,
           },
@@ -145,13 +116,31 @@ const Creation = () => {
     formData.skills = JSON.stringify(formData.skills);
     formData.feats = JSON.stringify(feats);
     formData.traits = JSON.stringify(traits);
-    // console.log("formData", formData);
+    formData.stats = JSON.stringify(formData.stats);
+    console.log("formData", formData);
     submit(formData, { method: "post" });
   };
   const handleChange = (e: ChangeEvent<HTMLInputElement>, field: string) => {
     setFormData((form) => ({
       ...form,
       [field]: e.target.value,
+    }));
+  };
+
+  const handleStatChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    field: string
+  ) => {
+    console.log("FORM", e.target.value, field);
+    setFormData((form) => ({
+      ...form,
+      stats: {
+        ...(form.stats as any),
+        [field]: {
+          // ...form.stats[field],
+          value: e.target.value,
+        },
+      },
     }));
   };
 
@@ -164,7 +153,7 @@ const Creation = () => {
       skills: {
         ...form.skills,
         [skill]: {
-          ...form.skills[skill],
+          ...form.skills[skill as keyof CharacterForm["skills"]],
           ranks: e.target.value,
         },
       },
@@ -180,7 +169,7 @@ const Creation = () => {
       skills: {
         ...form.skills,
         [skill]: {
-          ...form.skills[skill],
+          ...form.skills[skill as keyof CharacterForm["skills"]],
           trained: e.target.checked,
         },
       },
@@ -257,7 +246,7 @@ const Creation = () => {
               {active === 0 ? (
                 <GeneralInfo formData={formData} handleChange={handleChange} />
               ) : active === 1 ? (
-                <Stats formData={formData} handleChange={handleChange} />
+                <Stats formData={formData} handleChange={handleStatChange} />
               ) : active === 2 ? (
                 <Skills
                   formData={formData}

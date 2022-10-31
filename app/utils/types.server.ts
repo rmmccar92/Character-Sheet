@@ -46,29 +46,30 @@ export interface CharacterForm {
   // wisdom?: number | string;
   // intelligence?: number | string;
   // charisma?: number | string;
-  stats: {
-    strength: {
-      value: number | string | 10;
-    };
-    dexterity: {
-      value: number | string | 10;
-    };
-    constitution: {
-      value: number | string | 10;
-    };
-    wisdom: {
-      value: number | string | 10;
-    };
-    intelligence: {
-      value: number | string | 10;
-    };
-    charisma: {
-      value: number | string | 10;
-    };
-  };
-  skills: SkillsType;
-  feats?: FeatsAndTraits;
-  traits?: FeatsAndTraits;
+  // stats: {
+  //   strength: {
+  //     value: number | string | 10;
+  //   };
+  //   dexterity: {
+  //     value: number | string | 10;
+  //   };
+  //   constitution: {
+  //     value: number | string | 10;
+  //   };
+  //   wisdom: {
+  //     value: number | string | 10;
+  //   };
+  //   intelligence: {
+  //     value: number | string | 10;
+  //   };
+  //   charisma: {
+  //     value: number | string | 10;
+  //   };
+  // };
+  stats: string;
+  skills: string;
+  feats?: string;
+  traits?: string;
   image?: string;
 }
 
