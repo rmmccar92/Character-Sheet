@@ -177,9 +177,9 @@ export default function Defense({ character }: DefenseProps) {
             <Text>DR</Text>
           </Paper>
           <TextInput
-            defaultValue={
-              character ? `${character.dr.type}:${character.dr.value}` : ""
-            }
+          // defaultValue={
+          //   character ? `${character?.dr?.type}:${character?.dr?.value}` : ""
+          // }
           />
         </Container>
         <Container
@@ -211,7 +211,7 @@ export default function Defense({ character }: DefenseProps) {
           </Paper>
           <TextInput
             defaultValue={
-              character ? `${character.sr.type}:${character.sr.value}` : ""
+              character ? `${character?.sr?.type}:${character?.sr?.value}` : ""
             }
           />
         </Container>
@@ -243,7 +243,7 @@ export default function Defense({ character }: DefenseProps) {
             <Text>Fortitude</Text>
           </Paper>
           <TextInput
-            defaultValue={character ? character.saves.fortitude : "0"}
+            // defaultValue={character ? character?.saves?.fortitude : "0"}
             description="Total"
           />
           <TextInput description="Base" />
@@ -281,7 +281,7 @@ export default function Defense({ character }: DefenseProps) {
             <Text>Reflex</Text>
           </Paper>
           <TextInput
-            defaultValue={character ? character.saves.reflex : "0"}
+            defaultValue={character ? character?.saves?.reflex : "0"}
             description="Total"
           />
           <TextInput description="Base" />
@@ -319,7 +319,7 @@ export default function Defense({ character }: DefenseProps) {
             <Text>Will</Text>
           </Paper>
           <TextInput
-            defaultValue={character ? character.saves.will : "0"}
+            defaultValue={character ? character?.saves?.will : "0"}
             description="Total"
           />
           <TextInput description="Base" />
@@ -386,7 +386,7 @@ export default function Defense({ character }: DefenseProps) {
             <Text>Resist</Text>
           </Paper>
           <TextInput
-            defaultValue={character ? character.resistances.type : ""}
+            // defaultValue={character ? character?.resistances?.type : ""}
             description="Resistances"
           />
         </Container>
@@ -418,7 +418,7 @@ export default function Defense({ character }: DefenseProps) {
             <Text>Immune</Text>
           </Paper>
           <TextInput
-            defaultValue={character ? character.immunities.type : ""}
+            // defaultValue={character ? character?.immunities?.type : ""}
             description="Immunities"
           />
         </Container>
@@ -450,7 +450,7 @@ export default function Defense({ character }: DefenseProps) {
             <Text>CMD</Text>
           </Paper>
           <TextInput
-            defaultValue={character ? character.cmd.total : "0"}
+            // defaultValue={character ? character?.cmd?.total : "0"}
             description="Total"
           />
           <TextInput description="BAB" />
