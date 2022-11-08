@@ -22,8 +22,6 @@ export function links() {
 export const loader: LoaderFunction = async ({ request }) => {
   const userId = await requireUserId(request);
   const characters = await getAllCharacters(userId);
-  // HARDCODED FOR TESTING
-  // TODO actually pass in the character id
   return json({ characters });
 };
 
