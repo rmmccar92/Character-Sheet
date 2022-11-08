@@ -7,7 +7,11 @@ import {
   Paper,
 } from "@mantine/core";
 import skills from "~/utils/data.js";
-export default function Skills() {
+
+interface SkillsProps {
+  character: any;
+}
+export default function Skills({ character }: SkillsProps) {
   const rows = skills.map((skill) => (
     <tr key={skill.name}>
       <td>

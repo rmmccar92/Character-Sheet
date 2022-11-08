@@ -1,7 +1,11 @@
 import { Center, Container, TextInput, Paper, Text } from "@mantine/core";
 // import characterData from "../../data/data.js";
 
-export default function Abilities() {
+interface Props {
+  character: any;
+}
+
+export default function Abilities({ character }: Props) {
   return (
     <Center
       style={{
@@ -49,12 +53,13 @@ export default function Abilities() {
             </Paper>
             <TextInput
               description="Ability Score"
+              defaultValue={character ? character.stats.strength.value : `0`}
               size="xs"
-              // defaultValue={characterData[0].abilities.str || 0}
               style={{ width: `20%` }}
             />
             <TextInput
               description="Ability Modifier"
+              defaultValue={character ? character.stats.strength.modifier : `0`}
               size="xs"
               style={{ width: `20%` }}
             />
@@ -98,12 +103,15 @@ export default function Abilities() {
             </Paper>
             <TextInput
               description="Ability Score"
+              defaultValue={character ? character.stats.dexterity.value : `0`}
               size="xs"
-              // defaultValue={characterData[0].abilities.dex || 0}
               style={{ width: `20%` }}
             />
             <TextInput
               description="Ability Modifier"
+              defaultValue={
+                character ? character.stats.dexterity.modifier : `0`
+              }
               size="xs"
               style={{ width: `20%` }}
             />
@@ -146,13 +154,18 @@ export default function Abilities() {
               <Text style={{ fontSize: `0.5em` }}>Constitution</Text>
             </Paper>
             <TextInput
-              // defaultValue={characterData[0].abilities.con || 0}
               description="Ability Score"
+              defaultValue={
+                character ? character.stats.constitution.value : `0`
+              }
               size="xs"
               style={{ width: `20%` }}
             />
             <TextInput
               description="Ability Modifier"
+              defaultValue={
+                character ? character.stats.constitution.modifier : `0`
+              }
               size="xs"
               style={{ width: `20%` }}
             />
@@ -195,13 +208,18 @@ export default function Abilities() {
               <Text style={{ fontSize: `0.5em` }}>Intelligence</Text>
             </Paper>
             <TextInput
-              // defaultValue={characterData[0].abilities.int || 0}
               description="Ability Score"
+              defaultValue={
+                character ? character.stats.intelligence.value : `0`
+              }
               size="xs"
               style={{ width: `20%` }}
             />
             <TextInput
               description="Ability Modifier"
+              defaultValue={
+                character ? character.stats.intelligence.modifier : `0`
+              }
               size="xs"
               style={{ width: `20%` }}
             />
@@ -244,13 +262,14 @@ export default function Abilities() {
               <Text style={{ fontSize: `0.5em` }}>Wisdom</Text>
             </Paper>
             <TextInput
-              // defaultValue={characterData[0].abilities.wis || 0}
               description="Ability Score"
+              defaultValue={character ? character.stats.wisdom.value : `0`}
               size="xs"
               style={{ width: `20%` }}
             />
             <TextInput
               description="Ability Modifier"
+              defaultValue={character ? character.stats.wisdom.modifier : `0`}
               size="xs"
               style={{ width: `20%` }}
             />
@@ -293,13 +312,14 @@ export default function Abilities() {
               <Text style={{ fontSize: `0.5em` }}>Charisma</Text>
             </Paper>
             <TextInput
-              // defaultValue={characterData[0].abilities.cha || 0}
               description="Ability Score"
+              defaultValue={character ? character.stats.charisma.value : `0`}
               size="xs"
               style={{ width: `20%` }}
             />
             <TextInput
               description="Ability Modifier"
+              defaultValue={character ? character.stats.charisma.modifier : `0`}
               size="xs"
               style={{ width: `20%` }}
             />

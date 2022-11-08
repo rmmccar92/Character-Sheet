@@ -1,7 +1,11 @@
 import { Center, Container, Paper, TextInput, Text } from "@mantine/core";
 // import characterData from "../../data/data.js";
 
-export default function Defense() {
+interface DefenseProps {
+  character: any;
+}
+
+export default function Defense({ character }: DefenseProps) {
   return (
     <Center
       style={{
@@ -40,7 +44,10 @@ export default function Defense() {
           >
             <Text>AC</Text>
           </Paper>
-          <TextInput description="Total" />
+          <TextInput
+            defaultValue={character ? character.ac : `0`}
+            description="Total"
+          />
           <TextInput description="Armor Bonus" />
           <TextInput description="Shield Bonus" />
           <TextInput description="Dex Modifier" />
@@ -169,7 +176,11 @@ export default function Defense() {
           >
             <Text>DR</Text>
           </Paper>
-          <TextInput />
+          <TextInput
+            defaultValue={
+              character ? `${character.dr.type}:${character.dr.value}` : ""
+            }
+          />
         </Container>
         <Container
           style={{
@@ -198,7 +209,11 @@ export default function Defense() {
           >
             <Text>SR</Text>
           </Paper>
-          <TextInput />
+          <TextInput
+            defaultValue={
+              character ? `${character.sr.type}:${character.sr.value}` : ""
+            }
+          />
         </Container>
         <Container
           style={{
@@ -227,7 +242,10 @@ export default function Defense() {
           >
             <Text>Fortitude</Text>
           </Paper>
-          <TextInput description="Total" />
+          <TextInput
+            defaultValue={character ? character.saves.fortitude : "0"}
+            description="Total"
+          />
           <TextInput description="Base" />
           <TextInput description="Ability Modifier" />
           <TextInput description="Magic Modifier" />
@@ -262,7 +280,10 @@ export default function Defense() {
           >
             <Text>Reflex</Text>
           </Paper>
-          <TextInput description="Total" />
+          <TextInput
+            defaultValue={character ? character.saves.reflex : "0"}
+            description="Total"
+          />
           <TextInput description="Base" />
           <TextInput description="Ability Modifier" />
           <TextInput description="Magic Modifier" />
@@ -297,7 +318,10 @@ export default function Defense() {
           >
             <Text>Will</Text>
           </Paper>
-          <TextInput description="Total" />
+          <TextInput
+            defaultValue={character ? character.saves.will : "0"}
+            description="Total"
+          />
           <TextInput description="Base" />
           <TextInput description="Ability Modifier" />
           <TextInput description="Magic Modifier" />
@@ -305,7 +329,7 @@ export default function Defense() {
           <TextInput description="Temp" />
           <TextInput description="Other" />
         </Container>
-        <Container
+        {/* <Container
           style={{
             display: "flex",
             flexDirection: "row",
@@ -333,7 +357,7 @@ export default function Defense() {
             <Text>DR</Text>
           </Paper>
           <TextInput />
-        </Container>
+        </Container> */}
         <Container
           style={{
             display: "flex",
@@ -361,7 +385,10 @@ export default function Defense() {
           >
             <Text>Resist</Text>
           </Paper>
-          <TextInput description="Elemental & Other" />
+          <TextInput
+            defaultValue={character ? character.resistances.type : ""}
+            description="Resistances"
+          />
         </Container>
         <Container
           style={{
@@ -388,9 +415,12 @@ export default function Defense() {
               marginRight: `1%`,
             }}
           >
-            <Text>Imune</Text>
+            <Text>Immune</Text>
           </Paper>
-          <TextInput description="Effects & Other" />
+          <TextInput
+            defaultValue={character ? character.immunities.type : ""}
+            description="Immunities"
+          />
         </Container>
         <Container
           style={{
@@ -419,7 +449,10 @@ export default function Defense() {
           >
             <Text>CMD</Text>
           </Paper>
-          <TextInput description="Total" />
+          <TextInput
+            defaultValue={character ? character.cmd.total : "0"}
+            description="Total"
+          />
           <TextInput description="BAB" />
           <TextInput description="Strength Modifier" />
           <TextInput description="Dex Modifier" />

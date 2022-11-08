@@ -6,7 +6,12 @@ import {
   Text,
   Button,
 } from "@mantine/core";
-export default function Defense() {
+
+interface FeatsProps {
+  character: any;
+}
+
+export default function Defense({ character }: FeatsProps) {
   return (
     <Center
       style={{

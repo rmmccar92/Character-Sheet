@@ -33,14 +33,14 @@ export default function Sheet() {
     <Layout>
       <Container size={840} className="box">
         <General character={character} />
-        <Abilities />
-        <Offense />
-        <Defense />
-        <Skills />
-        <Feats />
-        <Equipment />
-        <Spells />
-        <Notes />
+        <Abilities character={character} />
+        <Offense character={character} />
+        <Defense character={character} />
+        <Skills character={character} />
+        <Feats character={character} />
+        <Equipment character={character} />
+        <Spells character={character} />
+        <Notes character={character} />
       </Container>
     </Layout>
   );

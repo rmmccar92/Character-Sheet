@@ -1,5 +1,10 @@
 import { Center, Container, Textarea } from "@mantine/core";
-export default function Notes() {
+
+interface NotesProps {
+  character: any;
+}
+
+export default function Notes({ character }: NotesProps) {
   return (
     <Center
       style={{

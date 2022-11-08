@@ -6,7 +6,12 @@ import {
   Text,
   Button,
 } from "@mantine/core";
-export default function Equipment() {
+
+interface EquipmentProps {
+  character: any;
+}
+
+export default function Equipment({ character }: EquipmentProps) {
   return (
     <Center
       style={{

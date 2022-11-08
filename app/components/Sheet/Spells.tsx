@@ -1,5 +1,9 @@
 import { Center, Container, Paper, Text, Button } from "@mantine/core";
-export default function Spells() {
+
+interface SpellsProps {
+  character: any;
+}
+export default function Spells({ character }: SpellsProps) {
   return (
     <Center
       style={{

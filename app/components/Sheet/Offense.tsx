@@ -10,7 +10,11 @@ import {
 // TODO: Weapons start on 175 can be refactored into components
 // TODO: Add Button functions Buttons start on 249
 
-export default function Offense() {
+interface OffenseProps {
+  character: any;
+}
+
+export default function Offense({ character }: OffenseProps) {
   return (
     <Center
       style={{
@@ -49,7 +53,10 @@ export default function Offense() {
           >
             <Text>Initiative</Text>
           </Paper>
-          <TextInput description="Total" />
+          <TextInput
+            defaultValue={character ? character.initiative : `0`}
+            description="Total"
+          />
           <TextInput description="Dex Modifier" />
           <TextInput description="Misc Modifier" />
         </Container>
@@ -80,7 +87,7 @@ export default function Offense() {
           >
             <Text>BAB</Text>
           </Paper>
-          <TextInput />
+          <TextInput defaultValue={character ? character.bab : `0`} />
         </Container>
         <Container
           style={{
@@ -138,7 +145,10 @@ export default function Offense() {
           >
             <Text>Speed</Text>
           </Paper>
-          <TextInput description="Base" />
+          <TextInput
+            defaultValue={character ? character.speed : `10ft`}
+            description="Base"
+          />
           <TextInput description="With Armor" />
           <TextInput description="Fly" />
           <TextInput description="Swim" />
@@ -173,7 +183,10 @@ export default function Offense() {
           >
             <Text>CMB</Text>
           </Paper>
-          <TextInput description="Total" />
+          <TextInput
+            defaultValue={character ? character.cmb : `0`}
+            description="Total"
+          />
           <TextInput description="BAB" />
           <TextInput description="Str Modifier" />
           <TextInput description="Size Modifier" />
