@@ -68,6 +68,10 @@ export const updateCharacter = async (
         size: character.size,
         gender: character.gender,
         age: character.characterAge,
+        height: character.characterHeight,
+        weight: character.weight,
+        hairColor: character.hairColor,
+        eyeColor: character.eyeColor,
         stats: {
           strength: {
             value: parseInt(stats?.strength?.value as any) || 0,
@@ -99,6 +103,20 @@ export const updateCharacter = async (
         },
         image: character.image,
       },
+      ac: character.ac,
+      touch: character.touch,
+      flatFooted: character.flatFooted,
+      hp: character.hp,
+      dr: character.dr,
+      sr: character.sr,
+      fortitude: character.fortitude,
+      reflex: character.reflex,
+      will: character.will,
+      resistances: character.resistances,
+      immunities: character.immunities,
+      bab: character.bab,
+      cmb: character.cmb,
+      speed: character.speed,
     });
     // console.log("updating", characterId);
     // console.log("update");
@@ -244,6 +262,7 @@ export const updateTraits = async (
 };
 
 export const getAllCharacters = async (userId: string) => {
+  // console.log("userId", userId);
   return await prisma.character.findMany({
     where: {
       userId,

@@ -41,7 +41,7 @@ model Character {
   race            String?
   deity           String?
   size            String?
-  hair            String?
+  hairColor       String?
   eyes            String?
   age             String?
   createdAt       DateTime        @default(now())
