@@ -71,7 +71,7 @@ export const updateCharacter = async (
         height: character.characterHeight,
         weight: character.weight,
         hairColor: character.hairColor,
-        eyeColor: character.eyeColor,
+        eyes: character.eyeColor,
         stats: {
           strength: {
             value: parseInt(stats?.strength?.value as any) || 0,
@@ -102,21 +102,49 @@ export const updateCharacter = async (
           ...skills,
         },
         image: character.image,
+        ac: {
+          total: parseInt(character.ac as any) || 0,
+          touch: parseInt(character.touch as any) || 0,
+          flatFooted: parseInt(character.flatFooted as any) || 0,
+        },
+        health: {
+          total: parseInt(character.hp as any) || 0,
+          max: parseInt(character.hpMax as any) || 0,
+          nonlethal: parseInt(character.nonlethal as any) || 0,
+          temp: parseInt(character.tempHp as any) || 0,
+        },
+        dr: {
+          type: character.drType || "None",
+          amount: parseInt(character.dr as any) || 0,
+        },
+        sr: {
+          type: character.srType || "None",
+          amount: parseInt(character.sr as any) || 0,
+        },
+        saves: {
+          fortitude: parseInt(character.fortitude as any) || 0,
+          reflex: parseInt(character.reflex as any) || 0,
+          will: parseInt(character.will as any) || 0,
+        },
+        resistances: character.resistances || "None",
+        immunities: character.immunities || "None",
+        bab: character.bab,
+        cmb: {
+          total: parseInt(character.cmb as any) || 0,
+          sizeMod: parseInt(character.cmbSizeMod as any) || 0,
+          miscMod: parseInt(character.cmbMiscMod as any) || 0,
+          tempMoInt: parseInt(character.cmbTempMod as any) || 0,
+        },
+        speed: {
+          base: character.speed || "0",
+          armor: character.armorSpeed || "0",
+          fly: character.flySpeed || "0",
+          swim: character.swimSpeed || "0",
+          climb: character.climbSpeed || "0",
+          burrow: character.burrowSpeed || "0",
+          tempMod: character.tempSpeedMod || "0",
+        },
       },
-      ac: character.ac,
-      touch: character.touch,
-      flatFooted: character.flatFooted,
-      hp: character.hp,
-      dr: character.dr,
-      sr: character.sr,
-      fortitude: character.fortitude,
-      reflex: character.reflex,
-      will: character.will,
-      resistances: character.resistances,
-      immunities: character.immunities,
-      bab: character.bab,
-      cmb: character.cmb,
-      speed: character.speed,
     });
     // console.log("updating", characterId);
     // console.log("update");

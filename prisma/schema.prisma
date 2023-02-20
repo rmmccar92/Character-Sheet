@@ -50,9 +50,9 @@ model Character {
   ac              AC?
   dr              DR?
   sr              SR?
-  resistances     Resistances?
+  resistances     String?
   cmb             CMB?
-  immunities      Immunities?
+  immunities      String?
   cmd             CMD?
   initiative      Initiative?
   bab             String?
@@ -144,9 +144,9 @@ type SR {
 }
 
 type AC {
-  total Int
-  touch Int
-  flat  Int
+  total Int?
+  touch Int?
+  flat  Int?
 }
 
 type Resistances {
