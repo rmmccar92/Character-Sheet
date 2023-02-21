@@ -117,20 +117,20 @@ model Weapon {
 }
 
 type Speed {
-  base    String
-  armor   String
-  fly     String
-  swim    String
-  climb   String
-  burrow  String
-  tempMod String
+  base    String?
+  armor   String?
+  fly     String?
+  swim    String?
+  climb   String?
+  burrow  String?
+  tempMod String?
 }
 
 type Health {
-  current   Int @default(0)
-  max       Int @default(0)
-  nonlethal Int @default(0)
-  temp      Int @default(0)
+  current   Int? @default(0)
+  max       Int? @default(0)
+  nonlethal Int? @default(0)
+  temp      Int? @default(0)
 }
 
 type DR {

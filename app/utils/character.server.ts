@@ -105,11 +105,14 @@ export const updateCharacter = async (
         ac: {
           total: parseInt(character.ac as any) || 0,
           touch: parseInt(character.touch as any) || 0,
-          flatFooted: parseInt(character.flatFooted as any) || 0,
+          flat: parseInt(character.flatFooted as any) || 0,
         },
         health: {
-          total: parseInt(character.hp as any) || 0,
-          max: parseInt(character.hpMax as any) || 0,
+          current:
+            parseInt(character.hpCurrent as any) ||
+            parseInt(character.hp as any) ||
+            0,
+          max: parseInt(character.hp as any) || 0,
           nonlethal: parseInt(character.nonlethal as any) || 0,
           temp: parseInt(character.tempHp as any) || 0,
         },
