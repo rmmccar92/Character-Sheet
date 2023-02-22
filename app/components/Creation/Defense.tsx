@@ -1,4 +1,4 @@
-import { Text, Title } from "@mantine/core";
+import { Text, Title, Container, Divider } from "@mantine/core";
 import type { FC } from "react";
 import { FormField } from "~/components/form-field";
 import type { ChangeEvent } from "react";
@@ -44,25 +44,56 @@ const Defense: FC<DefenseProps> = ({ formData, handleChange }) => {
         style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "hp")}
       />
-      <FormField
-        htmlFor="dr"
-        label="Damage Reduction"
-        value={formData.dr}
-        type="text"
-        style={{ width: "100%" }}
-        onChange={(e) => handleChange(e, "dr")}
-      />
-      <FormField
-        htmlFor="sr"
-        label="Spell Resistance"
-        value={formData.sr}
-        type="text"
-        style={{ width: "100%" }}
-        onChange={(e) => handleChange(e, "sr")}
-      />
+      <Container>
+        <Text>
+          <strong> Damage Reduction</strong>
+        </Text>
+        {/* <Divider size="md" color="purple" m="sm" /> */}
+        <FormField
+          htmlFor="dr"
+          label="Amount"
+          value={formData.dr}
+          type="text"
+          style={{ width: "100%" }}
+          onChange={(e) => handleChange(e, "dr")}
+        />
+        <FormField
+          htmlFor="drType"
+          label="Type"
+          value={formData.drType}
+          type="text"
+          style={{ width: "100%" }}
+          onChange={(e) => handleChange(e, "drType")}
+        />
+        {/* <Divider size="md" color="purple" m="sm" /> */}
+      </Container>
+      <Container>
+        <Text>
+          <strong>Spell Resistance</strong>
+        </Text>
+        {/* <Divider size="md" color="purple" m="sm" /> */}
+        <FormField
+          htmlFor="sr"
+          label="Amount"
+          value={formData.sr}
+          type="text"
+          style={{ width: "100%" }}
+          onChange={(e) => handleChange(e, "sr")}
+        />
+        <FormField
+          htmlFor="srType"
+          label="Type"
+          value={formData.srType}
+          type="text"
+          style={{ width: "100%" }}
+          onChange={(e) => handleChange(e, "srType")}
+        />
+        {/* <Divider size="md" color="purple" m="sm" /> */}
+      </Container>
       <Text>
         <strong>Saving Throws</strong>
       </Text>
+      {/* <Divider size="md" color="purple" m="sm" /> */}
       <FormField
         htmlFor="fortitude"
         label="Fortitude"
@@ -87,9 +118,11 @@ const Defense: FC<DefenseProps> = ({ formData, handleChange }) => {
         style={{ width: "100%" }}
         onChange={(e) => handleChange(e, "reflex")}
       />
+      {/* <Divider size="md" color="purple" m="sm" /> */}
       <Text>
         <strong>Other</strong>
       </Text>
+      {/* <Divider size="md" color="purple" m="sm" /> */}
       <FormField
         htmlFor="resistances"
         label="Resistances"

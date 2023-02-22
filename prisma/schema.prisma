@@ -117,13 +117,13 @@ model Weapon {
 }
 
 type Speed {
-  base    String?
-  armor   String?
-  fly     String?
-  swim    String?
-  climb   String?
-  burrow  String?
-  tempMod String?
+  base         String?
+  armorPenalty String?
+  fly          String?
+  swim         String?
+  climb        String?
+  burrow       String?
+  tempMod      String?
 }
 
 type Health {

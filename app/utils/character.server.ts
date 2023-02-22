@@ -33,21 +33,10 @@ export const updateCharacter = async (
   character: CharacterForm,
   characterId: string
 ) => {
-  // const characterToUpdate = await prisma.character.findUnique({
-  //   where: {
-  //     id: characterId,
-  //   },
-  // });
-  // console.log("character", character);
-
   const skills = JSON.parse(character.skills! as any);
   const feats = JSON.parse(character.feats! as any);
   const traits = JSON.parse(character.traits! as any);
   const stats = JSON.parse(character.stats! as any);
-  // character.skills = skills;
-  // character.feats = feats;
-  // character.traits = traits;
-  // character.stats = stats;
 
   // Testing values
   // console.log("character", character);
@@ -108,13 +97,10 @@ export const updateCharacter = async (
           flat: parseInt(character.flatFooted as any) || 0,
         },
         health: {
-          current:
-            parseInt(character.hpCurrent as any) ||
-            parseInt(character.hp as any) ||
-            0,
+          current: parseInt(character.hp as any) || 0,
           max: parseInt(character.hp as any) || 0,
-          nonlethal: parseInt(character.nonlethal as any) || 0,
-          temp: parseInt(character.tempHp as any) || 0,
+          nonlethal: 0,
+          temp: 0,
         },
         dr: {
           type: character.drType || "None",
@@ -136,16 +122,16 @@ export const updateCharacter = async (
           total: parseInt(character.cmb as any) || 0,
           sizeMod: parseInt(character.cmbSizeMod as any) || 0,
           miscMod: parseInt(character.cmbMiscMod as any) || 0,
-          tempMoInt: parseInt(character.cmbTempMod as any) || 0,
+          tempMoInt: 0,
         },
         speed: {
-          base: character.speed || "0",
-          armor: character.armorSpeed || "0",
-          fly: character.flySpeed || "0",
-          swim: character.swimSpeed || "0",
-          climb: character.climbSpeed || "0",
-          burrow: character.burrowSpeed || "0",
-          tempMod: character.tempSpeedMod || "0",
+          base: (character.baseSpeed as any) || "0",
+          armorPenalty: (character.speedArmorPenalty as any) || "0",
+          fly: (character.flySpeed as any) || "0",
+          swim: (character.swimSpeed as any) || "0",
+          climb: (character.climbSpeed as any) || "0",
+          burrow: (character.burrowSpeed as any) || "0",
+          tempMod: "0" as any,
         },
       },
     });

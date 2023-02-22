@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import { useEffect } from "react";
 import { alignmentMap } from "~/utils/constants";
 
 interface MySelectProps {
